@@ -25,12 +25,12 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 * [React Components][react_components]
 * [Sample-State][sample_state]
 
-[schema]: docs/schema.md
-[wireframes]: docs/wireframes
-[redux_structure]: docs/redux_structure.md
-[api]: docs/api_endpoints.md
-[react_components]: docs/react_components.md
-[sample_state]: docs/sample_state.md
+[schema]: schema.md
+[wireframes]: wireframes
+[redux_structure]: redux_structure.md
+[api]: api_endpoints.md
+[react_components]: react_components.md
+[sample_state]: sample_state.md
 
 
 ## CRUD Overview
