@@ -16,7 +16,6 @@ column name | data type | details
 id          | integer   | not null, primary key
 title       | string    | not null
 description | text      | not null
-date        | date      | not null
 category_id | integer   | not null, foreign key (references categories), indexed
 organizer_id | integer  | not null, foreign key (references users), indexed
 num_tickets | integer   | not null
@@ -27,10 +26,8 @@ address     | string    | not null
 city        | string    | not null
 state       | string    | not null
 zip_code    | integer   | not null
-start_date  | date      | not null
-start_time  | time      | not null
-end_date    | date      | not null
-end_time    | time      | not null
+start       | date      | not null
+end         | date      | not null
 live        | boolean   | not null, default: false
 
 ## tickets
@@ -44,7 +41,7 @@ event_id    | integer   | not null, foreign key (references events), index, uniq
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-title       | string    | not null
+name       | string    | not null
 
 ## bookmarks
 column name | data type | details
