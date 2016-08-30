@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
 # Use postgresql as the database for Active Record
@@ -31,7 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 group :production do
-  gem 'newrelic_rpm'  
+  gem 'newrelic_rpm'
   gem 'rails_12factor' # error feedback
 end
 
