@@ -10,7 +10,14 @@ import * as SessionActions from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById('root');
-  const store = window.Store = configureStore();
+  let store;
+
+  if (window.currentUser) {
+    const preloadedState = {session: {currentUser: window.currentUser}};
+    store = window.Store = configureStore(preloadedState);
+  } else {
+    store = window.Store = configureStore();
+  }
 
   // WINDOW TESTING
   window.SessionAPI = SessionAPI;
