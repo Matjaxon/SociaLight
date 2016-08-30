@@ -49,6 +49,7 @@ class SessionForm extends React.Component {
           <label>
             Email:
             <input
+              className="session-form-input"
               type="text"
               value={this.state.email}
               onChange={this.handleChange("email")} />
@@ -57,6 +58,7 @@ class SessionForm extends React.Component {
           <label>
             Phone Number:
             <input
+              className="session-form-input"
               type="text"
               value={this.state.phone_number}
               onChange={this.handleChange("phone_number")} />
@@ -65,13 +67,24 @@ class SessionForm extends React.Component {
       );
     }
 
+    let buttonName, altAction;
+    if (this.props.formType === "login") {
+      buttonName = "Login";
+      altAction = <Link to='/signup'>or Sign Up</Link>;
+    } else {
+      buttonName = "Sign Up";
+      altAction = <Link to='/login'>or Login</Link>;
+    }
+
     return(
+      <div className="form-container">
+      <h2>Welcome to SociaLight!</h2>
       <form className="session-form" onSubmit={this.handleSubmit}>
-        Welcome to SociaLight!
         <div className="session-form-fields">
           <label>
             Username:
             <input
+              className="session-form-input"
               type="text"
               value={this.state.username}
               onChange={this.handleChange("username")} />
@@ -80,6 +93,7 @@ class SessionForm extends React.Component {
           <label>
             Password:
             <input
+              className="session-form-input"
               type="password"
               value={this.state.password}
               onChange={this.handleChange("password")} />
@@ -88,8 +102,12 @@ class SessionForm extends React.Component {
 
         {emailAndPhone}
 
-        <input type="submit" value={this.props.formType} />
+        <input type="submit" className="submit-button" value={buttonName} />
+
+        <span className="alt-session-action">{altAction}</span>
+
       </form>
+    </div>
     );
   }
 }

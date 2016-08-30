@@ -1,3 +1,35 @@
 // Place all the styles related to the Api/Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form-container {
+  width: 50%;
+  max-width: 280px;
+  padding: 10px 10px 0 10px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.session-form-fields label {
+  display: block;
+  padding: 5px 0;
+}
+
+.session-form {
+  position: relative;
+}
+
+.session-form-input {
+  display: block;
+  padding:5px;
+  width: 100%;
+  border-radius: 1px;
+  border: 1px solid gray;
+}
+
+.alt-session-action {
+  display: inline-block;
+  padding: 10px;
+}
