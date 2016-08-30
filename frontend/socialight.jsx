@@ -1,8 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import configureStore from './store/store';
+
 import Root from './components/root';
+
+// WINDOW TESTING IMPORTS
+import * as SessionAPI from './util/session_api_util';
+import * as SessionActions from './actions/session_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById('root');
-  ReactDOM.render(<Root />, root);
+  const store = window.Store = configureStore();
+
+  // WINDOW TESTING
+  window.SessionAPI = SessionAPI;
+  window.SessionActions = SessionActions;
+  window.logout = () => window.Store.dispatch(SessionActions.logout());
+  window.login = (user) => window.Store.dispatch(SessionActions.login(user));
+  window.matt = {user: {username: "matt", password: "password"}};
+
+  ReactDOM.render(<Root store={store} />, root);
 });
