@@ -87,16 +87,16 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 - Filter events by category on index page
 - Indicated on event detail pages
 
+### BONUS FEATURES:
+
 ### Venues:
 
 #### Create
-- Generated through user purchase from event page
+- Generated through form for organizers
 
 #### Show
-- Display on user show page
-
-
-### BONUS FEATURES:
+- Show details about venue
+- Show upcoming events at venue
 
 ### Group Event:
 
@@ -190,11 +190,17 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 ### Phase 5: Category filtering (1 day)
 
 **Objective:** Filter results by category.
-
-- [ ] Filter index views to only.
+- [ ] `Category` model
+- [ ] Filter index views by category.
 - [ ] Show related events on event detailed show pages.
 
 ### Bonus Features (TBD)
+
+### Venue
+
+- [ ] `Venue` model
+- [ ] Venue form
+- [ ] Venue show page showing upcoming events
 
 ### Group Events
 

@@ -3,17 +3,14 @@
 **AuthFormContainer**
  - AuthForm
 
-**HomeContainer**
- - Home
- - Sidebar
-
 **EventsContainer**
  - EventsHeader
   * EventIndex
+    - EventIndexItems
 
 **EventContainer**
  - EventHeader
-  + EventIndex
+  + EventDetail
 
 **SearchResultsContainer**
  - Search
@@ -26,24 +23,25 @@
 **EventIndex**
  - EventIndexItem
   + EventDetail
-   * EventTools
     - EventSearch
     - Categories
      + Category
     * Event
 
+**ProfileContainer**
+ - EventsContainer
+  * EventIndex
+  * EventIndexItem
+    * TicketsIndex
+    * TicketIndexItem
+ - BookmarksContainer
+  * BookmarksIndex
+
 **NewEventContainer**
- - NewEvent
-  - RTETools
+ - NewEventForm
   - NewEventButton
 
 **Search**
-
-**NewEvent**
- - NewEvent
-
-**NewCategory**
- - NewCategory
 
 **EventSearch**
  + AutoSearch
@@ -59,14 +57,11 @@
 |-------|-------------|
 | "/sign-up" | "AuthFormContainer" |
 | "/sign-in" | "AuthFormContainer" |
-| "/home" | "HomeContainer" |
-| "/home/event/:eventId" | "EventsContainer" |
-| "/home/event/:eventId/event/:eventId" | "EventContainer" |
-| "/home/category/:categoryId/event/:eventId" | "CategoryContainer" |
-| "/home/search-results" | "SearchResultsContainer"
+| "/events" | "EventsContainer" |
+| "/events/:eventId" | "EventsDetail" |
 | "/new-event" | "NewEventContainer" |
+| '/profile' | "ProfileContainer"
 | "/search" | "Search" |
-| "/new-event" | "NewEvent" |
-| "/new-category" | "NewCategory" |
-| "/category-search" | "CategorySearch" |
+| "/search-results" | "SearchResultsContainer"
 | "/event-search" | "EventSearch" |
+| "/category-search" | "CategorySearch" |
