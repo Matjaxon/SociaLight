@@ -134,8 +134,8 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 
 ** Objective:**  Functioning rails application with front-end authentication
 
-- [ ] New Rails project
-- [ ] `User` model/migration
+- [x] New Rails project
+- [x] `User` model/migration
 - [ ] Back end authentication (session/password)
 - [ ] `StaticPages` controller and root view
 - [ ] Webpack & react/redux modules
