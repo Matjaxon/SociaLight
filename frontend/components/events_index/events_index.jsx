@@ -1,4 +1,5 @@
 import React from 'react';
+import EventIndexItem from './events_index_item';
 
 class EventsIndex extends React.Component {
   componentDidMount() {
@@ -7,14 +8,13 @@ class EventsIndex extends React.Component {
 
   render() {
     let eventListItems = this.props.eventsList.map( singleEvent => (
-      <li>{singleEvent.title}</li>
-      )
-    );
+      <EventIndexItem key={`event-index-item-${singleEvent.id}`}
+        eventItem={singleEvent} />
+    ));
     return (
-      <section>
-        Index goes here
+      <section className="event-index">
+        <h2>Discover a new experience</h2>
         <ul>
-          <li>List here?</li>
           {eventListItems}
         </ul>
       </section>

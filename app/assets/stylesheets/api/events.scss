@@ -1,3 +1,74 @@
 // Place all the styles related to the Api/Events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'colors';
+
+.event-index {
+  padding: 20px;
+  margin: 20px;
+
+}
+
+.event-index-item {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 20px 0;
+}
+
+.event-index-header {
+  border: 1px solid $border-color;
+}
+
+.event-index-image {
+  width: 200px;
+  border-right: 1px solid $border-color;
+}
+
+// .event-index-image img {}
+
+.event-index-item li {
+  display: flex;
+  flex-direction: row;
+}
+
+.event-main-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border-left: 1px solid $border-color;
+}
+
+.event-main-details li {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.event-index-footer {
+  display: flex;
+  flex-direction: row;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
+.event-index-footer li {
+  padding: 5px;
+  border-left: 1px solid $border-color;
+}
+
+.event-index-footer:last-child {
+  border-right: 1px solid $border-color;
+}
+
+.event-index-price {
+  width: 201px;
+}
+
+.event-index-category {
+  flex-grow: 1;
+}
+
+.event-index-bookmark {
+  width: 100px;
+}

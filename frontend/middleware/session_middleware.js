@@ -3,8 +3,6 @@ import * as SessionActions from '../actions/session_actions';
 
 const SessionMiddleware = ({store, dispatch}) => next => action => {
   let loginSuccess = (user) => {
-    console.log("LOGGING IN");
-    console.log(user);
     return dispatch(SessionActions.receiveCurrentUser(user));
   };
   let loginFail = (errors) => {

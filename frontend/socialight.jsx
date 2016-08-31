@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // WINDOW TESTING
-  debugger;
   window.SessionAPI = SessionAPI;
   window.SessionActions = SessionActions;
   window.logout = () => window.Store.dispatch(SessionActions.logout());
