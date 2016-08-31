@@ -78,36 +78,36 @@ class SessionForm extends React.Component {
 
     return(
       <div className="form-container">
-      <h2>Welcome to SociaLight!</h2>
-      <form className="session-form" onSubmit={this.handleSubmit}>
-        <div className="session-form-fields">
-          <label>
-            Username:
-            <input
-              className="session-form-input"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange("username")} />
-          </label>
+        <h2>Welcome to SociaLight!</h2>
+        <form className="session-form" onSubmit={this.handleSubmit}>
+          <div className="session-form-fields">
+            <label>
+              Username:
+              <input
+                className="session-form-input"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange("username")} />
+            </label>
 
-          <label>
-            Password:
-            <input
-              className="session-form-input"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange("password")} />
-          </label>
-        </div>
+            <label>
+              Password:
+              <input
+                className="session-form-input"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange("password")} />
+            </label>
+          </div>
 
-        {emailAndPhone}
+          {emailAndPhone}
 
-        <input type="submit" className="submit-button" value={buttonName} />
+          <input type="submit" className="submit-button" value={buttonName} />
 
-        <span className="alt-session-action">{altAction}</span>
+          <span className="alt-session-action">{altAction}</span>
 
-      </form>
-    </div>
+        </form>
+      </div>
     );
   }
 }

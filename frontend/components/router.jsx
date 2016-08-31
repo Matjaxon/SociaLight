@@ -5,6 +5,7 @@ import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 import Splash from "./splash/splash";
 import EventsIndexContainer from './events_index/events_index_container';
+import EventFormContainer from './event_form/event_form_container';
 
 const AppRouter = () => (
   <Router history={ hashHistory } >
@@ -13,6 +14,7 @@ const AppRouter = () => (
       <Route path="/signup" component={ SessionFormContainer }/>
       <Route path="/login" component={ SessionFormContainer } />
       <Route path="/browse" component={ EventsIndexContainer } />
+      <Route path="/new-event" component={ EventFormContainer } />
     </Route>
   </Router>
 );
