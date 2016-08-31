@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dbwkodu79
+  api_key: '844552832373395'
+  api_secret: xJ142GyLjoZqImIL0ILT-FqHa4c
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dbwkodu79
+  api_key: '844552832373395'
+  api_secret: xJ142GyLjoZqImIL0ILT-FqHa4c
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dbwkodu79
+  api_key: '844552832373395'
+  api_secret: xJ142GyLjoZqImIL0ILT-FqHa4c
+  enhance_image_tag: true
+  static_image_support: false

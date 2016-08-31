@@ -1,0 +1,58 @@
+
+.splash-header {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  top: 3px;
+  background-image: url("http://res.cloudinary.com/dbwkodu79/image/upload/v1472601143/concert1_xwkvyb.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.splash-image {
+  height: auto;
+  width: 100%;
+}
+
+.splash-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  top: 15%;
+  text-align: center;
+  align-items: center;
+}
+
+.splash-text h1 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.splash-text h1, .splash-text h4 {
+  color: white;
+  display: block;
+  padding: 5px;
+}
+
+.splash-create-event {
+  display: flex;
+  background: #0077ea;
+  height: 40px;
+  width: 210px;
+  border-radius: 4px;
+  margin: 10px auto;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+
+  text-transform: uppercase;
+  font-size: 24px;
+  color: white;
+  letter-spacing: 1px;
+}

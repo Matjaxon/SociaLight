@@ -23,7 +23,7 @@
  small, strike, strong, sub, sup, tt, var,
  dl, dt, dd, ol, ul, li,
  fieldset, form, label, legend,
- table, caption, tbody, tfoot, thead, tr, th, td {
+ table, caption, tbody, tfoot, thead, tr, th, td, .logout-button {
  	margin: 0;
  	padding: 0;
  	border: 0;
@@ -71,10 +71,18 @@
  	box-sizing: border-box;
  }
 
+ button {
+   cursor: pointer;
+ }
+
  /* END OF RESET */
 
 h2 {
   font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
 }
 
 .submit-button {
@@ -86,11 +94,77 @@ h2 {
   color: white;
   margin: 10px 0 10px 0;
   width: 60%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .submit-button:hover {
   background-color: #006ad1;
   padding: 12px 20px;
   margin: 8px 0;
+  transition: background-color 0.4s ease;
+}
+
+.user-nav {
+  display: flex;
+  float: right;
+}
+
+.user-links {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+
+.user-nav a {
+  display: flex;
+  float: right;
+  height: 54px;
+  padding: 20px 20px;
+  border-left: 1px solid lightgray;
+  box-sizing: border-box;
+}
+
+.user-nav a:hover {
+  background: #f5f5f5;
+  transition: background-color 0.4s ease;
+}
+
+.site-logo {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  padding: 5px 10px;
+  height: 40px;
+  width: 150px;
+}
+
+.nav-logo {
+  border-right: 1px solid lightgray;
+}
+
+.nav {
+  display:flex;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  height: 56px;
+}
+
+.logout-button {
+  display: flex;
+  background: inherit;
+  padding: 20px;
+  height: 54px;
+  border-left: 1px solid lightgray;
+  text-transform: uppercase;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.logout-button:hover {
+  background: #f5f5f5;
   transition: background-color 0.4s ease;
 }
