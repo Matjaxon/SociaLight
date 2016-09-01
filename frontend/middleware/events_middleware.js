@@ -14,6 +14,10 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
       EventsAPI.fectchEvent(action.eventData, eventSuccess);
       break;
 
+    case EventActions.EventConstants.CREATE_EVENT:
+      EventsAPI.createEvent(action.eventData, eventSuccess);
+      break;
+
     default:
       break;
   }

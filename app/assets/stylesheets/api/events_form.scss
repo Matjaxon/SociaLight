@@ -7,10 +7,11 @@
   display: flex;
   flex-direction: column;
   padding: 40px;
-  border-left: 1px solid $form-border-color;
-  border-right: 1px solid $form-border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   margin: 0 auto;
-  background-color: lightgray;
+  background-color: #ededed;
 }
 
 .event-form-title {
@@ -21,11 +22,12 @@
   padding-bottom: 5px;
 }
 
-.form-subheading {
+.event-form-container h2 {
   display: block;
   padding: 10px 0;
   border-bottom: 1px solid $form-border-color;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 
 .event-form-fields {
@@ -73,7 +75,6 @@
   font-family: 'Questrial', sans-serif;
   justify-content: space-around;
   padding: 10px;
-  padding-right: 10px;
   text-align: center;
   border-radius: 5px;
   margin-bottom: 20px;
@@ -92,7 +93,6 @@
 }
 
 .calendar-container {
-  display: flex;
   align-items: center;
   justify-content: space-between;
 }
@@ -106,7 +106,7 @@
 
 div.rdr-Calendar {
   width: 350px;
-  margin: 5px 30px;
+  margin: 5px 20px;
   margin-bottom: 20px;
   box-sizing: border-box;
 }
@@ -118,4 +118,36 @@ div.rdr-Calendar {
 span.rdr-Day {
   font-size: 20px;
   background: lightgray;
+}
+
+.launch-button {
+  font-size: 1.1em;
+  padding: 15px;
+  width: 350px;
+  background-color: $live-event;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.button-container {
+  padding: 10px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.event-status {
+  padding: 10px 0;
+  text-transform: uppercase;
+}
+
+.live-event {
+  color: $live-event;
+}
+
+.draft-event {
+  color: #eb0000;
 }

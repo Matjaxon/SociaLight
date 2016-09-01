@@ -1,4 +1,5 @@
 export const createEvent = (data, success, error) => {
+  debugger;
   $.ajax({
     method: "POST",
     url: "api/events",

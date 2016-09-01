@@ -8,17 +8,18 @@ class EventForm extends React.Component {
       title: "",
       description: "",
       category_id: 1,
-      organizer_id: this.props.currentUser.id,
-      num_tickets: 0,
+      num_tickets: 100,
       ticket_price: 0,
       start_time: new Date(),
       end_time: new Date(),
       live: false,
     };
+
     this._handleChange = this._handleChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._handleStartTimeChange = this._handleStartTimeChange.bind(this);
     this._handleEndTimeChange = this._handleEndTimeChange.bind(this);
+    this._saveChanges = this._saveChanges.bind(this);
   }
 
   _handleChange(key) {
@@ -31,6 +32,7 @@ class EventForm extends React.Component {
       let inputTime = (event.target.value) ? event.target.value : "12:00";
       let timeArray = inputTime.split(":");
       let tempTime = this.state.start_time;
+
       tempTime.setHours(timeArray[0]);
       tempTime.setMinutes(timeArray[1]);
       this.setState({start_time: tempTime});
@@ -41,6 +43,7 @@ class EventForm extends React.Component {
       let inputTime = (event.target.value) ? event.target.value : "12:00";
       let timeArray = inputTime.split(":");
       let tempTime = this.state.end_time;
+
       tempTime.setHours(timeArray[0]);
       tempTime.setMinutes(timeArray[1]);
       this.setState({end_time: tempTime});
@@ -48,8 +51,6 @@ class EventForm extends React.Component {
   }
 
   _handleSelect(range) {
-
-    console.log(range);
     let startDate = new Date(range.startDate._d.getTime());
     let endDate = new Date(range.endDate._d.getTime());
 
@@ -74,15 +75,29 @@ class EventForm extends React.Component {
     this.setState({start_time: startDate, end_time: endDate});
   }
 
+  _saveChanges(event) {
+    console.log('SAVING CHANGES');
+    event.preventDefault();
+    this.props.createEvent({'event': this.state});
+  }
+
   render() {
+
+    const isLive = this.state.live;
+
     return(
       <section className="event-form-container">
         <h1 className="event-form-title">Create A New Event</h1>
-        <form className="event-form">
+        <form className="event-form" onSubmit={this._saveChanges}>
 
-          <h2 className="form-subheading">Event Details</h2>
+          <h2>Event Details</h2>
+          <h4 className={"event-status " +
+            ((isLive) ? "live-event" : "draft-event")}>
+              Status: {(isLive) ? 'live' : 'draft'}
+          </h4>
+
           <div className="event-form-fields">
-            <label>
+            <label className="event-form-input">
               <h3>Event Name</h3>
               <input
                 className="event-form-input-title"
@@ -100,10 +115,11 @@ class EventForm extends React.Component {
             </label>
 
             <div className="calendar-container">
-              <label className="event-form-input">
+              <label className="event-form-input"></label>
                 <h3>Event Time</h3>
                 <div className="event-time-display">
-                  {this.state.start_time.toString()} - {this.state.end_time.toString()}
+                  {this.state.start_time.toString()} -
+                  {this.state.end_time.toString()}
                 </div>
                 <div>
                   <DateRange
@@ -111,7 +127,6 @@ class EventForm extends React.Component {
                     onChange={this._handleSelect}
                   />
                 </div>
-              </label>
             </div>
 
             <div className="times-container">
@@ -136,7 +151,7 @@ class EventForm extends React.Component {
               </label>
             </div>
 
-            <h2 className="form-subheading">Tickets</h2>
+            <h2>Tickets</h2>
             <label className="event-form-input">
               <h3>Total Tickets</h3>
               <input
@@ -154,10 +169,21 @@ class EventForm extends React.Component {
                 value={this.state.ticket_price}
                 onChange={this._handleChange("ticket_price")} />
             </label>
-
           </div>
 
-          <input type="submit" value={`Create Event`} />
+          <h2>Take It Live</h2>
+
+          <h4 className={"event-status " +
+            ((isLive) ? "live-event" : "draft-event")}>
+              Status: {(isLive) ? 'live' : 'draft'}
+          </h4>
+
+          <div className="button-container">
+            <button className="launch-button hvr-back-pulse">Launch Event</button>
+
+            <input type="submit" className="form-button save-button"
+              value={`Save Changes`} />
+          </div>
 
         </form>
       </section>
