@@ -1,5 +1,6 @@
 import React from 'react';
 import { DateRange } from 'react-date-range';
+import { withRouter } from 'react-router';
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -20,10 +21,16 @@ class EventForm extends React.Component {
     this._handleStartTimeChange = this._handleStartTimeChange.bind(this);
     this._handleEndTimeChange = this._handleEndTimeChange.bind(this);
     this._saveChanges = this._saveChanges.bind(this);
+    this._toggleLive = this._toggleLive.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (!this.props.currentUser) {
+      this.props.router.push('/login');
+    }
   }
 
   _handleChange(key) {
-      console.log(this.state);
       return (event) => this.setState({[key]: event.target.value});
     }
 
@@ -76,14 +83,27 @@ class EventForm extends React.Component {
   }
 
   _saveChanges(event) {
-    console.log('SAVING CHANGES');
-    event.preventDefault();
+    if (event) event.preventDefault();
     this.props.createEvent({'event': this.state});
+  }
+
+  _toggleLive(event) {
+    event.preventDefault();
+    this.setState({live: true}, this._saveChanges);
   }
 
   render() {
 
     const isLive = this.state.live;
+
+    let launchButton;
+    if (isLive) {
+      launchButton = <button className="launch-button hide-event"
+        onClick={this._toggleLive}>Hide Event</button>;
+    } else {
+      launchButton = <button className="launch-button hvr-back-pulse"
+        onClick={this._toggleLive}>Launch Event</button>;
+    }
 
     return(
       <section className="event-form-container">
@@ -179,7 +199,8 @@ class EventForm extends React.Component {
           </h4>
 
           <div className="button-container">
-            <button className="launch-button hvr-back-pulse">Launch Event</button>
+
+            {launchButton}
 
             <input type="submit" className="form-button save-button"
               value={`Save Changes`} />
@@ -191,4 +212,4 @@ class EventForm extends React.Component {
   }
 }
 
-export default EventForm;
+export default withRouter(EventForm);
