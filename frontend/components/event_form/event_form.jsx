@@ -77,65 +77,84 @@ class EventForm extends React.Component {
   render() {
     return(
       <section className="event-form-container">
-        <div>New Event Form</div>
+        <h1 className="event-form-title">Create A New Event</h1>
         <form className="event-form">
+
+          <h2 className="form-subheading">Event Details</h2>
           <div className="event-form-fields">
             <label>
-              Event Name:
+              <h3>Event Name</h3>
               <input
-                className="event-form-input"
+                className="event-form-input-title"
                 type="text"
                 value={this.state.title}
                 onChange={this._handleChange("title")} />
             </label>
 
-            <label>
-              Description:
-              <input
+            <label className="event-form-input">
+              <h3>Description</h3>
+              <textarea rows="8"
                 className="event-form-input"
-                type="text"
                 value={this.state.description}
                 onChange={this._handleChange("description")} />
             </label>
 
-            <label>
-              Total Tickets:
+            <div className="calendar-container">
+              <label className="event-form-input">
+                <h3>Event Time</h3>
+                <div className="event-time-display">
+                  {this.state.start_time.toString()} - {this.state.end_time.toString()}
+                </div>
+                <div>
+                  <DateRange
+                    onInit={this._handleSelect}
+                    onChange={this._handleSelect}
+                  />
+                </div>
+              </label>
+            </div>
+
+            <div className="times-container">
+              <label className="event-form-input">
+                <h3>Start Time</h3>
+                <input
+                  className="event-form-input"
+                  type="time"
+                  value={("0" + this.state.start_time.getHours()).slice(-2)
+                    + ":" + ("0" + this.state.start_time.getMinutes()).slice(-2)}
+                  onChange={this._handleStartTimeChange} />
+              </label>
+
+              <label className="event-form-input">
+                <h3>End Time</h3>
+                <input
+                  className="event-form-input"
+                  type="time"
+                  value={("0" + this.state.end_time.getHours()).slice(-2) +
+                    ":" + ("0" + this.state.end_time.getMinutes()).slice(-2)}
+                  onChange={this._handleEndTimeChange} />
+              </label>
+            </div>
+
+            <h2 className="form-subheading">Tickets</h2>
+            <label className="event-form-input">
+              <h3>Total Tickets</h3>
               <input
-                className="event-form-input"
+                className="event-form-input tickets-input"
                 type="number"
                 value={this.state.num_tickets}
                 onChange={this._handleChange("num_tickets")} />
             </label>
 
-            <label>
-              Select Dates:
-              <div>
-                <DateRange
-                  onInit={this._handleSelect}
-                  onChange={this._handleSelect}
-                />
-              </div>
+            <label className="event-form-input">
+              <h3>Price Per Ticket ($)</h3>
+              <input
+                className="event-form-input tickets-input"
+                type="number"
+                value={this.state.ticket_price}
+                onChange={this._handleChange("ticket_price")} />
             </label>
 
-            <label>
-              Start Time:
-              <input
-                className="event-form-input"
-                type="time"
-                value={("0" + this.state.start_time.getHours()).slice(-2)
-                  + ":" + ("0" + this.state.start_time.getMinutes()).slice(-2)}
-                onChange={this._handleStartTimeChange} />
-            </label>
-
-            <label>
-              Start Time:
-              <input
-                className="event-form-input"
-                type="time"
-                value={("0" + this.state.end_time.getHours()).slice(-2) +
-                  ":" + ("0" + this.state.end_time.getMinutes()).slice(-2)}
-                onChange={this._handleEndTimeChange} />
-            </label>
           </div>
 
           <input type="submit" value={`Create Event`} />

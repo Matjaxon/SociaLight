@@ -1,0 +1,121 @@
+@import "colors";
+@import "font_sizes";
+
+.event-form-container {
+  width: 80%;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  border-left: 1px solid $form-border-color;
+  border-right: 1px solid $form-border-color;
+  margin: 0 auto;
+  background-color: lightgray;
+}
+
+.event-form-title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid $form-border-color;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+
+.form-subheading {
+  display: block;
+  padding: 10px 0;
+  border-bottom: 1px solid $form-border-color;
+  margin-bottom: 20px;
+}
+
+.event-form-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.event-form-fields label {
+  display: block;
+  padding: 5px 0;
+}
+
+.event-form-input {
+  width: 100%;
+  font-size: $form-font-size;
+}
+
+.event-form-input-title {
+  width: 100%;
+  font-size: 35px;
+  font-variant-caps: small-caps;
+  padding: 7px 3px;
+}
+
+.event-form-container h3 {
+  padding: 5px;
+}
+
+.times-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.times-container label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.times-container input, .tickets-input {
+  width: 180px;
+  justify-content: center;
+  font-family: 'Questrial', sans-serif;
+  justify-content: space-around;
+  padding: 10px;
+  padding-right: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.event-time-display {
+  text-align: center;
+  font-style: bolder;
+  padding: 15px;
+  letter-spacing: 0.5px;
+  color: rgb(231, 76, 60);
+  border: 1px solid $form-border-color;
+  border-radius: 25px;
+  margin: 10px 0 20px 0;
+  background: white;
+}
+
+.calendar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rdr-DateRange {
+  align-items: center;
+  text-align: center;
+  display:flex;
+  justify-content: space-between;
+}
+
+div.rdr-Calendar {
+  width: 350px;
+  margin: 5px 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.rdr-Calendar span {
+  font-size: 24px;
+}
+
+span.rdr-Day {
+  font-size: 20px;
+  background: lightgray;
+}
