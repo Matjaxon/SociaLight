@@ -1,0 +1,99 @@
+@import '../colors';
+@import '../font_sizes';
+
+.event-show-container {
+  position: relative;
+}
+
+.show-header {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 3px;
+  background-image: url("http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 350px;
+}
+
+.show-header-text {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left:15%;
+}
+
+.show-event-title, .show-header-text h2 {
+  color: white;
+  padding: 5px;
+}
+
+.show-event-title {
+  font-variant: small-caps;
+  font-size: 3.5em;
+}
+
+.show-header-text h2 {
+  letter-spacing: 2px;
+}
+
+.show-header-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid red;
+}
+
+.show-header-footer a {
+  padding: 15px 10px;
+  flex-grow: 1;
+  text-align: center;
+  text-decoration: none;
+}
+
+.show-header-footer {
+  border-radius: 10px 10px 10px 10px;
+  border-color: $font-color;
+}
+
+.show-header-footer a:not(:last-of-type) {
+  border-right: 1px solid $font-color;
+}
+
+.event-details-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 70%;
+}
+
+.event-details-container h3 {
+  padding: 5px 0;
+  margin-top: 20px;
+}
+
+.event-details-description {
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.buy-tickets {
+  transition: background-color 0.6s, color 0.4s, ease;
+}
+
+.buy-tickets:hover {
+  background-color: $blue-button;
+  color: white;
+}

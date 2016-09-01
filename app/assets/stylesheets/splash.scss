@@ -1,4 +1,6 @@
 
+@import 'colors';
+
 .splash-header {
   display: flex;
   align-content: center;
@@ -55,4 +57,30 @@
   font-size: 24px;
   color: white;
   letter-spacing: 1px;
+}
+
+.featured-cities-container {
+  width: 90%;
+  display: flex;
+  margin: 20px auto;
+  border: 1px solid $border-color;
+}
+
+.featured-cities-container li {
+  padding: 10px 5px;
+  border-right: 1px solid $border-color;
+  text-align: center;
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.featured-cities-container li:not(:last-of-type) {
+  border-right: 1px solid $border-color;
+}
+
+.splash-events-container {
+  width: 90%;
+  border: 1px solid red;
+  margin: 20px auto;
+  padding: 20px;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import EventIndexItem from './events_index_item';
 
 class EventsIndex extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.requestEvents();
   }
 

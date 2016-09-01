@@ -18,10 +18,10 @@ export const fetchEvents = (success, error) => {
   });
 };
 
-export const fetchEvent = (eventData, success, error) => {
+export const fetchEvent = (eventId, success, error) => {
   $.ajax({
     method: "GET",
-    url: `api/events/${eventData.id}`,
+    url: `api/events/${eventId}`,
     success,
     error
   });

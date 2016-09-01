@@ -151,12 +151,12 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 
 **Objective:** Events can be created, read, edited and destroyed through the API.
 
-- [ ] `Event` model
-- [ ] Seed database with a small amount of test data
+- [x] `Event` model
+- [x] Seed database with a small amount of test data
 - [ ] CRUD API for events (`EventsController`)
 - [ ] JBuilder views for events
 - Event components and respective Redux loops
-  - [ ] `EventsIndex`
+  - [x] `EventsIndex`
   - [ ] `EventIndexItem`
   - [ ] `EventForm`
 - [ ] Style events components
