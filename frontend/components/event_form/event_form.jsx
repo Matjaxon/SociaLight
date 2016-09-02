@@ -138,7 +138,7 @@ class EventForm extends React.Component {
 
   _toggleLive(event) {
     event.preventDefault();
-    this.setState({live: true}, this._handleSubmit);
+    this.setState({live: !this.state.live}, this._handleSubmit);
   }
 
   render() {
@@ -153,9 +153,12 @@ class EventForm extends React.Component {
         onClick={this._toggleLive}>Launch Event</button>;
     }
 
+    let formTitle = (this.props.formType === 'new-event') ?
+      "Create a New Event" : "Edit Your Event";
+
     return(
       <section className="event-form-container">
-        <h1 className="event-form-title">Create A New Event</h1>
+        <h1 className="event-form-title">{formTitle}</h1>
         <form className="event-form" onSubmit={this._handleSubmit}>
 
           <h2>Event Details</h2>

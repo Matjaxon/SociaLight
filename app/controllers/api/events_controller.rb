@@ -33,7 +33,6 @@ class Api::EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    p event_params
     if @event.update_attributes(event_params)
       render json: @event
     else
