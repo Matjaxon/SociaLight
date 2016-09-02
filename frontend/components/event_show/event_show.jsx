@@ -10,15 +10,17 @@ class EventShow extends React.Component {
     this.props.requestEvent(this.props.eventId);
   }
 
-  componentWillReceiveProps() {
-    this.props.requestEvent(this.props.eventId);
-  }
-
   render() {
     const showEvent = (this.props.eventDetail);
     if (showEvent) {
       let startDateTime = new Date(showEvent.start_time);
       let endDateTime = new Date(showEvent.end_time);
+      let editButton;
+      if (this.props.currentUser.id === showEvent.organizer_id) {
+        editButton = <Link to={`/edit-event/${showEvent.id}`}>Edit Event</Link>;
+      } else {
+        editButton = "";
+      }
 
       return (
         <section className="event-show-container">
@@ -54,6 +56,8 @@ class EventShow extends React.Component {
               {endDateTime.toLocaleTimeString(navigator.language,
                 {hour: '2-digit', minute: '2-digit'})}</p>
           </section>
+
+          {editButton}
 
         </section>
       );

@@ -6,7 +6,8 @@ const mapStateToProps = (state, ownProps) => {
   let eventId = parseInt(ownProps.params.eventId);
   return {
     eventDetail: state.events.eventDetail,
-    eventId
+    eventId,
+    currentUser: state.session.currentUser
   };
 };
 

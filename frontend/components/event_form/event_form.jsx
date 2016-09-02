@@ -2,21 +2,20 @@ import React from 'react';
 import { DateRange } from 'react-date-range';
 import { withRouter } from 'react-router';
 
+const newEventState = {
+  title: "",
+  description: "",
+  category_id: 1,
+  num_tickets: 100,
+  ticket_price: 0,
+  start_time: new Date(),
+  end_time: new Date(),
+  live: false,
+};
+
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
-
-    const newEventState = {
-      title: "",
-      description: "",
-      category_id: 1,
-      num_tickets: 100,
-      ticket_price: 0,
-      start_time: new Date(),
-      end_time: new Date(),
-      live: false,
-    };
-
     this.state = newEventState;
 
     this._handleChange = this._handleChange.bind(this);
@@ -28,14 +27,41 @@ class EventForm extends React.Component {
     this._checkOwner = this._checkOwner.bind(this);
   }
 
-  componentWillUpdate() {
+  componentWillMount() {
+    if (this.props.formType !== 'new-event' &&
+      this.props.preloadedEvent === null) {
+        return this.props.requestEvent(this.props.activeEventId);
+    }
+  }
+
+  componentDidUpdate() {
     if (!this.props.currentUser) {
       this.props.router.push('/login');
+    }
+    if (this.props.preloadedEvent) {
+      this._checkOwner();
     }
   }
 
   componentWillReceiveProps() {
-    if (this.props.formType !== "new-event") this._checkOwner();
+    let that = this;
+    if (that.props.formType === "new-event") {
+      that.setState(newEventState);
+    } else {
+      if (that.props.preloadedEvent === null) {
+        return that.setState(newEventState);
+      } else {
+        let tempState = {};
+        let stateKeys = Object.keys(newEventState);
+        let preloadedEvent = that.props.preloadedEvent;
+        stateKeys.forEach( key => {
+          tempState[`${key}`] = preloadedEvent[`${key}`];
+        });
+        tempState.start_time = new Date(tempState.start_time);
+        tempState.end_time = new Date(tempState.end_time);
+        return that.setState(tempState);
+      }
+    }
   }
 
   _checkOwner() {
@@ -47,7 +73,6 @@ class EventForm extends React.Component {
   }
 
   _handleChange(key) {
-      console.log(this.state);
       return (event) => this.setState({[key]: event.target.value});
     }
 
@@ -110,7 +135,6 @@ class EventForm extends React.Component {
   }
 
   render() {
-
     const isLive = this.state.live;
 
     let launchButton;

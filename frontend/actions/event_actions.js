@@ -3,7 +3,8 @@ export const EventConstants = {
   REQUEST_EVENTS: "REQUEST_EVENTS",
   REQUEST_EVENT: "REQUEST_EVENT",
   RECEIVE_EVENTS: "RECEIVE_EVENTS",
-  RECEIVE_EVENT: "RECEIVE_EVENT"
+  RECEIVE_EVENT: "RECEIVE_EVENT",
+  REDIRECT_AFTER_SAVE: "REDIRECT_AFTER_SAVE"
 };
 
 export const createEvent = (eventData) => ({
@@ -27,5 +28,10 @@ export const requestEvents = () => ({
 
 export const requestEvent = (eventId) => ({
   type: EventConstants.REQUEST_EVENT,
+  eventId
+});
+
+export const redirectAfterSave = (eventId) => ({
+  type: EventConstants.REDIRECT_AFTER_SAVE,
   eventId
 });

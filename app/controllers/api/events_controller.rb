@@ -1,7 +1,12 @@
 class Api::EventsController < ApplicationController
 
   def index
-    @events = Event.all.order(:start_time)
+    if current_user
+      @events = Event.all.where(live: true).order(:start_time)
+    else
+      @events = Event.where("live = true OR organizer_id = ?", current_user.id)
+        .order(:start_time)
+    end
     render json: @events
   end
 
