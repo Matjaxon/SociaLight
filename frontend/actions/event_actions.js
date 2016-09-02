@@ -4,7 +4,8 @@ export const EventConstants = {
   RECEIVE_EVENTS: "RECEIVE_EVENTS",
   RECEIVE_EVENT: "RECEIVE_EVENT",
   CREATE_EVENT: "CREATE_EVENT",
-  UPDATE_EVENT: "UPDATE_EVENT"
+  UPDATE_EVENT: "UPDATE_EVENT",
+  DELETE_EVENT: "DELETE_EVENT"
 };
 
 export const createEvent = (eventData) => ({
@@ -12,14 +13,11 @@ export const createEvent = (eventData) => ({
   eventData
 });
 
-export const updateEvent = (eventId, eventData) => {
-  debugger;
-  return {
-    type: EventConstants.UPDATE_EVENT,
-    eventId,
-    eventData
-  };
-};
+export const updateEvent = (eventId, eventData) => ({
+  type: EventConstants.UPDATE_EVENT,
+  eventId,
+  eventData
+});
 
 export const receiveEvents = (events) => ({
   type: EventConstants.RECEIVE_EVENTS,
@@ -38,4 +36,9 @@ export const requestEvents = () => ({
 export const requestEvent = (eventId) => ({
   type: EventConstants.REQUEST_EVENT,
   eventId
+});
+
+export const deleteEvent = (eventData) => ({
+  type: EventConstants.DELETE_EVENT,
+  eventData
 });

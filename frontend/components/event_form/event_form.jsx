@@ -26,6 +26,7 @@ class EventForm extends React.Component {
     this._handleSubmit = this._handleSubmit.bind(this);
     this._toggleLive = this._toggleLive.bind(this);
     this._checkOwner = this._checkOwner.bind(this);
+    this._deleteEvent = this._deleteEvent.bind(this);
   }
 
   componentWillMount() {
@@ -131,7 +132,6 @@ class EventForm extends React.Component {
       this.props.createEvent({'event': this.state});
     } else {
       let eventId = parseInt(this.props.activeEventId);
-      debugger;
       this.props.updateEvent(eventId, {'event': this.state});
     }
   }
@@ -141,9 +141,20 @@ class EventForm extends React.Component {
     this.setState({live: !this.state.live}, this._handleSubmit);
   }
 
-  render() {
-    const isLive = this.state.live;
+  _deleteEvent(event) {
+    event.preventDefault();
+    if (this.props.formType === "new-event") {
+      this.setState(newEventState);
+    } else {
+      this.props.deleteEvent(this.props.preloadedEvent);
+    }
+  }
 
+  render() {
+    let formTitle = (this.props.formType === 'new-event') ?
+    "Create a New Event" : "Edit Your Event";
+
+    const isLive = this.state.live;
     let launchButton;
     if (isLive) {
       launchButton = <button className="launch-button hide-event"
@@ -153,8 +164,9 @@ class EventForm extends React.Component {
         onClick={this._toggleLive}>Launch Event</button>;
     }
 
-    let formTitle = (this.props.formType === 'new-event') ?
-      "Create a New Event" : "Edit Your Event";
+    let deleteButtonText = (this.props.formType === "new-event") ?
+      "Discard" : "Delete";
+
 
     return(
       <section className="event-form-container">
@@ -254,8 +266,12 @@ class EventForm extends React.Component {
 
             {launchButton}
 
-            <input type="submit" className="form-button save-button"
+            <input type="submit" className="save-button form-button"
               value={`Save Changes`} />
+
+            <button className="delete-button"
+              onClick={this._deleteEvent}>{deleteButtonText} Event</button>
+
           </div>
 
         </form>

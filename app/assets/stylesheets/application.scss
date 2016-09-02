@@ -15,6 +15,7 @@
  */
 
 @import 'colors';
+@import 'font_sizes';
 
 
 /* RESET */
@@ -167,42 +168,4 @@ h4 {
   justify-content: space-between;
   border: 1px solid $border-color;
   height: 56px;
-}
-
-.logout-button {
-  display: flex;
-  background: inherit;
-  padding: 20px;
-  height: 54px;
-  border-left: 1px solid $border-color;
-  text-transform: uppercase;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-.logout-button:hover {
-  background: #f5f5f5;
-  transition: background-color 0.4s ease;
-}
-
-.form-button {
-  width: 140px;
-  background-color: white;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: black;
-  border: 1px solid $font-color;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-  margin: 10px;
-}
-
-.form-button:hover {
-  background: $font-color;
-  color: white;
-  border-color: white;
-  transition: background-color 0.4s ease;
 }

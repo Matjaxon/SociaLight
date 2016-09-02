@@ -1,4 +1,5 @@
 class Api::EventsController < ApplicationController
+  before_action :verify_owner, only: [:update, :destroy]
 
   def index
     if current_user
@@ -41,11 +42,29 @@ class Api::EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event = Event.find(params[:id])
+    puts @event
+    if @event.destroy
+      render json: @event
+    else
+      errors = @event.errors.full_messages
+      render json: {error: errors}, status: :unprocessible_entity
+    end
+  end
+
   private
 
   def event_params
     params.require(:event).permit(:title, :description, :category_id,
       :num_tickets, :ticket_price, :start_time, :end_time,
       :live)
+  end
+
+  def verify_owner
+    event = Event.find(params[:id])
+    unless event.organizer == current_user
+      render json: {error: "Not authorized"}, status: 401
+    end
   end
 end

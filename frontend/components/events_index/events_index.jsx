@@ -4,8 +4,8 @@ import EventIndexItem from './events_index_item';
 class EventsIndex extends React.Component {
   render() {
     let eventListItems = this.props.eventsList.map( singleEvent => (
-      <EventIndexItem key={`event-index-item-${singleEvent.id}`}
-        eventItem={singleEvent} />
+      <EventIndexItem key=
+          {`event-index-item-${singleEvent.id}`} eventItem={singleEvent} />
     ));
     return (
       <section className="event-index">

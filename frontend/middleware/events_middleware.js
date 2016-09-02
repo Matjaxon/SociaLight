@@ -5,11 +5,11 @@ import { hashHistory } from 'react-router';
 const EventsMiddleware = ({ getState, dispatch }) => next => action => {
   const eventsSuccess = data => dispatch(EventActions.receiveEvents(data));
   const eventSuccess = data => dispatch(EventActions.receiveEvent(data));
-
   const eventUpdateSuccess = data => {
     hashHistory.push(`event/${data.id}`);
     dispatch(EventActions.receiveEvent(data));
   };
+  const eventDeleteSuccess = () => hashHistory.push('/');
 
   switch(action.type) {
     case EventActions.EventConstants.REQUEST_EVENTS:
@@ -25,9 +25,12 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
       return next(action);
 
     case EventActions.EventConstants.UPDATE_EVENT:
-      debugger;
       EventsAPI.updateEvent(action.eventId, action.eventData,
         eventUpdateSuccess);
+      return next(action);
+
+    case EventActions.EventConstants.DELETE_EVENT:
+      EventsAPI.deleteEvent(action.eventData.id, eventDeleteSuccess);
       return next(action);
 
     default:

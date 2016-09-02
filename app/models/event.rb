@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
   :ticket_price, :start_time, :end_time, presence: true
 
   belongs_to :organizer,
-    foreign_key: :user_id,
+    foreign_key: :organizer_id,
     primary_key: :id,
     class_name: :User
 
