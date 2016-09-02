@@ -1,6 +1,7 @@
 import React from 'react';
 import { DateRange } from 'react-date-range';
 import { withRouter } from 'react-router';
+import merge from 'lodash/merge';
 
 const newEventState = {
   title: "",
@@ -22,7 +23,7 @@ class EventForm extends React.Component {
     this._handleSelect = this._handleSelect.bind(this);
     this._handleStartTimeChange = this._handleStartTimeChange.bind(this);
     this._handleEndTimeChange = this._handleEndTimeChange.bind(this);
-    this._saveChanges = this._saveChanges.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
     this._toggleLive = this._toggleLive.bind(this);
     this._checkOwner = this._checkOwner.bind(this);
   }
@@ -124,14 +125,20 @@ class EventForm extends React.Component {
     this.setState({start_time: startDate, end_time: endDate});
   }
 
-  _saveChanges(event) {
+  _handleSubmit(event) {
     if (event) event.preventDefault();
-    this.props.createEvent({'event': this.state});
+    if (this.props.formType === 'new-event') {
+      this.props.createEvent({'event': this.state});
+    } else {
+      let eventId = parseInt(this.props.activeEventId);
+      debugger;
+      this.props.updateEvent(eventId, {'event': this.state});
+    }
   }
 
   _toggleLive(event) {
     event.preventDefault();
-    this.setState({live: true}, this._saveChanges);
+    this.setState({live: true}, this._handleSubmit);
   }
 
   render() {
@@ -149,7 +156,7 @@ class EventForm extends React.Component {
     return(
       <section className="event-form-container">
         <h1 className="event-form-title">Create A New Event</h1>
-        <form className="event-form" onSubmit={this._saveChanges}>
+        <form className="event-form" onSubmit={this._handleSubmit}>
 
           <h2>Event Details</h2>
           <h4 className={"event-status " +

@@ -1,8 +1,18 @@
 export const createEvent = (data, success, error) => {
-  debugger;
   $.ajax({
     method: "POST",
     url: "api/events",
+    data,
+    success,
+    error
+  });
+};
+
+export const updateEvent = (eventId, data, success, error) => {
+  debugger;
+  $.ajax({
+    method: "PATCH",
+    url: `api/events/${eventId}`,
     data,
     success,
     error

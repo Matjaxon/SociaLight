@@ -31,6 +31,17 @@ class Api::EventsController < ApplicationController
     end
   end
 
+  def update
+    @event = Event.find(params[:id])
+    p event_params
+    if @event.update_attributes(event_params)
+      render json: @event
+    else
+      errors = @event.errors.full_messages
+      render json: {error: errors}, status: :unprocessible_entity
+    end
+  end
+
   private
 
   def event_params

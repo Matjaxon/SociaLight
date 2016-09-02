@@ -24,6 +24,12 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
       EventsAPI.createEvent(action.eventData, eventUpdateSuccess);
       return next(action);
 
+    case EventActions.EventConstants.UPDATE_EVENT:
+      debugger;
+      EventsAPI.updateEvent(action.eventId, action.eventData,
+        eventUpdateSuccess);
+      return next(action);
+
     default:
       return next(action);
   }
