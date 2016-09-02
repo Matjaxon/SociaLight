@@ -2,10 +2,6 @@ import React from 'react';
 import EventIndexItem from './events_index_item';
 
 class EventsIndex extends React.Component {
-  componentWillMount() {
-    this.props.requestEvents();
-  }
-
   render() {
     let eventListItems = this.props.eventsList.map( singleEvent => (
       <EventIndexItem key={`event-index-item-${singleEvent.id}`}

@@ -18,11 +18,13 @@
 
 .event-index-header {
   border: 1px solid $border-color;
+  cursor: pointer;
 }
 
 .event-index-image {
   width: 200px;
   border-right: 1px solid $border-color;
+  cursor: pointer;
 }
 
 .event-index-item li {
@@ -60,6 +62,7 @@
 
 .event-index-price {
   width: 201px;
+  cursor: pointer;
 }
 
 .event-index-category {

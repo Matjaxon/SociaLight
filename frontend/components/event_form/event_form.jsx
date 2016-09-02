@@ -5,7 +5,8 @@ import { withRouter } from 'react-router';
 class EventForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+
+    const newEventState = {
       title: "",
       description: "",
       category_id: 1,
@@ -16,21 +17,37 @@ class EventForm extends React.Component {
       live: false,
     };
 
+    this.state = newEventState;
+
     this._handleChange = this._handleChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._handleStartTimeChange = this._handleStartTimeChange.bind(this);
     this._handleEndTimeChange = this._handleEndTimeChange.bind(this);
     this._saveChanges = this._saveChanges.bind(this);
     this._toggleLive = this._toggleLive.bind(this);
+    this._checkOwner = this._checkOwner.bind(this);
   }
 
-  componentDidUpdate() {
+  componentWillUpdate() {
     if (!this.props.currentUser) {
       this.props.router.push('/login');
     }
   }
 
+  componentWillReceiveProps() {
+    if (this.props.formType !== "new-event") this._checkOwner();
+  }
+
+  _checkOwner() {
+    const preloadedEvent = this.props.preloadedEvent;
+    if (!preloadedEvent || preloadedEvent.organizer_id
+      !== this.props.currentUser.id) {
+      this.props.router.push('/');
+    }
+  }
+
   _handleChange(key) {
+      console.log(this.state);
       return (event) => this.setState({[key]: event.target.value});
     }
 
@@ -156,7 +173,8 @@ class EventForm extends React.Component {
                   className="event-form-input"
                   type="time"
                   value={("0" + this.state.start_time.getHours()).slice(-2)
-                    + ":" + ("0" + this.state.start_time.getMinutes()).slice(-2)}
+                    + ":" + ("0" +
+                    this.state.start_time.getMinutes()).slice(-2)}
                   onChange={this._handleStartTimeChange} />
               </label>
 

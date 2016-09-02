@@ -8,20 +8,19 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
   switch(action.type) {
     case EventActions.EventConstants.REQUEST_EVENTS:
       EventsAPI.fetchEvents(eventsSuccess);
-      break;
+      return next(action);
 
     case EventActions.EventConstants.REQUEST_EVENT:
       EventsAPI.fetchEvent(action.eventId, eventSuccess);
-      break;
+      return next(action);
 
     case EventActions.EventConstants.CREATE_EVENT:
       EventsAPI.createEvent(action.eventData, eventSuccess);
-      break;
+      return next(action);
 
     default:
-      break;
+      return next(action);
   }
-  return next(action);
 };
 
 export default EventsMiddleware;

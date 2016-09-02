@@ -139,7 +139,7 @@ h4 {
   float: right;
   height: 54px;
   padding: 20px 20px;
-  border-left: 1px solid lightgray;
+  border-left: 1px solid $border-color;
   box-sizing: border-box;
 }
 
@@ -159,13 +159,13 @@ h4 {
 }
 
 .nav-logo {
-  border-right: 1px solid lightgray;
+  border-right: 1px solid $border-color;
 }
 
 .nav {
   display:flex;
   justify-content: space-between;
-  border: 1px solid lightgray;
+  border: 1px solid $border-color;
   height: 56px;
 }
 
@@ -174,7 +174,7 @@ h4 {
   background: inherit;
   padding: 20px;
   height: 54px;
-  border-left: 1px solid lightgray;
+  border-left: 1px solid $border-color;
   text-transform: uppercase;
   justify-content: center;
   align-content: center;

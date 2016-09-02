@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import { requestEvent } from '../actions/event_actions';
+import { requestEvent, requestEvents } from '../actions/event_actions';
 
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
@@ -11,26 +11,40 @@ import EventsIndexContainer from './events_index/events_index_container';
 import EventFormContainer from './event_form/event_form_container';
 import EventShowContainer from './event_show/event_show_container';
 
-
 class AppRouter extends React.Component {
   constructor(props) {
     super(props);
     this._enforceLogin = this._enforceLogin.bind(this);
     this._redirectIfLoggedIn = this._redirectIfLoggedIn.bind(this);
+    this._requestEvents = this._requestEvents.bind(this);
+    this._requestEvent = this._requestEvent.bind(this);
+
     this.routes = (
       <Route path='/' component={ App } >
-        <IndexRoute component={ SplashContainer } />
+        <IndexRoute component={ SplashContainer }
+          onEnter={this._requestEvents} />
         <Route path="/signup" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn} />
         <Route path="/login" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn}/>
-        <Route path="/browse" component={ EventsIndexContainer } />
+        <Route path="/browse" component={ EventsIndexContainer }
+          onEnter={this._requestEvents} />
         <Route path="/new-event"
           component={ EventFormContainer }
           onEnter={this._enforceLogin}/>
         <Route path="/event/:eventId" component={ EventShowContainer } />
+        <Route path="/edit-event/:eventId" component={ EventFormContainer }
+          onEnter={this._requestEvent} />
       </Route>
     );
+  }
+
+  _requestEvents() {
+    this.props.dispatch(requestEvents());
+  }
+
+  _requestEvent(nextState) {
+    this.props.dispatch(requestEvent(parseInt(nextState.params.eventId)));
   }
 
   _enforceLogin(nextState, replace) {
