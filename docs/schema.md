@@ -35,7 +35,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 guest_id    | integer   | not null, foreign key (references users), indexed
-event_id    | integer   | not null, foreign key (references events), index, unique [guest_id]
+event_id    | integer   | not null, foreign key (references events), indexed
 
 ## categories
 column name | data type | details

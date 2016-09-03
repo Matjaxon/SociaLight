@@ -10,6 +10,7 @@ import SplashContainer from './splash/splash_container';
 import EventsIndexContainer from './events_index/events_index_container';
 import EventFormContainer from './event_form/event_form_container';
 import EventShowContainer from './event_show/event_show_container';
+import TicketForm from './ticket_form/ticket_form';
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -23,17 +24,19 @@ class AppRouter extends React.Component {
       <Route path='/' component={ App } >
         <IndexRoute component={ SplashContainer }
           onEnter={this._requestEvents} />
-        <Route path="/signup" component={ SessionFormContainer }
+        <Route path="signup" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn} />
-        <Route path="/login" component={ SessionFormContainer }
+        <Route path="login" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn}/>
-        <Route path="/browse" component={ EventsIndexContainer }
+        <Route path="browse" component={ EventsIndexContainer }
           onEnter={this._requestEvents} />
-        <Route path="/new-event"
+        <Route path="new-event"
           component={ EventFormContainer }
           onEnter={this._enforceLogin}/>
-        <Route path="/event/:eventId" component={ EventShowContainer } />
-        <Route path="/edit-event/:eventId" component={ EventFormContainer }
+        <Route path="event/:eventId" component={ EventShowContainer }>
+          <Route path="order" component={ TicketForm } />
+        </Route>
+        <Route path="edit-event/:eventId" component={ EventFormContainer }
           onEnter={this._requestEvent} />
       </Route>
     );

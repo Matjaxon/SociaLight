@@ -33,3 +33,23 @@
   display: inline-block;
   padding: 10px;
 }
+
+.submit-button {
+  cursor: pointer;
+  border: 1px solid;
+  padding: 10px 20px;
+  border-radius: 2px;
+  background-color: #0077ea;
+  color: white;
+  margin: 10px 0 10px 0;
+  width: 60%;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.submit-button:hover {
+  background-color: #006ad1;
+  padding: 12px 20px;
+  margin: 8px 0;
+  transition: background-color 0.4s ease;
+}

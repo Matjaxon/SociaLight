@@ -269,7 +269,7 @@ class EventForm extends React.Component {
             <input type="submit" className="save-button form-button"
               value={`Save Changes`} />
 
-            <button className="delete-button"
+            <button className="form-button delete-button"
               onClick={this._deleteEvent}>{deleteButtonText} Event</button>
 
           </div>

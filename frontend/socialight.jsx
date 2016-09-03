@@ -9,6 +9,8 @@ import * as SessionAPI from './util/session_api_util';
 import * as SessionActions from './actions/session_actions';
 import * as EventActions from './actions/event_actions';
 import * as EventsAPI from './util/events_api_util';
+import * as TicketActions from './actions/ticket_actions';
+import * as TicketsAPI from './util/tickets_api_util';
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById('root');
@@ -32,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.EventActions = EventActions;
   window.fetchEvents = () => window.EventsAPI.fetchEvents( (data) => console.log(data));
   window.requestEvents = () => window.Store.dispatch(EventActions.requestEvents());
+  window.createTicket = () => window.Store.dispatch(TicketActions.createTicket(70, 1));
 
 
   ReactDOM.render(<Root store={store} />, root);

@@ -22,6 +22,17 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :tickets,
+    foreign_key: :guest_id,
+    primary_key: :id,
+    class_name: :Ticket
+
+  has_many :events, -> {distinct}, through: :tickets, source: :event
+
+  has_many :hosted_events,
+    foreign_key: :organizer_id,
+    class_name: :Event
+
   def self.find_by_credentials(username, password)
     @user = User.find_by(username: username)
     return nil if @user.nil?

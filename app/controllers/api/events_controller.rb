@@ -3,10 +3,10 @@ class Api::EventsController < ApplicationController
 
   def index
     if current_user
-      @events = Event.all.where(live: true).order(:start_time)
-    else
       @events = Event.where("live = true OR organizer_id = ?", current_user.id)
-        .order(:start_time)
+      .order(:start_time)
+    else
+        @events = Event.all.where(live: true).order(:start_time)
     end
     render json: @events
   end
@@ -26,7 +26,7 @@ class Api::EventsController < ApplicationController
   def show
     @event = Event.find_by(id: params[:id])
     if @event
-      render json: @event
+      render 'api/events/show'
     else
       render json: {error: "Event not found"}, status: 404
     end

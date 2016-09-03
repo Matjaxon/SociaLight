@@ -1,0 +1,24 @@
+@import "colors";
+@import "font_sizes";
+
+.hidden-form {
+  height: 0px;
+  overflow: hidden;
+  padding: 0px;
+  border: 0px;
+  margin: 0px;
+  font-size: 0px;
+  transition: height 2.0s, padding 2s,
+    border 2s, margin 2s, font-size 2s, ease;
+}
+
+// .show-form {
+//   font-size: 100%;
+//   padding: 5px;
+//   border: 1px solid $form-border-color;
+//   border-radius: 5px;
+//   overflow: auto;
+//   height: auto;
+  // transition: height 0.5s, padding 0.5s,
+  // border 0.5s, margin 0.5s, font-size 0.5s, ease;
+// }

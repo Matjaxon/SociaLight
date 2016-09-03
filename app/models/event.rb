@@ -15,8 +15,8 @@
 #  city         :string
 #  state        :string
 #  zip_code     :string
-#  start_time   :time             not null
-#  end_time     :time             not null
+#  start_time   :datetime         not null
+#  end_time     :datetime         not null
 #  live         :boolean          default(FALSE), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -31,5 +31,14 @@ class Event < ActiveRecord::Base
     foreign_key: :organizer_id,
     primary_key: :id,
     class_name: :User
+
+  has_many :tickets
+
+  has_many :guests, -> {distinct},
+    class_name: :User
+
+  def tickets_available?(num_tickets)
+    self.num_tickets - self.tickets.count > num_tickets
+  end
 
 end

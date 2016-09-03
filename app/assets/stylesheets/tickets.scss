@@ -1,0 +1,42 @@
+// Place all the styles related to the Api/Tickets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "colors";
+@import "font_sizes";
+
+.ticket-form-container {
+  padding: 10px;
+  padding-bottom: 20px;
+
+}
+
+.ticket-form-container {
+  display: block;
+}
+
+.main-ticket-form {
+  padding: 10px;
+  border: 1px solid $form-border-color;
+  border-radius: 5px;
+  background: $form-background-color;
+}
+
+.ticket-form-container h2 {
+  margin-bottom: 10px;
+}
+
+.ticket-form-container h4 {
+  margin-bottom: 5px;
+}
+
+.order-now {
+  background-color: $blue-button;
+}
+
+.group-order-form {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid $form-border-color;
+  border-radius: 5px;
+}
