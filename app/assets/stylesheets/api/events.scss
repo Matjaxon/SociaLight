@@ -51,7 +51,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 10%;
+  width: 40px;
   border-left: 1px solid $border-color;
 }
 
@@ -106,5 +106,24 @@
 }
 
 .event-index-bookmark {
-  width: 100px;
+  align-items: center;
+  align-text: center;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  border-top: 0px solid transparent;
+  transition: all 0.2s, ease;
+  cursor: pointer;
+}
+
+.event-index-bookmark:hover i {
+  color: $nav-hover;
+}
+
+.event-index-bookmark:hover {
+  border-top: 3px solid $nav-hover;
+}
+
+.bookmarked {
+  color: #e0ad2d
 }

@@ -10,6 +10,8 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
     dispatch(EventActions.receiveEvent(data));
   };
   const eventDeleteSuccess = () => hashHistory.push('/');
+  const toggleBookmarkSuccess = data =>
+    dispatch(EventActions.receiveEvent(data));
 
   switch(action.type) {
     case EventActions.EventConstants.REQUEST_EVENTS:
@@ -31,6 +33,10 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
 
     case EventActions.EventConstants.DELETE_EVENT:
       EventsAPI.deleteEvent(action.eventData.id, eventDeleteSuccess);
+      return next(action);
+
+    case EventActions.EventConstants.TOGGLE_BOOKMARK:
+      EventsAPI.toggleBookmark(action.eventId);
       return next(action);
 
     default:

@@ -44,3 +44,11 @@ export const deleteEvent = (eventId, success, error) => {
     error
   });
 };
+
+export const toggleBookmark = (eventId) => {
+  $.ajax({
+    method: "POST",
+    url: `api/events/${eventId}/bookmark`,
+    data: {bookmark: {event_id: `${eventId}`}}
+  });
+};

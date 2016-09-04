@@ -9,7 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestEvents: () => dispatch(EventActions.requestEvents())
+  requestEvents: () => dispatch(EventActions.requestEvents()),
+  toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId))
 });
 
 export default connect(

@@ -10,7 +10,7 @@ class Api::BookmarksController < ApplicationController
 
     else
       @bookmark = Bookmark.new(bookmark_params)
-      @bookmark.user_id = current_user_id
+      @bookmark.user_id = current_user.id
       if @bookmark.save
         render json: @bookmark, status: 200
       else
@@ -29,5 +29,6 @@ class Api::BookmarksController < ApplicationController
   def enforce_login
     unless current_user
       render json: {error: "Login required"}, status: 401
+    end
   end
 end

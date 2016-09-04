@@ -5,8 +5,8 @@ const _handleClick = (router, url) => (
   () => router.push(url)
 );
 
+const EventIndexItem = ({ eventItem, currentUser, toggleBookmark, router }) => {
 
-const EventIndexItem = ({ eventItem, currentUser, router }) => {
   let startDateTime = new Date(eventItem.start_time);
   let endDateTime = new Date(eventItem.end_time);
 
@@ -28,6 +28,15 @@ const EventIndexItem = ({ eventItem, currentUser, router }) => {
     </div>;
   } else {
     eventStatusSection = <div></div>;
+  }
+
+  let bookmarkFlag;
+  let isBookmarked = eventItem.is_bookmarked;
+  if (isBookmarked) {
+    bookmarkFlag = <i className="fa fa-bookmark bookmarked"
+      aria-hidden="true"></i>;
+  } else {
+    bookmarkFlag = <i className="fa fa-bookmark-o" aria-hidden="true"></i>;
   }
 
   return (
@@ -58,7 +67,10 @@ const EventIndexItem = ({ eventItem, currentUser, router }) => {
           {eventItem.ticket_price}
         </li>
         <li className='event-index-category'>Category</li>
-        <li className="event-index-bookmark">Bookmark</li>
+        <li className="event-index-bookmark"
+          onClick={ () => toggleBookmark(eventItem.id)}>
+          {bookmarkFlag}
+        </li>
       </ul>
     </ul>
   );
