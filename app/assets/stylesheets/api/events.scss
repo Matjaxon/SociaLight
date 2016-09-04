@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import 'colors';
+@import 'font_sizes';
 
 .event-index {
   padding: 20px;
@@ -12,8 +13,9 @@
 .event-index-item {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  margin: 20px 0;
+  margin: 20px 5px;
+  width: 90%;
+  align-self: center;
 }
 
 .event-index-header {
@@ -42,6 +44,40 @@
 .event-main-details li {
   flex-grow: 1;
   padding: 10px;
+}
+
+.event-index-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  border-left: 1px solid $border-color;
+}
+
+.tickets-number {
+  font-size: 1.2em;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.tickets-label, .event-status-text {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 30px 0;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+
+.hosted-live {
+  color: $live-green;
+}
+
+.hosted-draft {
+  color: $draft-red;
 }
 
 .event-index-footer {

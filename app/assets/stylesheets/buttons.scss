@@ -14,13 +14,14 @@
   cursor: pointer;
   margin: 10px 0;
   text-decoration: none;
+  text-align: center;
+  transition: all 0.4s ease;
 }
 
 .form-button:hover {
   background: $font-color;
   color: white;
   border-color: white;
-  transition: background-color 0.4s ease;
 }
 
 .save-button  {

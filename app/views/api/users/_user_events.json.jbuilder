@@ -1,4 +1,4 @@
-json.events user.events do |event|
+json.events user_events do |event|
   json.partial! "api/events/event", event: event
   user_tickets = event.tickets.where(guest_id: user.id)
   json.tickets user_tickets do |ticket|

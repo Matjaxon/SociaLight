@@ -27,7 +27,8 @@
  small, strike, strong, sub, sup, tt, var,
  dl, dt, dd, ol, ul, li,
  fieldset, form, label, legend,
- table, caption, tbody, tfoot, thead, tr, th, td, .logout-button {
+ table, caption, tbody, tfoot, thead, tr, th, td,
+ .logout-button, button {
  	margin: 0;
  	padding: 0;
  	border: 0;
@@ -43,6 +44,7 @@
  :focus {
  	outline: 0;
  }
+
  body {
  	line-height: 1;
  	color: black;
@@ -104,6 +106,10 @@ h4 {
   font-size: 1.2em;
 }
 
+h5 {
+  font-size: 1.1em;
+}
+
 .user-nav {
   display: flex;
   float: right;
@@ -121,12 +127,14 @@ h4 {
   height: 54px;
   padding: 20px 20px;
   border-left: 1px solid $border-color;
-  box-sizing: border-box;
+  border-top: 0px solid transparent;
+  transition: all 0.2s, ease;
+  text-decoration: none;
 }
 
 .user-nav a:hover {
-  background: $nav-hover;
-  transition: background-color 0.4s ease;
+  border-top: 5px solid $nav-hover;
+  color: $nav-hover;
 }
 
 .nav {
@@ -156,16 +164,18 @@ h4 {
   padding: 20px;
   height: 54px;
   border-left: 1px solid $border-color;
+  border-top: 0px solid transparent;
   text-transform: uppercase;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .logout-button:hover {
-  background: $nav-hover;
-  transition: background-color 0.4s ease;
+  border-top: 5px solid $nav-hover;
+  color: $nav-hover;
 }
 
 .hidden-form {
@@ -174,10 +184,18 @@ h4 {
   padding: 0px;
   border: 0px;
   margin: 0px;
-  // font-size: 0px;
 }
 
 .transition-form {
   transition: height 8.0s, font-size 8.0s, ease;
   -webkit-transition: height 8.0s, font-size 8.0s, ease;
+}
+
+.app-footer {
+  border-top: 4px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10vh;
+  background-color: $footer-background-color;
 }

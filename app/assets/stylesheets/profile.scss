@@ -1,0 +1,95 @@
+@import "colors";
+@import "font_sizes";
+
+.user-page-container {
+  margin: 0 auto;
+}
+
+.user-details-container {
+  text-align: center;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  height: 8%;
+  min-height: 60px;
+}
+
+.user-details-container h2 {
+  display: block;
+  padding: 15px;
+  font-size: 1.7em;
+}
+
+.profile-events-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-events-index {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 55vh;
+  min-height: 200px;
+  width: 90%;
+  overflow: scroll;
+  margin: 0 auto;
+  background: $form-background-color;
+}
+
+.profile-event-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid $border-color;
+}
+
+.profile-button {
+  background-color: transparent;
+  width: 25%;
+  height: 40px;
+  min-width: 200px;
+  font-size: 1.2em;
+  color: $unselected-text;
+  border-bottom: 0px solid transparent;
+  margin-bottom: 5px;
+  transition: all 0.2s, ease;
+  animation-direction: reverse;
+}
+
+.profile-button:hover {
+  border-color: $nav-hover;
+  border-bottom: 5px solid $nav-hover;
+}
+
+.selected-button {
+  color: $font-color;
+}
+
+.profile-events-container section.closed {
+  display: none;
+}
+
+.profile-events-container section.open {
+  display: block;
+}
+
+.profile-events-container section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.profile-index-button {
+  display: block;
+  text-decoration: none;
+  padding: 15px 30px;
+  min-width: 40%;
+  background-color: $blue-button;
+  font-weight: bolder;
+  letter-spacing: 1.5px;
+  margin: 20px auto;
+}

@@ -8,7 +8,7 @@ class Api::EventsController < ApplicationController
     else
         @events = Event.all.where(live: true).order(:start_time)
     end
-    render json: @events
+    render 'api/events/index'
   end
 
   def create

@@ -1,6 +1,9 @@
 json.partial! "api/users/user", user: @user
 
 if current_user
-  json.partial! "api/users/user_events", user: @user
-  json.partial! "api/users/user_hosted_events", user: @user
+
+  user_events = @user.events.order(:start_time)
+  hosted_events = @user.hosted_events.order(:start_time)
+  json.partial! "api/users/user_events", user_events: user_events, user: @user
+  json.partial! "api/users/user_hosted_events", hosted_events: hosted_events, user: @user
 end

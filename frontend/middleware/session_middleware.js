@@ -21,7 +21,11 @@ const SessionMiddleware = ({store, dispatch}) => next => action => {
 
     case SessionActions.SessionConstants.LOGOUT:
       SessionAPI.logout(next(action), loginFail);
-      break;
+      return next(action);
+
+    case SessionActions.SessionConstants.REQUEST_USER:
+      SessionAPI.fetchUser(action.userId, loginSuccess, loginFail);
+      return next(action);
 
     default:
       return next(action);

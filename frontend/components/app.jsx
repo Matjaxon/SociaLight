@@ -14,6 +14,9 @@ const App = ({ children }) => (
       <li className="nav-group"><UserNavContainer /></li>
     </ul>
     { children }
+
+    <section className="app-footer"></section>
+
   </div>
 );
 

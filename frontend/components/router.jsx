@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import { requestEvent, requestEvents } from '../actions/event_actions';
+import { requestUser } from '../actions/session_actions';
 
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
@@ -11,6 +12,8 @@ import EventsIndexContainer from './events_index/events_index_container';
 import EventFormContainer from './event_form/event_form_container';
 import EventShowContainer from './event_show/event_show_container';
 import TicketForm from './ticket_form/ticket_form';
+import UserPageContainer from './user_page/user_page_container';
+
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -19,6 +22,7 @@ class AppRouter extends React.Component {
     this._redirectIfLoggedIn = this._redirectIfLoggedIn.bind(this);
     this._requestEvents = this._requestEvents.bind(this);
     this._requestEvent = this._requestEvent.bind(this);
+    this._requestProfile = this._requestProfile.bind(this);
 
     this.routes = (
       <Route path='/' component={ App } >
@@ -38,8 +42,18 @@ class AppRouter extends React.Component {
         </Route>
         <Route path="edit-event/:eventId" component={ EventFormContainer }
           onEnter={this._requestEvent} />
+        <Route path="profile" component={ UserPageContainer }
+          onEnter={this._requestProfile} />
       </Route>
     );
+  }
+
+  _requestProfile(_, replace) {
+    if (!this.props.currentUser) {
+      replace('/login');
+    } else {
+      this.props.dispatch(requestUser(this.props.currentUser.id));
+    }
   }
 
   _requestEvents() {

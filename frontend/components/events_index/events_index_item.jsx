@@ -6,7 +6,30 @@ const _handleClick = (router, url) => (
 );
 
 
-const EventIndexItem = ({ eventItem, router }) => {
+const EventIndexItem = ({ eventItem, currentUser, router }) => {
+  let startDateTime = new Date(eventItem.start_time);
+  let endDateTime = new Date(eventItem.end_time);
+
+  let liveStatus = (eventItem.live) ? "live" : "draft";
+
+  let eventStatusSection;
+  if (!currentUser) {
+    eventStatusSection = <div></div>;
+  } else if (eventItem.current_user_event) {
+    eventStatusSection = <div className={"event-index-status"}>
+        <div className={"event-status-text hosted-" + liveStatus}>
+          {liveStatus}
+        </div>
+      </div>;
+  } else if (eventItem.current_user_tickets > 0) {
+    eventStatusSection = <div className="event-index-status has-tickets">
+      <div className="tickets-number">{eventItem.current_user_tickets}</div>
+      <div className="tickets-label"> tickets</div>
+    </div>;
+  } else {
+    eventStatusSection = <div></div>;
+  }
+
   return (
     <ul className="event-index-item">
       <li className='event-index-header'
@@ -17,13 +40,18 @@ const EventIndexItem = ({ eventItem, router }) => {
         </div>
 
         <ul className="event-main-details">
-          <li className="event-index-time">{eventItem.start_time}</li>
-          <li className='event-index-title'>{eventItem.title}</li>
-          <li className='event-index-description'>{eventItem.description}</li>
+          <li className='event-index-title'><h4>{eventItem.title}</h4></li>
+          <li className="event-index-time">
+            <h5>{`${startDateTime.toDateString()}` + `  ` +
+              `${startDateTime.toLocaleTimeString(navigator.language,
+              {hour: '2-digit', minute: '2-digit'})}`}</h5>
+          </li>
           <li className='event-index-location'>LOCATION</li>
         </ul>
+
+        {eventStatusSection}
       </li>
-      
+
       <ul className="event-index-footer">
         <li className='event-index-price'
           onClick={_handleClick(router, `/event/${eventItem.id}`)}>

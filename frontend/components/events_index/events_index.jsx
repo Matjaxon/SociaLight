@@ -5,7 +5,8 @@ class EventsIndex extends React.Component {
   render() {
     let eventListItems = this.props.eventsList.map( singleEvent => (
       <EventIndexItem key=
-          {`event-index-item-${singleEvent.id}`} eventItem={singleEvent} />
+          {`event-index-item-${singleEvent.id}`} eventItem={singleEvent}
+          currentUser={this.props.currentUser}/>
     ));
     return (
       <section className="event-index">
