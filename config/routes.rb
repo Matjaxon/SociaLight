@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :events do
       resources :tickets, only: [:create, :show]
+      resource :bookmark, only: [:create]
     end
   end
 

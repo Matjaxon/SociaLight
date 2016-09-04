@@ -37,8 +37,14 @@ class Event < ActiveRecord::Base
   has_many :guests, -> {distinct},
     class_name: :User
 
+  has_many :bookmarks
+
   def tickets_available?(num_tickets)
     self.num_tickets - self.tickets.count > num_tickets
+  end
+
+  def user_bookmark(user)
+    self.bookmarks.where(user_id: user.id).first
   end
 
 end

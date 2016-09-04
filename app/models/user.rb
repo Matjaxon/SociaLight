@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
     foreign_key: :organizer_id,
     class_name: :Event
 
+  has_many :bookmarks
+
   def self.find_by_credentials(username, password)
     @user = User.find_by(username: username)
     return nil if @user.nil?

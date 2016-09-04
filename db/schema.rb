@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902212213) do
+ActiveRecord::Schema.define(version: 20160904204459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "integer"
+    t.string   "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bookmarks", ["event_id"], name: "index_bookmarks_on_event_id", using: :btree
+  add_index "bookmarks", ["user_id", "event_id"], name: "index_bookmarks_on_user_id_and_event_id", unique: true, using: :btree
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.string   "title",                        null: false
