@@ -24,7 +24,7 @@
 
 class Event < ActiveRecord::Base
 
-  validates :title, :description, :category_id, :organizer_id, :num_tickets,
+  validates :title, :description, :category, :organizer, :num_tickets,
   :ticket_price, :start_time, :end_time, presence: true
 
   belongs_to :organizer,
@@ -40,6 +40,10 @@ class Event < ActiveRecord::Base
   has_many :bookmarks
 
   belongs_to :venue
+
+  belongs_to :category,
+    foreign_key: :category_id,
+    class_name: :Category
 
   def tickets_available?(num_tickets)
     self.num_tickets - self.tickets.count > num_tickets

@@ -10,20 +10,11 @@ class UserPage extends React.Component {
     this._changeActive = this._changeActive.bind(this);
   }
 
-  // componentDidUpdate() {
-  //   debugger;
-  //   if (!this.props.currentUser) {
-  //     this.props.router.push('/login');
-  //   }
-  // }
-
-  // componentWillUpdate() {
-  //   debugger;
-  // }
-
-  // shouldComponentUpdate() {
-  //   debugger;
-  // }
+  componentDidUpdate() {
+    if (!this.props.currentUser) {
+      this.props.router.push('/');
+    }
+  }
 
   _changeActive(key) {
     event.preventDefault();

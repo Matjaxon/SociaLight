@@ -141,10 +141,11 @@ seed_events.each do |event|
     new_event = Event.new
 
     EVENTBRITE_EVENT_MAPPING.each do |key, val|
+      if key == "category_id"
+        new_event[key] = SOCIALITE_CATEGORY_BRIDGE[event[val.first]]
       if val.length == 1 && event[val.first]
         new_event[key] = event[val.first]
       elsif event[val.first] && event[val.first][val[1]]
-        # byebug if event.nil? || key.nil? || val.nil? || new_event.nil?
         new_event[key] = event[val.first][val[1]]
       end
     end
