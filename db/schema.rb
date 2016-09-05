@@ -11,15 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904204459) do
+ActiveRecord::Schema.define(version: 20160905063739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bookmarks", force: :cascade do |t|
-    t.string   "user_id"
-    t.string   "integer"
-    t.string   "event_id"
+    t.integer  "user_id",    null: false
+    t.integer  "event_id",   null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,28 +27,37 @@ ActiveRecord::Schema.define(version: 20160904204459) do
   add_index "bookmarks", ["user_id", "event_id"], name: "index_bookmarks_on_user_id_and_event_id", unique: true, using: :btree
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id", using: :btree
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
-    t.string   "title",                        null: false
+    t.string   "title",                                null: false
     t.text     "description"
-    t.integer  "category_id",                  null: false
-    t.integer  "organizer_id",                 null: false
-    t.integer  "num_tickets",                  null: false
-    t.integer  "ticket_price",                 null: false
+    t.integer  "category_id",                          null: false
+    t.integer  "organizer_id",                         null: false
+    t.integer  "num_tickets",                          null: false
+    t.integer  "ticket_price",                         null: false
     t.integer  "venue_id"
     t.string   "venue_name"
     t.string   "address"
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
-    t.datetime "start_time",                   null: false
-    t.datetime "end_time",                     null: false
-    t.boolean  "live",         default: false, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "start_time",                           null: false
+    t.datetime "end_time",                             null: false
+    t.boolean  "live",                 default: false, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "main_event_image_url"
+    t.string   "seed_id"
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id", using: :btree
+  add_index "events", ["seed_id"], name: "index_events_on_seed_id", using: :btree
   add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
 
   create_table "tickets", force: :cascade do |t|
@@ -63,16 +71,34 @@ ActiveRecord::Schema.define(version: 20160904204459) do
   add_index "tickets", ["guest_id"], name: "index_tickets_on_guest_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",        null: false
-    t.string   "email",           null: false
-    t.string   "phone_number",    null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "username",          null: false
+    t.string   "email",             null: false
+    t.string   "phone_number",      null: false
+    t.string   "password_digest",   null: false
+    t.string   "session_token",     null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "profile_image_url"
   end
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
   add_index "users", ["username"], name: "index_users_on_username", using: :btree
+
+  create_table "venues", force: :cascade do |t|
+    t.string   "name"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "address"
+    t.string   "city"
+    t.integer  "zip_code"
+    t.string   "region"
+    t.string   "display_address"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "seed_id"
+  end
+
+  add_index "venues", ["name"], name: "index_venues_on_name", using: :btree
+  add_index "venues", ["seed_id"], name: "index_venues_on_seed_id", using: :btree
 
 end

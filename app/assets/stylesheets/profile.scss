@@ -24,18 +24,16 @@
 .profile-events-container {
   display: flex;
   flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  background-color: $form-background-color;
 }
 
 .profile-events-index {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-height: 55vh;
-  min-height: 200px;
-  width: 90%;
-  overflow: scroll;
+  max-height: 55vh !important;
+  width: 98%;
+  overflow-y: scroll;
   margin: 0 auto;
-  background: $form-background-color;
 }
 
 .profile-event-button-container {
@@ -75,12 +73,6 @@
 
 .profile-events-container section.open {
   display: block;
-}
-
-.profile-events-container section {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .profile-index-button {

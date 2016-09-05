@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
 
   has_many :bookmarks
 
+  has_many :bookmarked_events,
+    through: :bookmarks, 
+    source: :event
+
   def self.find_by_credentials(username, password)
     @user = User.find_by(username: username)
     return nil if @user.nil?

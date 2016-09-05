@@ -10,7 +10,7 @@
 #
 
 class Ticket < ActiveRecord::Base
-  validates :guest_id, :event_id, presence: true
+  validates :guest, :event, presence: true
 
   belongs_to :event
 
@@ -18,5 +18,5 @@ class Ticket < ActiveRecord::Base
     foreign_key: :guest_id,
     primary_key: :id,
     class_name: :User
-    
+
 end

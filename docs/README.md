@@ -154,7 +154,7 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 - [x] `Event` model
 - [x] Seed database with a small amount of test data
 - [x] CRUD API for events (`EventsController`)
-- [ ] JBuilder views for events
+- [x] JBuilder views for events
 - Event components and respective Redux loops
   - [x] `EventsIndex`
   - [x] `EventIndexItem`
@@ -168,9 +168,9 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 
 - [x] `Ticket` model
 - [ ] Seed database with a small amount of test data
-- [ ] CRUD API for tickets (`TicketsController`)
-- [ ] JBuilder views for tickets
-- [ ] Adding tickets requires an event and a user
+- [x] CRUD API for tickets (`TicketsController`)
+- [x] JBuilder views for tickets
+- [x] Adding tickets requires an event and a user
 - [ ] View events and tickets on user show page
 - [ ] Viewing tickets by event for event organizers
 - [ ] Style ticket components
@@ -180,9 +180,9 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 
 **Objective:** Bookmarks can be added for events to allow the user to return to buy tickets later.
 
-- [ ] `Bookmark` model
-- [ ] Adding bookmarks to events
-- [ ] View bookmarked events on user page
+- [x] `Bookmark` model
+- [x] Adding bookmarks to events
+- [x] View bookmarked events on user page
 - [ ] View bookmarked events on event index sidebar
 - [ ] Style bookmark components
 - [ ] Seed tags with seed data

@@ -8,14 +8,22 @@
 .event-index {
   padding: 20px;
   margin: 20px;
+  overflow-y: scroll;
+  max-height:80vh;
+  background-color: $form-background-color;
 }
 
 .event-index-item {
-  display: flex;
   flex-direction: column;
-  margin: 20px 5px;
-  width: 90%;
+  margin: 20px auto;
   align-self: center;
+  background-color: white;
+}
+
+.event-index-item:hover {
+  -webkit-box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
+  -moz-box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
+  box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
 }
 
 .event-index-header {
@@ -57,7 +65,7 @@
 
 .tickets-number {
   font-size: 1.2em;
-  padding-bottom: 5px;
+  padding-bottom: 20px;
   margin-bottom: 5px;
 }
 
@@ -65,7 +73,7 @@
   display: block;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 30px 0;
+  padding-left: 5px;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);

@@ -38,21 +38,35 @@ class UserPage extends React.Component {
         </section>
 
         <section className="profile-events-container">
-          <section className={((active === "events") ? "open " : "closed")}>
-            <ProfileEventsIndex eventsList={this.props.boughtEvents} />
-            <Link className="form-button profile-index-button"
-              to="/browse">Discover Something New</Link>
-          </section>
+          <div className="index-overflow-container">
+            <section className={((active === "events") ? "open " : "closed")}>
+              <ProfileEventsIndex eventsList={this.props.boughtEvents}
+                currentUser={this.props.currentUser}
+                toggleBookmark={this.props.toggleBookmark} />
+              <Link className="form-button profile-index-button"
+                to="/browse">Discover Something New</Link>
+            </section>
+          </div>
 
-          <section className={((active === "hosted") ? "open " : "closed")}>
-            <HostedEventsIndex hostedEvents={this.props.hostedEvents} />
-            <Link className="form-button profile-index-button"
-              to="/new-event">Host Something Awesome</Link>
-          </section>
+          <div className="index-overflow-container">
+            <section className={((active === "hosted") ? "open " : "closed")}>
+              <HostedEventsIndex hostedEvents={this.props.hostedEvents}
+                currentUser={this.props.currentUser}
+                toggleBookmark={this.props.toggleBookmark}/>
+              <Link className="form-button profile-index-button"
+                to="/new-event">Host Something Awesome</Link>
+            </section>
+          </div>
 
-          <section className={((active === "saved") ? "open " : "closed")}>
-            <div>Saved Events</div>
-          </section>
+          <div className="index-overflow-container">
+            <section className={((active === "saved") ? "open " : "closed")}>
+              <ProfileEventsIndex eventsList={this.props.savedEvents}
+                currentUser={this.props.currentUser}
+                toggleBookmark={this.props.toggleBookmark}/>
+              <Link className="form-button profile-index-button"
+                to="/browse">Discover Something New</Link>
+            </section>
+          </div>
 
         </section>
 

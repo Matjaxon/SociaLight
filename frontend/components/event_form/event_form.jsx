@@ -199,7 +199,7 @@ class EventForm extends React.Component {
 
             <div className="calendar-container">
               <label className="event-form-input"></label>
-                <h3>Event Time</h3>
+              <h3>Event Time</h3>
                 <div className="event-time-display">
                   {this.state.start_time.toString()} -
                   {this.state.end_time.toString()}

@@ -1,11 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
+#  ============= FAKER USERNAME GENERATION ================
 
 # 50.times do
 #   username = Faker::Internet.user_name
@@ -15,6 +9,8 @@
 #   User.create!(username: username, password: password, email: email, phone_number: phone_number)
 # end
 #
+
+#  ============= FAKER EVENT GENERATION ================
 
 # 10.times do
 #   title = Faker::Hipster.sentence(3)
@@ -33,3 +29,138 @@
 #     start_time: start_time, end_time: end_time, live: live,
 #     category_id: category_id, organizer_id: organizer_id)
 # end
+
+# =============== CATEGORY SEEDING ======================
+
+# NOT A COMPLETE LIST
+
+EVENTBRITE_CATEGORY_MAPPING = {
+  103 => "music",
+  101 => "business",
+  110 => "food & drink",
+  113 => "community",
+  105 => "arts",
+  104 => "film & media",
+  108 => "sports & fitness",
+  107 => "health & wellness",
+  102 =>"science & technology",
+  109 => "travel",
+  106 => "fashion",
+  119 => "hobbies"
+}
+
+# EventBrite: SociaLight
+SOCIALITE_CATEGORY_BRIDGE = {
+  103 => 1,
+  101 => 2,
+  110 => 3,
+  113 => 4,
+  105 => 5,
+  104 => 6,
+  108 => 7,
+  107 => 8,
+  102 => 9,
+  109 => 10,
+  106 => 11,
+  119 => 12
+}
+
+#
+# EVENTBRITE_CATEGORY_MAPPING.each do | _, category|
+#   Category.create!({name: category})
+# end
+
+# =============== EVENTBRITE EVENT SEEDING ==============
+
+Eventbrite.token = 'H5YYFUXDC3LC5PFS4N3B'
+
+EVENTBRITE_EVENT_MAPPING = {
+  'title': ['name', 'text'],
+  'description': ['description', 'text'],
+  'start_time': ['start', 'local'],
+  'end_time': ['end', 'local'],
+  'category_id': ['category_id'],
+  "main_event_image_url": ['logo', "url"],
+  "seed_id": ["id"]
+}
+
+EVENTBRITE_VENUE_MAPPING = {
+  "name": ["name"],
+  "latitude": ["address", "latitude"],
+  "longitude": ["address", "longitude"],
+  "address": ["address", "address_1"],
+  "city": ["address", "city"],
+  "region": ["address", "region"],
+  "display_address": ["address", "localized_address_display"],
+  "seed_id": ["id"]
+}
+
+ALL_USERS = User.all
+
+paid_events = Eventbrite::Event.search({'location.latitude': 37.7749,
+  'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
+  'location.within': '10mi', price: 'paid'})
+
+# p paid_events.events.count
+
+seed_events = paid_events.events
+
+# p seed_events
+
+seed_events.each do |event|
+  eb_venue_id = event['venue_id']
+  venue = Venue.find_by_seed_id(eb_venue_id)
+
+  unless venue
+    new_venue = Venue.new
+
+    request_url = "https://www.eventbriteapi.com/v3/venues/#{eb_venue_id}"
+    response = RestClient.get request_url,
+      {params: {token: 'H5YYFUXDC3LC5PFS4N3B'}}
+    parsed_response = JSON.parse(response)
+
+    EVENTBRITE_VENUE_MAPPING.each do |key, val|
+      if val.length == 1
+        new_venue[key] = parsed_response[val.first]
+      else
+        new_venue[key] = parsed_response[val.first][val[1]]
+      end
+    end
+
+    new_venue.save!
+    venue = new_venue
+  end
+
+  # p "VENUE CHECK:"
+  # p venue
+  # p venue.valid?
+  # p venue.errors.full_messages
+
+  venue_id = venue.id
+
+
+  unless Event.find_by_seed_id(event.id)
+    new_event = Event.new
+
+    EVENTBRITE_EVENT_MAPPING.each do |key, val|
+      if val.length == 1
+        new_event[key] = event[val.first]
+      else
+        new_event[key] = event[val.first][val[1]]
+      end
+    end
+
+    new_event.num_tickets = (rand(30) + 1) * 10
+    new_event.ticket_price = (rand(25) + 1) * 5
+
+    new_event.organizer_id = ALL_USERS.sample.id
+
+    new_event.venue_id = venue_id
+
+    # p "EVENT CHECK:"
+    # p new_event
+    # p new_event.valid?
+    # p new_event.errors.full_messages
+    new_event.save!
+  end
+end
