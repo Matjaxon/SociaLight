@@ -39,6 +39,8 @@ class Event < ActiveRecord::Base
 
   has_many :bookmarks
 
+  belongs_to :venue
+
   def tickets_available?(num_tickets)
     self.num_tickets - self.tickets.count > num_tickets
   end

@@ -24,12 +24,33 @@ class EventShow extends React.Component {
         editButton = "";
       }
 
+      let headerLocation;
+      let detailLocation;
+      if (showEvent.venue) {
+        headerLocation = showEvent.venue.name;
+        detailLocation = (
+          <div>
+            <p>{showEvent.venue.name}</p>
+            <p>{showEvent.venue.display_address}</p>
+          </div>
+        );
+      } else {
+        headerLocation = (showEvent.address) ? showEvent.address: "";
+        if (showEvent.address) {
+          detailLocation = <p>{`${showEvent.address}, ${showEvent.city},
+            ${showEvent.state}`}</p>;
+        } else {
+          detailLocation = <p>{`${showEvent.city}, ${showEvent.state}`}</p>;
+        }
+      }
+
       return (
         <section className="event-show-container">
           <section className="show-header">
 
             <div className="show-header-text">
               <h1 className="show-event-title">{showEvent.title}</h1>
+              <h2>{headerLocation}</h2>
               <h2>{startDateTime.toDateString()}</h2>
               <h2>{startDateTime.toLocaleTimeString(navigator.language,
                 {hour: '2-digit', minute: '2-digit'})}</h2>
@@ -50,12 +71,12 @@ class EventShow extends React.Component {
             <section className="event-details-container">
 
               <h3>What</h3>
-              <p className="event-details-description">
+              <div className="event-details-description">
                 {showEvent.description}
-              </p>
+              </div>
 
               <h3>Where</h3>
-              <p>TO COMPILE LOCATION DETAILS</p>
+              <div>{detailLocation}</div>
 
               <h3>When</h3>
               <h4>Starts</h4>
