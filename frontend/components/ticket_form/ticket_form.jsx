@@ -35,7 +35,6 @@ class TicketForm extends React.Component {
   }
 
   _orderNow(event) {
-    debugger;
     event.preventDefault();
     this.props.createTicket(this.props.eventId, this.state.numTickets);
   }

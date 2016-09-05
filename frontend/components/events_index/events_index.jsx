@@ -10,11 +10,13 @@ class EventsIndex extends React.Component {
           toggleBookmark={this.props.toggleBookmark}/>
     ));
     return (
-      <section className="event-index">
+      <section className="event-index-container">
         <h2>Discover a new experience</h2>
-        <ul>
-          {eventListItems}
-        </ul>
+        <div className="event-index">
+          <ul>
+            {eventListItems}
+          </ul>
+        </div>
       </section>
     );
   }

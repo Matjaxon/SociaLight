@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import UserPage from "./user_page";
 import * as EventActions from '../../actions/event_actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentUser: state.session.currentUser,
   username: state.session.currentUser.username,
   boughtEvents: state.session.currentUser.events,

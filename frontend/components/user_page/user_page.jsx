@@ -1,7 +1,7 @@
 import React from 'react';
 import HostedEventsIndex from './hosted_events_index';
 import ProfileEventsIndex from './profile_events_index';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
 class UserPage extends React.Component {
   constructor(props) {
@@ -9,6 +9,21 @@ class UserPage extends React.Component {
     this.state = {active: "events"};
     this._changeActive = this._changeActive.bind(this);
   }
+
+  // componentDidUpdate() {
+  //   debugger;
+  //   if (!this.props.currentUser) {
+  //     this.props.router.push('/login');
+  //   }
+  // }
+
+  // componentWillUpdate() {
+  //   debugger;
+  // }
+
+  // shouldComponentUpdate() {
+  //   debugger;
+  // }
 
   _changeActive(key) {
     event.preventDefault();
@@ -75,4 +90,4 @@ class UserPage extends React.Component {
   }
 }
 
-export default UserPage;
+export default withRouter(UserPage);

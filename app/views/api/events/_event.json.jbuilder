@@ -1,6 +1,8 @@
 wanted_event_fields = event.attributes.keys.map(&:to_sym) - [:created_at, :updated_at]
 
-is_bookmarked = event.user_bookmark(current_user) ? true : false
+if user
+  is_bookmarked = event.user_bookmark(user) ? true : false
+end
 
 if event.venue_id
   venue = event.venue

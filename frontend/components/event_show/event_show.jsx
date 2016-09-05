@@ -13,6 +13,7 @@ class EventShow extends React.Component {
 
   render() {
     const showEvent = (this.props.eventDetail);
+    const defaultHeaderImage = 'http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg';
     if (showEvent) {
       let startDateTime = new Date(showEvent.start_time);
       let endDateTime = new Date(showEvent.end_time);
@@ -44,9 +45,16 @@ class EventShow extends React.Component {
         }
       }
 
+      let showBackgroundImage = (showEvent.main_event_image_url) ?
+        showEvent.main_event_image_url : defaultHeaderImage;
+
+      const headerStyle = {
+        backgroundImage: `url(${showBackgroundImage})`
+      };
+
       return (
         <section className="event-show-container">
-          <section className="show-header">
+          <section className="show-header" style={headerStyle}>
 
             <div className="show-header-text">
               <h1 className="show-event-title">{showEvent.title}</h1>

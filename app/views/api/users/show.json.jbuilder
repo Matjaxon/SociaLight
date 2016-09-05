@@ -1,7 +1,6 @@
 json.partial! "api/users/user", user: @user
 
-if current_user
-
+if @user
   user_events = @user.events.order(:start_time)
   hosted_events = @user.hosted_events.order(:start_time)
   bookmarked_events = @user.bookmarked_events.order(:start_time)

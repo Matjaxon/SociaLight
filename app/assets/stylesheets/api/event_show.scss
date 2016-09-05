@@ -12,7 +12,6 @@
   justify-content: center;
   position: relative;
   margin-top: 3px;
-  background-image: url("http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg");
   background-size: cover;
   background-position: center;
   height: 350px;
@@ -22,7 +21,14 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  left:15%;
+  left: 15%;
+  background-color: $event-header-text-background;
+  width: 80%;
+  padding: 20px;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(41, 41, 41, 0.55);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(41, 41, 41, 0.55);
+  box-shadow: 0px 0px 76px 0px rgba(41, 41, 41, 1);
+  border-radius: 50px;
 }
 
 .show-event-title, .show-header-text h2 {

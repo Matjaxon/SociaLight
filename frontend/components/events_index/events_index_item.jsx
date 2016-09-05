@@ -58,13 +58,20 @@ class EventIndexItem extends React.Component {
       bookmarkFlag = <i className="fa fa-bookmark-o" aria-hidden="true"></i>;
     }
 
+    const defaultItemImage = 'http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg';
+    let itemBackgroundImage = (eventItem.main_event_image_url) ?
+      eventItem.main_event_image_url : defaultItemImage;
+
+    const indexItemStyle = {
+      backgroundImage: `url(${itemBackgroundImage})`
+    };
+
     return (
       <ul className="event-index-item">
         <li className='event-index-header'
           onClick={_handleClick(router, `/event/${eventItem.id}`)}>
-          <div className="events-index-image">
-            <img className="event-index-image"
-              src="https://hd.unsplash.com/photo-1454908027598-28c44b1716c1" />
+          <div className="events-index-image"
+            style={indexItemStyle} >
           </div>
 
           <ul className="event-main-details">
