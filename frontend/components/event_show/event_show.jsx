@@ -18,7 +18,6 @@ class EventShow extends React.Component {
       let startDateTime = new Date(showEvent.start_time);
       let endDateTime = new Date(showEvent.end_time);
       let editButton;
-      debugger;
       if (this.props.currentUser &&
         this.props.currentUser.id === showEvent.organizer_id) {
         editButton = <Link to={`/edit-event/${showEvent.id}`}

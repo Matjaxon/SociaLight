@@ -6,7 +6,6 @@ unless User.find_by_username('matt')
     phone_number: 6618888888, seed_user: false)
 end
 
-
 #  ============= FAKER USERNAME GENERATION ================
 
 50.times do
@@ -180,3 +179,23 @@ end
 
 create_seed_events(paid_seed_events, false)
 create_seed_events(free_seed_events, true)
+
+
+# ================ TICKET GENERATION ===============
+
+live_events = Event.where(live: true)
+seed_users = User.where(seed_user: true)
+seed_users.push(User.find_by_username('matt'))
+
+2000.times do |purchase|
+  event = live_events.sample
+  user = seed_users.sample
+  until user != event.organizer
+    user = seed_users.sample
+  end
+
+  new_ticket = Ticket.new
+  new_ticket.event = event
+  new_ticket.guest = user
+  new_ticket.save!
+end
