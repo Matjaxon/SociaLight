@@ -160,7 +160,7 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
   - [x] `EventIndexItem`
   - [x] `EventForm`
 - [ ] Style events components
-- [ ] Seed events
+- [x] Seed events
 
 ### Phase 3: Tickets (2 days)
 
@@ -184,13 +184,13 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 - [x] Adding bookmarks to events
 - [x] View bookmarked events on user page
 - [ ] View bookmarked events on event index sidebar
-- [ ] Style bookmark components
+- [x] Style bookmark components
 - [ ] Seed tags with seed data
 
 ### Phase 5: Category filtering (1 day)
 
 **Objective:** Filter results by category.
-- [ ] `Category` model
+- [x] `Category` model
 - [ ] Filter index views by category.
 - [ ] Show related events on event detailed show pages.
 
@@ -198,7 +198,7 @@ SociaLight is a web application inspired by Eventbrite built using Ruby on Rails
 
 ### Venue
 
-- [ ] `Venue` model
+- [x] `Venue` model
 - [ ] Venue form
 - [ ] Venue show page showing upcoming events
 
