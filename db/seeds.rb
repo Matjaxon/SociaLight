@@ -66,9 +66,11 @@ SOCIALITE_CATEGORY_BRIDGE = {
 }
 
 #
-# EVENTBRITE_CATEGORY_MAPPING.each do | _, category|
-#   Category.create!({name: category})
-# end
+EVENTBRITE_CATEGORY_MAPPING.each do | _, category|
+  unless Category.find_by_name(category)
+    Category.create!({name: category})
+  end
+end
 
 # =============== EVENTBRITE EVENT SEEDING ==============
 
@@ -101,11 +103,7 @@ paid_events = Eventbrite::Event.search({'location.latitude': 37.7749,
   'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
   'location.within': '10mi', price: 'paid'})
 
-# p paid_events.events.count
-
 seed_events = paid_events.events
-
-# p seed_events
 
 seed_events.each do |event|
   eb_venue_id = event['venue_id']
@@ -120,9 +118,9 @@ seed_events.each do |event|
     parsed_response = JSON.parse(response)
 
     EVENTBRITE_VENUE_MAPPING.each do |key, val|
-      if val.length == 1
+      if val.length == 1 && parsed_response[val.first]
         new_venue[key] = parsed_response[val.first]
-      else
+      elsif parsed_response[val.first] && parsed_response[val.first][val[1]]
         new_venue[key] = parsed_response[val.first][val[1]]
       end
     end
@@ -143,16 +141,17 @@ seed_events.each do |event|
     new_event = Event.new
 
     EVENTBRITE_EVENT_MAPPING.each do |key, val|
-      if val.length == 1
+      if val.length == 1 && event[val.first]
         new_event[key] = event[val.first]
-      else
+      elsif event[val.first] && event[val.first][val[1]]
+        # byebug if event.nil? || key.nil? || val.nil? || new_event.nil?
         new_event[key] = event[val.first][val[1]]
       end
     end
 
     new_event.num_tickets = (rand(30) + 1) * 10
     new_event.ticket_price = (rand(25) + 1) * 5
-
+    new_event.live = true
     new_event.organizer_id = ALL_USERS.sample.id
 
     new_event.venue_id = venue_id
