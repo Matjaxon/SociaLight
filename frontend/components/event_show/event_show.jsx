@@ -18,7 +18,9 @@ class EventShow extends React.Component {
       let startDateTime = new Date(showEvent.start_time);
       let endDateTime = new Date(showEvent.end_time);
       let editButton;
-      if (this.props.currentUser.id === showEvent.organizer_id) {
+      debugger;
+      if (this.props.currentUser &&
+        this.props.currentUser.id === showEvent.organizer_id) {
         editButton = <Link to={`/edit-event/${showEvent.id}`}
           className="form-button show-edit-button">Edit Event</Link>;
       } else {
@@ -80,7 +82,8 @@ class EventShow extends React.Component {
 
               <h3>What</h3>
               <div className="event-details-description">
-                {showEvent.description}
+                <div dangerouslySetInnerHTML=
+                  {{__html: showEvent.description_html}} />
               </div>
 
               <h3>Where</h3>

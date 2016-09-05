@@ -1,14 +1,22 @@
+seed_users = User.where(seed_user: true)
+seed_users.destroy_all
+
+unless User.find_by_username('matt')
+  User.create!(username: 'matt', password: 'password', email: 'matt@example.com',
+    phone_number: 6618888888, seed_user: false)
+end
+
 
 #  ============= FAKER USERNAME GENERATION ================
 
-# 50.times do
-#   username = Faker::Internet.user_name
-#   password = Faker::Internet.password(8)
-#   email = Faker::Internet.safe_email
-#   phone_number = Faker::PhoneNumber.phone_number
-#   User.create!(username: username, password: password, email: email, phone_number: phone_number)
-# end
-#
+50.times do
+  username = Faker::Internet.user_name
+  password = Faker::Internet.password(8)
+  email = Faker::Internet.safe_email
+  phone_number = Faker::PhoneNumber.phone_number
+  User.create!(username: username, password: password, email: email,
+    phone_number: phone_number, seed_user: true)
+end
 
 #  ============= FAKER EVENT GENERATION ================
 
@@ -79,6 +87,7 @@ Eventbrite.token = 'H5YYFUXDC3LC5PFS4N3B'
 EVENTBRITE_EVENT_MAPPING = {
   'title': ['name', 'text'],
   'description': ['description', 'text'],
+  'description_html': ['description', 'html'],
   'start_time': ['start', 'local'],
   'end_time': ['end', 'local'],
   'category_id': ['category_id'],
@@ -97,70 +106,77 @@ EVENTBRITE_VENUE_MAPPING = {
   "seed_id": ["id"]
 }
 
-ALL_USERS = User.all
+SEED_USERS = User.where(seed_user: true)
 
 paid_events = Eventbrite::Event.search({'location.latitude': 37.7749,
   'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
   'location.within': '10mi', price: 'paid'})
+free_events = Eventbrite::Event.search({'location.latitude': 37.7749,
+  'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
+  'location.within': '10mi', price: 'free'})
 
-seed_events = paid_events.events
+paid_seed_events = paid_events.events
+free_seed_events = free_events.events
 
-seed_events.each do |event|
-  eb_venue_id = event['venue_id']
-  venue = Venue.find_by_seed_id(eb_venue_id)
 
-  unless venue
-    new_venue = Venue.new
+def create_seed_events(seed_events, is_free)
+  seed_events.each do |event|
+    eb_venue_id = event['venue_id']
+    venue = Venue.find_by_seed_id(eb_venue_id)
 
-    request_url = "https://www.eventbriteapi.com/v3/venues/#{eb_venue_id}"
-    response = RestClient.get request_url,
-      {params: {token: 'H5YYFUXDC3LC5PFS4N3B'}}
-    parsed_response = JSON.parse(response)
+    unless venue
+      new_venue = Venue.new
 
-    EVENTBRITE_VENUE_MAPPING.each do |key, val|
-      if val.length == 1 && parsed_response[val.first]
-        new_venue[key] = parsed_response[val.first]
-      elsif parsed_response[val.first] && parsed_response[val.first][val[1]]
-        new_venue[key] = parsed_response[val.first][val[1]]
+      request_url = "https://www.eventbriteapi.com/v3/venues/#{eb_venue_id}"
+      response = RestClient.get request_url,
+        {params: {token: 'H5YYFUXDC3LC5PFS4N3B'}}
+      parsed_response = JSON.parse(response)
+
+      EVENTBRITE_VENUE_MAPPING.each do |key, val|
+        if val.length == 1 && parsed_response[val.first]
+          new_venue[key] = parsed_response[val.first]
+        elsif parsed_response[val.first] && parsed_response[val.first][val[1]]
+          new_venue[key] = parsed_response[val.first][val[1]]
+        end
       end
+
+      new_venue.save!
+      venue = new_venue
     end
 
-    new_venue.save!
-    venue = new_venue
-  end
+    venue_id = venue.id
 
-  # p "VENUE CHECK:"
-  # p venue
-  # p venue.valid?
-  # p venue.errors.full_messages
+    unless Event.find_by_seed_id(event.id)
+      new_event = Event.new
 
-  venue_id = venue.id
-
-
-  unless Event.find_by_seed_id(event.id)
-    new_event = Event.new
-
-    EVENTBRITE_EVENT_MAPPING.each do |key, val|
-      if key == "category_id"
-        new_event[key] = SOCIALITE_CATEGORY_BRIDGE[event[val.first]]
-      if val.length == 1 && event[val.first]
-        new_event[key] = event[val.first]
-      elsif event[val.first] && event[val.first][val[1]]
-        new_event[key] = event[val.first][val[1]]
+      EVENTBRITE_EVENT_MAPPING.each do |key, val|
+        if key == :category_id
+          new_event.category =
+            Category.find(SOCIALITE_CATEGORY_BRIDGE[event[val.first].to_i])
+        elsif val.length == 1 && event[val.first]
+          new_event[key] = event[val.first]
+        elsif event[val.first] && event[val.first][val[1]]
+          new_event[key] = event[val.first][val[1]]
+        end
       end
+
+      new_event.num_tickets = (rand(30) + 1) * 10
+
+      if is_free
+        new_event.ticket_price = 0
+      else
+        new_event.ticket_price = (rand(25) + 1) * 5
+      end
+
+      new_event.live = true
+      new_event.organizer = SEED_USERS.sample
+
+      new_event.venue_id = venue_id
+
+      new_event.save!
     end
-
-    new_event.num_tickets = (rand(30) + 1) * 10
-    new_event.ticket_price = (rand(25) + 1) * 5
-    new_event.live = true
-    new_event.organizer_id = ALL_USERS.sample.id
-
-    new_event.venue_id = venue_id
-
-    # p "EVENT CHECK:"
-    # p new_event
-    # p new_event.valid?
-    # p new_event.errors.full_messages
-    new_event.save!
   end
 end
+
+create_seed_events(paid_seed_events, false)
+create_seed_events(free_seed_events, true)
