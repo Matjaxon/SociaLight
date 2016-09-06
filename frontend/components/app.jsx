@@ -6,7 +6,7 @@ const App = ({ children }) => (
   <div>
     <ul className="nav">
       <li className="nav-group nav-logo">
-        <Link className="site-logo" to='/'>SociaLight</Link>
+        <Link className="site-logo" to='/'></Link>
       </li>
       <li className="nav-group nav-browse">
         <Link to="/browse">Browse Events</Link>

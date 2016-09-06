@@ -12,6 +12,7 @@ class SessionForm extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.guestLogin = this.guestLogin.bind(this);
   }
 
   handleChange(key) {
@@ -19,7 +20,7 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     if (this.props.formType === 'login') {
       this.props.processForm(
         {user: {username: this.state.username,
@@ -36,6 +37,17 @@ class SessionForm extends React.Component {
 
   redirectIfLoggedIn() {
     if (this.props.loggedIn) this.props.router.replace("/");
+  }
+
+  // CONST GUESS_INFO = {username: ['d','o','m','_','c','o','b','b'],
+  //   password: ['p','a','s','s','w','o','r','d']}
+
+  guestLogin() {
+    if (this.props.formType !== "login") {
+      this.props.router.push('/login');
+    }
+    this.setState({username: 'dom_cobb', password: 'password'},
+      () => this.handleSubmit());
   }
 
   render () {
@@ -77,7 +89,7 @@ class SessionForm extends React.Component {
     }
 
     return(
-      <div className="form-container">
+      <div className="session-form-container">
         <h2>Welcome to SociaLight!</h2>
         <form className="session-form" onSubmit={this.handleSubmit}>
           <div className="session-form-fields">
@@ -102,11 +114,15 @@ class SessionForm extends React.Component {
 
           {emailAndPhone}
 
-          <input type="submit" className="submit-button" value={buttonName} />
-
-          <span className="alt-session-action">{altAction}</span>
-
+          <div>
+            <input type="submit" className="submit-button" value={buttonName} />
+            <span className="alt-session-action">{altAction}</span>
+          </div>
         </form>
+
+        <div className="guest-login" onClick={this.guestLogin}>
+          Guest Login
+        </div>
       </div>
     );
   }

@@ -16,6 +16,7 @@
 
 @import 'colors';
 @import 'font_sizes';
+@import 'button_sizes';
 
 
 /* RESET */
@@ -119,6 +120,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .user-nav {
   display: flex;
+  align-content: center;
   float: right;
 }
 
@@ -130,8 +132,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 .user-nav a, {
   display: flex;
+  align-items: center;
   float: right;
-  height: 54px;
+  height: $nav-height;
   padding: 20px 20px;
   border-left: 1px solid $border-color;
   border-top: 0px solid transparent;
@@ -146,21 +149,23 @@ input[type=number]::-webkit-outer-spin-button {
 
 .nav {
   display:flex;
+  align-content: center;
   justify-content: space-between;
   border: 1px solid $border-color;
-  height: 56px;
+  height: $nav-height;
 }
 
 .nav-logo {
   border-right: 1px solid $border-color;
   justify-content: center;
   letter-spacing: 1px;
+  box-sizing: border-box;
 }
 
 .nav-logo a {
   display: flex;
   font-variant: small-caps;
-  height: 54px;
+  height: $nav-logo-height;
   border-top: 0px solid transparent;
   text-decoration: none;
   justify-content: center;
@@ -169,6 +174,10 @@ input[type=number]::-webkit-outer-spin-button {
   width: 20%;
   min-width: 200px;
   transition: all 0.2s, ease;
+  background-image: url('logo1.jpeg');
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
 }
 
 .nav-logo a:hover {
@@ -183,7 +192,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .nav-browse a, {
-  display: inline-block;
+  display: flex;
+  height: $nav-height;
   margin: 0 auto;
   text-transform: uppercase;
   padding: 20px 20px;
@@ -192,21 +202,26 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
   flex-grow: 1;
   width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .logout-button {
   display: flex;
   background: inherit;
-  padding: 20px;
-  height: 54px;
-  border-left: 1px solid $border-color;
-  border-top: 0px solid transparent;
   text-transform: uppercase;
-  justify-content: center;
   align-content: center;
   flex-direction: column;
   box-sizing: border-box;
   transition: all 0.2s ease;
+  display: flex;
+  float: right;
+  height: $nav-height;
+  padding: 20px 20px;
+  border-left: 1px solid $border-color;
+  border-top: 0px solid transparent;
+  transition: all 0.2s, ease;
+  text-decoration: none;
 }
 
 .logout-button:hover {
