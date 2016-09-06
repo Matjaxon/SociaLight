@@ -37,8 +37,9 @@
  	font-style: inherit;
   color: #5e6b78;
  	font-size: 100%;
- 	font-family: 'Jaldi', sans-serif;;
+ 	font-family: 'Jaldi', sans-serif;
  	vertical-align: baseline;
+  text-decoration: none;
  }
  /* remember to define focus styles! */
  :focus {
@@ -90,8 +91,14 @@ input[type=number]::-webkit-outer-spin-button {
 
  /* END OF RESET */
 
- h1 {
+ h1, .nav-logo a {
    font-size: 1.6em;
+   font-style: $default-font;
+   font-family :sans-serif;
+   text-decoration: none;
+   color: $font-accent;
+   font-weight: bold;
+   font-variant: small-caps;
  }
 
  h2 {
@@ -121,7 +128,7 @@ input[type=number]::-webkit-outer-spin-button {
   text-transform: uppercase;
 }
 
-.user-nav a {
+.user-nav a, {
   display: flex;
   float: right;
   height: 54px;
@@ -132,7 +139,7 @@ input[type=number]::-webkit-outer-spin-button {
   text-decoration: none;
 }
 
-.user-nav a:hover {
+.user-nav a:hover, .nav-browse a:hover {
   border-top: 5px solid $nav-hover;
   color: $nav-hover;
 }
@@ -146,16 +153,42 @@ input[type=number]::-webkit-outer-spin-button {
 
 .nav-logo {
   border-right: 1px solid $border-color;
+  justify-content: center;
+  letter-spacing: 1px;
 }
 
-.site-logo {
+.nav-logo a {
   display: flex;
+  font-variant: small-caps;
+  height: 54px;
+  border-top: 0px solid transparent;
+  text-decoration: none;
   justify-content: center;
   align-content: center;
-  flex-direction: column;
-  padding: 5px 10px;
-  height: 40px;
+  padding: 10px 10px;
   width: 150px;
+  transition: all 0.2s, ease;
+}
+
+.nav-logo a:hover {
+  border-top: 5px solid $nav-hover;
+}
+
+.nav-browse {
+  flex-grow: 1;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.nav-browse a, {
+  display: flex;
+  margin: 0 auto;
+  text-transform: uppercase;
+  height: 54px;
+  padding: 20px 20px;
+  border-top: 0px solid transparent;
+  transition: all 0.2s, ease;
+  text-decoration: none;
 }
 
 .logout-button {

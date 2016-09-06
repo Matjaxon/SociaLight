@@ -13,7 +13,7 @@ import EventFormContainer from './event_form/event_form_container';
 import EventShowContainer from './event_show/event_show_container';
 import TicketForm from './ticket_form/ticket_form';
 import UserPageContainer from './user_page/user_page_container';
-
+import SearchContainer from './search/search_container';
 
 class AppRouter extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class AppRouter extends React.Component {
           onEnter={this._redirectIfLoggedIn} />
         <Route path="login" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn}/>
-        <Route path="browse" component={ EventsIndexContainer }
+        <Route path="browse" component={ SearchContainer }
           onEnter={this._requestEvents} />
         <Route path="new-event"
           component={ EventFormContainer }

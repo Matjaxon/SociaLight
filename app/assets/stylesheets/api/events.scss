@@ -128,8 +128,9 @@
   display: flex;
   justify-content: center;
   border-top: 0px solid transparent;
-  transition: all 0.2s, ease;
+  transition: all 0.1s, ease;
   cursor: pointer;
+  height: 30px;
 }
 
 .event-index-bookmark:hover i {
@@ -137,7 +138,7 @@
 }
 
 .event-index-bookmark:hover {
-  border-top: 3px solid $nav-hover;
+  border-top: 4px solid $nav-hover;
 }
 
 .bookmarked {

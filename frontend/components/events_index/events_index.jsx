@@ -11,7 +11,6 @@ class EventsIndex extends React.Component {
     ));
     return (
       <section className="event-index-container">
-        <h2>Discover a new experience</h2>
         <div className="event-index">
           <ul>
             {eventListItems}

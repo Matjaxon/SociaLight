@@ -1,0 +1,53 @@
+
+@import "colors";
+@import "font_sizes";
+
+.search-page {
+  margin: 0 20px;
+}
+
+.search-main-container {
+  display: flex;
+}
+
+.search-page h2 {
+  width: 100%;
+  color: $font-accent;
+  padding-top: 10px;
+}
+
+.search-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  min-width: 200px;
+}
+
+.map-search-container {
+  height: 200px;
+  border: 1px solid $border-color;
+  margin-top: 20px;
+}
+
+.category-filter-container {
+  padding: 20px 0;
+}
+
+.category-filter-container h4 {
+  padding-bottom: 3px;
+}
+
+.category-filter-item {
+  padding: 5px 0;
+  color: $unselected-text;
+  text-transform: capitalize;
+}
+
+.category-filter-item:hover {
+  color: $nav-hover;
+}
+
+.active-filter {
+  color: $font-color;
+  font-weight: bold;
+}

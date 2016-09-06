@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :tickets, only: [:create, :show]
       resource :bookmark, only: [:create]
     end
+    resources :categories, only: [:index, :create]
   end
 
   root to: 'static_pages#root'

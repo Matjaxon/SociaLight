@@ -6,10 +6,10 @@ const App = ({ children }) => (
   <div>
     <ul className="nav">
       <li className="nav-group nav-logo">
-        <Link to='/'><h1 className="site-logo">SociaLight</h1></Link>
+        <Link className="site-logo" to='/'>SociaLight</Link>
       </li>
-      <li className="nav-group">
-        <Link to="/browse"><h3>Browse Events</h3></Link>
+      <li className="nav-group nav-browse">
+        <Link to="/browse">Browse Events</Link>
       </li>
       <li className="nav-group"><UserNavContainer /></li>
     </ul>
