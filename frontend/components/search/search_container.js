@@ -6,12 +6,15 @@ const mapStateToProps = state => ({
   eventsList: state.events.eventsList,
   currentUser: state.session.currentUser,
   categories: state.search.categories,
-  filteredCategories: state.search.filteredCategories
+  filteredCategories: state.search.filteredCategories,
+  allFilters: state.search.allFilters
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchCategories: () => dispatch(SearchActions.fetchCategories()),
-  toggleCategoryFilter: (category) => dispatch(SearchActions.toggleCategoryFilter(category))
+  toggleCategoryFilter: (category) => dispatch(SearchActions.toggleCategoryFilter(category)),
+  clearFilters: () => dispatch(SearchActions.clearFilters()),
+  fetchFilteredEvents: (filters) => dispatch(SearchActions.fetchFilteredEvents(filters))
 });
 
 export default connect(

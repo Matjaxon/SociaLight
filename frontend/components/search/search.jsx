@@ -11,6 +11,10 @@ class Search extends React.Component {
     this.props.fetchCategories();
   }
 
+  componentWillUnmount() {
+    this.props.clearFilters();
+  }
+
   render () {
     return(
       <section className="search-page">

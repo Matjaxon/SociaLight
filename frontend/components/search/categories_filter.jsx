@@ -1,12 +1,11 @@
 import React from 'react';
-import CategoryFilterItem from './category_filter_item';
+import CategoryFilterItemContainer from './category_filter_item_container';
 
 const CategoriesFilter = ({ categories, filteredCategories,
   toggleCategoryFilter }) => {
-  const filteredCategoryNames = filteredCategories.map( category => category.name);
   const categoryFilterItems = categories.map( category => {
-    let isFiltered = filteredCategoryNames.includes(category.name);
-    return <CategoryFilterItem key={category.name}
+    let isFiltered = filteredCategories.includes(category.name);
+    return <CategoryFilterItemContainer key={category.name}
       category={category} isFiltered={isFiltered}
       toggleCategoryFilter={toggleCategoryFilter} />;
   });

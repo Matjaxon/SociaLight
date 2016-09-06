@@ -4,9 +4,11 @@ class Api::EventsController < ApplicationController
   def index
     if current_user
       @events = Event.where("live = true OR organizer_id = ?", current_user.id)
-      .order(:start_time)
+      .order(:start_time).includes(:venue)
+      @events = Event.filter_events(@events, params[:filters])
     else
-        @events = Event.all.where(live: true).order(:start_time)
+      @events = Event.all.where(live: true).order(:start_time).includes(:venue)
+      @events = Event.filter_events(@events, params[:filters])
     end
     @user = current_user
     render 'api/events/index'

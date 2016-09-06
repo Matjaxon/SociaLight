@@ -53,4 +53,21 @@ class Event < ActiveRecord::Base
     self.bookmarks.where(user_id: user.id).first
   end
 
+  def self.filter_events(events, filters)
+    p filters
+    return events if filters == nil
+    unless filters["categories"].empty?
+      p filters["categories"]
+      category_ids = filters["categories"].map do |category|
+        found_category = Category.find_by_name(category)
+        p found_category.inspect
+        found_category.id
+      end
+      p category_ids
+      events = events.where(category_id: category_ids)
+    end
+    "HITTING END"
+    p events
+    events
+  end
 end

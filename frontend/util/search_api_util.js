@@ -6,3 +6,13 @@ export const fetchCategories = (success, error) => {
     error
   });
 };
+
+export const fetchFilteredEvents = (filters, success, error) => {
+  $.ajax({
+    method: "GET",
+    url: "api/events",
+    data : {filters: filters},
+    success,
+    error
+  });
+};

@@ -10,8 +10,9 @@ const EventsReducer = (state = defaultState, action) => {
   switch (action.type) {
 
     case EventActions.EventConstants.RECEIVE_EVENTS:
-      return merge({}, {eventsList: action.events,
-        eventDetail: state.eventDetail});
+      let newState = merge({}, state);
+      newState.eventsList = action.events;
+      return newState;
 
     case EventActions.EventConstants.RECEIVE_EVENT:
       const newEvent = action.singleEvent;
