@@ -8,17 +8,32 @@
 .ticket-form-container {
   padding: 10px;
   padding-bottom: 20px;
-
+  position: fixed;
+  display: flex;
+  right: -485px;
+  top: 195px;
+  transition: all 0.8s ease;
+  z-index: 2;
 }
 
-.ticket-form-container {
-  display: block;
+.ticket-active {
+  right: -155px;
+}
+
+.ticket-nav {
+  width: 40px;
+  border: 1px solid $border-color;
+  background-color: gray;
+}
+
+.ticket-nav-box {
+  border-bottom: 1px solid $border-color;
+  height: 40px;
 }
 
 .main-ticket-form {
   padding: 10px;
   border: 1px solid $form-border-color;
-  border-radius: 5px;
   background: $form-background-color;
 }
 

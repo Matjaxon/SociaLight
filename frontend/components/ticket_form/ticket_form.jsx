@@ -1,9 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import ClassUtil from '../../util/class_name_util';
-// import "../../class_name_util";
-// import { addClassName } from '../../util/class_name_util';
-
 
 class TicketForm extends React.Component {
   constructor(props) {
@@ -11,17 +7,17 @@ class TicketForm extends React.Component {
     this._orderNow = this._orderNow.bind(this);
     this._showGroupOrder = this._showGroupOrder.bind(this);
     this._hideGroupOrder = this._hideGroupOrder.bind(this);
-    this.state = {numTickets: 1};
+    this._handleChange = this._handleChange.bind(this);
+    this._openForm = this._openForm.bind(this);
+    this.state = {
+      numTickets: 1,
+      formOpen: this.props.formOpen
+    };
   }
 
   componentDidMount() {
     this._resetForms();
   }
-
-
-  // Object.prototype.addClassName = function(newClass) {
-  //   this.className += ` ${newClass}`;
-  // };
 
   _handleChange(key) {
     return (event) => this.setState({[key]: event.target.value});
@@ -32,6 +28,13 @@ class TicketForm extends React.Component {
     if (!Array.from(groupOrderDiv.classList).includes("hidden-form")) {
       groupOrderDiv.classList.add("hidden-form");
     }
+  }
+
+  _openForm(event) {
+    if (event) event.preventDefault();
+    console.log("clicked");
+    this.props.toggleForm();
+    // return this.setState({formOpen: !this.state.formOpen});
   }
 
   _orderNow(event) {
@@ -49,13 +52,17 @@ class TicketForm extends React.Component {
     event.preventDefault();
     const groupOrderDiv = document.getElementById("group-order");
     groupOrderDiv.classList.add("hidden-form");
-    // groupOrderDiv.classList.remove("show-form");
-    // $('.group-order-form').hide("slide", {direction: "up"}, 1500);
   }
 
   render() {
+    let formOpen = this.props.ticketFormOpen;
     return(
-      <section className="ticket-form-container">
+      <section className={"ticket-form-container"
+        + ((formOpen) ? " ticket-active" : "")}>
+        <div className="ticket-nav"
+          onClick={() => this._openForm()}>
+          <div className="ticket-nav-box">ARROW</div>
+        </div>
         <form className="main-ticket-form" onSubmit={this._orderNow}>
           <h2>Get Your Tickets</h2>
           <label>

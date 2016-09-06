@@ -5,10 +5,25 @@ import TicketFormContainer from '../ticket_form/ticket_form_container';
 class EventShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isBookmarked: this.props.isBookmarked
+    };
+
+    this._toggleBookmark = this._toggleBookmark.bind(this);
+    this._toggleForm = this._toggleForm.bind(this);
   }
 
   componentWillMount() {
     this.props.requestEvent(this.props.eventId);
+  }
+
+  _toggleBookmark() {
+    this.props.toggleBookmark(this.props.eventDetail.id);
+    this.setState({isBookmarked: !this.state.isBookmarked});
+  }
+
+  _toggleForm() {
+    this.props.toggleForm();
   }
 
   render() {
@@ -53,6 +68,15 @@ class EventShow extends React.Component {
         backgroundImage: `url(${showBackgroundImage})`
       };
 
+      let bookmarkFlag;
+      let isBookmarked = this.state.isBookmarked;
+      if (isBookmarked) {
+        bookmarkFlag = <i className="fa fa-bookmark bookmarked"
+          aria-hidden="true"></i>;
+      } else {
+        bookmarkFlag = <i className="fa fa-bookmark-o" aria-hidden="true"></i>;
+      }
+
       return (
         <section className="event-show-container">
           <section className="show-header" style={headerStyle}>
@@ -66,15 +90,23 @@ class EventShow extends React.Component {
             </div>
 
             <div className="show-header-footer">
-              <Link to="/">{(showEvent.ticket_price === 0) ? "FREE" :
-                `Price: $` + showEvent.ticket_price}</Link>
-              <Link to={`/event/${showEvent.id}/order`}
-                className="buy-tickets">Buy Tickets</Link>
-              <Link to="/">Bookmark</Link>
+              <div className="show-header-button"
+                onClick={() => this._toggleForm()}>
+                {(showEvent.ticket_price === 0) ? "FREE" : `Price: $` +
+                  showEvent.ticket_price}
+              </div>
+              <div className="show-header-button"
+                onClick={() => this._toggleForm()}>Buy Tickets</div>
+              <div className="event-index-bookmark show-header-button"
+                onClick={ () => this._toggleBookmark(showEvent.id)}>
+                {bookmarkFlag}
+              </div>
             </div>
 
             {editButton}
           </section>
+
+          <TicketFormContainer />
 
           <section className="event-show-body">
             <section className="event-details-container">
@@ -98,9 +130,6 @@ class EventShow extends React.Component {
               <p>{endDateTime.toDateString()} -
                 {endDateTime.toLocaleTimeString(navigator.language,
                   {hour: '2-digit', minute: '2-digit'})}</p>
-            </section>
-            <section className="event-order-container">
-              <TicketFormContainer />
             </section>
           </section>
         </section>
