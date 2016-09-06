@@ -19,7 +19,8 @@ class Search extends React.Component {
           <section className="search-sidebar">
             <div className="map-search-container">MAP SEARCH AREA</div>
             <CategoriesFilter categories={this.props.categories}
-              filteredCategories={this.props.filteredCategories}/>
+              filteredCategories={this.props.filteredCategories}
+              toggleCategoryFilter={this.props.toggleCategoryFilter}/>
           </section>
           <section className="search-events-container">
             <EventsIndexContainer />
