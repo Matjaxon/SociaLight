@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
-
 import Root from './components/root';
 
 // WINDOW TESTING IMPORTS
@@ -22,20 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     store = window.Store = configureStore();
   }
-
-
-  // WINDOW TESTING
-  window.SessionAPI = SessionAPI;
-  window.SessionActions = SessionActions;
-  window.logout = () => window.Store.dispatch(SessionActions.logout());
-  window.login = (user) => window.Store.dispatch(SessionActions.login(user));
-  window.matt = {user: {username: "matt", password: "password"}};
-  window.EventsAPI = EventsAPI;
-  window.EventActions = EventActions;
-  window.fetchEvents = () => window.EventsAPI.fetchEvents( (data) => console.log(data));
-  window.requestEvents = () => window.Store.dispatch(EventActions.requestEvents());
-  window.createTicket = () => window.Store.dispatch(TicketActions.createTicket(70, 1));
-
 
   ReactDOM.render(<Root store={store} />, root);
 });

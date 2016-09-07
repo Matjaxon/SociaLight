@@ -1,12 +1,12 @@
 import React from 'react';
-import EventIndexItem from '../events_index/events_index_item';
+import EventIndexItemContainer from '../events_index/events_index_item_container';
 import { withRouter } from 'react-router';
 
 
 const HostedEventItem = ({ eventItem, currentUser, toggleBookmark }) => (
   <div className="hosted-event-item-container">
     <div className="event-index-item">
-      <EventIndexItem eventItem={eventItem}
+      <EventIndexItemContainer eventItem={eventItem}
         currentUser={currentUser}
         toggleBookmark={toggleBookmark} />
     </div>

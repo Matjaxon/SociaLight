@@ -1,5 +1,5 @@
 import React from 'react';
-import EventIndexItem from './events_index_item';
+import EventIndexItemContainer from './events_index_item_container';
 
 class EventsIndex extends React.Component {
   render() {
@@ -9,10 +9,9 @@ class EventsIndex extends React.Component {
       let userTickets = (currentUser && currentUser.ticket_counts[singleEvent.id]) ?
         currentUser.ticket_counts[singleEvent.id] : 0;
       return(
-        <EventIndexItem key=
-            {`event-index-item-${singleEvent.id}`} eventItem={singleEvent}
-            currentUser={this.props.currentUser}
-            toggleBookmark={this.props.toggleBookmark}
+        <EventIndexItemContainer key=
+            {`event-index-item-${singleEvent.id}`}
+            eventItem={singleEvent}
             isBookmarked={isBookmarked}
             userTickets={userTickets}
            />

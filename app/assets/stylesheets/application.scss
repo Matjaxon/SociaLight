@@ -160,6 +160,9 @@ input[type=number]::-webkit-outer-spin-button {
   justify-content: center;
   letter-spacing: 1px;
   box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  background-image: url('SociaLights.png');
 }
 
 .nav-logo a {
@@ -174,9 +177,6 @@ input[type=number]::-webkit-outer-spin-button {
   width: 20%;
   min-width: 200px;
   transition: all 0.2s, ease;
-  background-image: url('logo1.jpeg');
-  background-size: cover;
-  background-position: center;
   box-sizing: border-box;
 }
 

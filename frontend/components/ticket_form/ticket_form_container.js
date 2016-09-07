@@ -5,7 +5,8 @@
   const mapStateToProps = (state, ownProps) => ({
     eventId: state.events.eventDetail.id,
     currentUser: state.session.currentUser,
-    ticketFormOpen: state.tickets.ticketFormOpen
+    ticketFormOpen: state.tickets.ticketFormOpen,
+    ticketPrice: state.events.eventDetail.ticket_price
   });
 
   const mapDispatchToProps = dispatch => ({

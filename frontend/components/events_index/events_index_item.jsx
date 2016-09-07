@@ -9,14 +9,22 @@ class EventIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isBookmarked: this.props.isBookmarked
+      isBookmarked: this._checkIsBookmarked(props)
     };
     this._toggleBookmark = this._toggleBookmark.bind(this);
+    this._checkIsBookmarked = this._checkIsBookmarked.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    debugger;
-    this.setState({isBookmarked: nextProps.isBookmarked});
+  componentWillReceiveProps() {
+    this.setState({isBookmarked: this._checkIsBookmarked(this.props)});
+  }
+
+  _checkIsBookmarked(props) {
+    if (this.props.currentUser) {
+      return (props.bookmarkedEventIds[this.props.eventItem.id]) ? true : false;
+    } else {
+      return false;
+    }
   }
 
   _toggleBookmark() {

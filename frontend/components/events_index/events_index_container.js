@@ -4,11 +4,19 @@ import EventsIndex from './events_index';
 import * as EventActions from '../../actions/event_actions';
 import { requestUser } from '../../actions/session_actions';
 
-const mapStateToProps = (state) => ({
-  eventsList: state.events.eventsList,
-  currentUser: state.session.currentUser,
-  savedEvents: state.session.currentUser.saved_events
-});
+const mapStateToProps = (state) => {
+  if (state.session.currentUser) {
+    return ({
+      eventsList: state.events.eventsList,
+      currentUser: state.session.currentUser,
+      savedEvents: state.session.currentUser.saved_events
+    });
+  } else {
+    return ({
+      eventsList: state.events.eventsList
+    });
+  }
+};
 
 const mapDispatchToProps = (dispatch) => ({
   requestEvents: () => dispatch(EventActions.requestEvents()),
