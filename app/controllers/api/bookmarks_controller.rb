@@ -6,13 +6,17 @@ class Api::BookmarksController < ApplicationController
 
     if @user_bookmark
       @user_bookmark.destroy
-      render json: @user_bookmark, status: 200
-
+      puts "DESTROY SUCCESSFUL"
+      puts @event
+      render json: @event, status: 200
     else
       @bookmark = Bookmark.new(bookmark_params)
       @bookmark.user_id = current_user.id
       if @bookmark.save
-        render json: @bookmark, status: 200
+        puts "BOOKMARK SUCCESSULLY SAVED"
+        @event = @bookmark.event
+        puts @event
+        render json: @event, status: 200
       else
         @errors = @bookmark.errors.full_messages
         render json: {error: @errors}, status: :unprocessible_entity

@@ -6,7 +6,8 @@ export const EventConstants = {
   CREATE_EVENT: "CREATE_EVENT",
   UPDATE_EVENT: "UPDATE_EVENT",
   DELETE_EVENT: "DELETE_EVENT",
-  TOGGLE_BOOKMARK: "TOGGLE_BOOKMARK"
+  TOGGLE_BOOKMARK: "TOGGLE_BOOKMARK",
+  RECEIVE_BOOKMARK_EVENT: "RECEIVE_BOOKMARK_EVENT"
 };
 
 export const createEvent = (eventData) => ({
@@ -47,4 +48,9 @@ export const deleteEvent = (eventData) => ({
 export const toggleBookmark = (eventId) => ({
   type: EventConstants.TOGGLE_BOOKMARK,
   eventId
+});
+
+export const receiveBookmarkEvent = (eventData) => ({
+  type: EventConstants.RECEIVE_BOOKMARK_EVENT,
+  eventData
 });

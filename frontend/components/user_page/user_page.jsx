@@ -6,7 +6,10 @@ import { Link, withRouter } from 'react-router';
 class UserPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {active: "events"};
+    this.state = {
+      active: "events",
+      savedEvents: this.props.savedEvents
+    };
     this._changeActive = this._changeActive.bind(this);
   }
 
@@ -14,6 +17,10 @@ class UserPage extends React.Component {
     if (!this.props.currentUser) {
       this.props.router.push('/');
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({savedEvents: nextProps.savedEvents});
   }
 
   _changeActive(key) {
@@ -66,7 +73,7 @@ class UserPage extends React.Component {
 
           <div className="index-overflow-container">
             <section className={((active === "saved") ? "open " : "closed")}>
-              <ProfileEventsIndex eventsList={this.props.savedEvents}
+              <ProfileEventsIndex eventsList={this.state.savedEvents}
                 currentUser={this.props.currentUser}
                 toggleBookmark={this.props.toggleBookmark}/>
               <Link className="form-button profile-index-button"

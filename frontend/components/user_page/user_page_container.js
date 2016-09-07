@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import UserPage from "./user_page";
 import * as EventActions from '../../actions/event_actions';
+import { requestUser } from '../../actions/session_actions';
 
 const mapStateToProps = (state) => {
   if (state.session.currentUser) {
@@ -19,7 +20,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId))
+  toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId)),
+  requestUser: (userId) => dispatch(requestUser(userId))
 });
 
 export default connect(

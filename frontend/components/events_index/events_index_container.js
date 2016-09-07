@@ -6,7 +6,8 @@ import { requestUser } from '../../actions/session_actions';
 
 const mapStateToProps = (state) => ({
   eventsList: state.events.eventsList,
-  currentUser: state.session.currentUser
+  currentUser: state.session.currentUser,
+  savedEvents: state.session.currentUser.saved_events
 });
 
 const mapDispatchToProps = (dispatch) => ({

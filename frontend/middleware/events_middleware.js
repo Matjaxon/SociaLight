@@ -11,7 +11,7 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
   };
   const eventDeleteSuccess = () => hashHistory.push('/');
   const toggleBookmarkSuccess = data =>
-    dispatch(EventActions.receiveEvent(data));
+    dispatch(EventActions.receiveBookmarkEvent(data));
 
   switch(action.type) {
     case EventActions.EventConstants.REQUEST_EVENTS:
@@ -36,7 +36,7 @@ const EventsMiddleware = ({ getState, dispatch }) => next => action => {
       return next(action);
 
     case EventActions.EventConstants.TOGGLE_BOOKMARK:
-      EventsAPI.toggleBookmark(action.eventId);
+      EventsAPI.toggleBookmark(action.eventId, toggleBookmarkSuccess);
       return next(action);
 
     default:

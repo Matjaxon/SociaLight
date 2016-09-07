@@ -45,10 +45,11 @@ export const deleteEvent = (eventId, success, error) => {
   });
 };
 
-export const toggleBookmark = (eventId) => {
+export const toggleBookmark = (eventId, success) => {
   $.ajax({
     method: "POST",
     url: `api/events/${eventId}/bookmark`,
-    data: {bookmark: {event_id: `${eventId}`}}
+    data: {bookmark: {event_id: `${eventId}`}},
+    success
   });
 };

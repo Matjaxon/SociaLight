@@ -5,9 +5,10 @@ import { toggleForm } from '../../actions/ticket_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let eventId = parseInt(ownProps.params.eventId);
+  const currentUser = state.session.currentUser;
   let isBookmarked;
-  if (state.events.eventDetail) {
-    isBookmarked = state.events.eventDetail.is_bookmarked;
+  if (currentUser) {
+    isBookmarked = (currentUser.bookmarked_event_ids[eventId]) ? true : false;
   } else {
     isBookmarked = false;
   }
