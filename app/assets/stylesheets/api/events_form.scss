@@ -16,8 +16,7 @@
 
 .event-form-title {
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border-bottom: 1px solid $form-border-color;
+  letter-spacing: 1.5px;
   margin-bottom: 20px;
   padding-bottom: 5px;
 }
@@ -28,6 +27,7 @@
   border-bottom: 1px solid $form-border-color;
   margin-bottom: 10px;
   text-transform: uppercase;
+  letter-spacing: 0.7px;
 }
 
 .event-form-fields {

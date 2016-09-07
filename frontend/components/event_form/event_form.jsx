@@ -213,6 +213,7 @@ class EventForm extends React.Component {
               <h3>Event Category</h3>
               <select value={this.state.category_id}
                 onChange={this._handleChange("category_id")}>
+                <option value="" disabled>Select Category</option>
                 {this.categoryOptions}
               </select>
             </label>

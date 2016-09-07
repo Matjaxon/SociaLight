@@ -7,7 +7,7 @@ const UserNav = ({ currentUser, logout }) => {
       <div className="user-nav">
         <ul className="user-links">
           <li>
-            <Link to="/new-event">Create An Event</Link>
+            <Link to="/new-event">Create Event</Link>
           </li>
           <li>
             <Link to="/profile">{currentUser.username}</Link>
