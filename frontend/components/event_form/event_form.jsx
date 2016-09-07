@@ -6,12 +6,15 @@ import merge from 'lodash/merge';
 const newEventState = {
   title: "",
   description: "",
-  category_id: 1,
+  category_id: "",
   num_tickets: 100,
   ticket_price: 0,
   start_time: new Date(),
   end_time: new Date(),
   live: false,
+  address: "",
+  city: "",
+  state: ""
 };
 
 class EventForm extends React.Component {
@@ -27,6 +30,7 @@ class EventForm extends React.Component {
     this._toggleLive = this._toggleLive.bind(this);
     this._checkOwner = this._checkOwner.bind(this);
     this._deleteEvent = this._deleteEvent.bind(this);
+    this._createCategoryOptions = this._createCategoryOptions.bind(this);
   }
 
   componentWillMount() {
@@ -34,6 +38,7 @@ class EventForm extends React.Component {
       this.props.preloadedEvent === null) {
         return this.props.requestEvent(this.props.activeEventId);
     }
+    this.props.fetchCategories();
   }
 
   componentDidUpdate() {
@@ -45,7 +50,14 @@ class EventForm extends React.Component {
     }
   }
 
-  componentWillReceiveProps() {
+  _createCategoryOptions(categories) {
+    return categories.map( category => (
+      <option key={`category-${category.id}`}
+        value={category.id}>{category.name}</option>
+    ));
+  }
+
+  componentWillReceiveProps(nextProps) {
     let that = this;
     if (that.props.formType === "new-event") {
       that.setState(newEventState);
@@ -64,6 +76,7 @@ class EventForm extends React.Component {
         return that.setState(tempState);
       }
     }
+    this.categoryOptions = this._createCategoryOptions(nextProps.categories);
   }
 
   _checkOwner() {
@@ -167,7 +180,6 @@ class EventForm extends React.Component {
     let deleteButtonText = (this.props.formType === "new-event") ?
       "Discard" : "Delete";
 
-
     return(
       <section className="event-form-container">
         <h1 className="event-form-title">{formTitle}</h1>
@@ -195,6 +207,14 @@ class EventForm extends React.Component {
                 className="event-form-input"
                 value={this.state.description}
                 onChange={this._handleChange("description")} />
+            </label>
+
+            <label className="event-form-input">
+              <h3>Event Category</h3>
+              <select value={this.state.category_id}
+                onChange={this._handleChange("category_id")}>
+                {this.categoryOptions}
+              </select>
             </label>
 
             <div className="calendar-container">
@@ -234,6 +254,37 @@ class EventForm extends React.Component {
                   onChange={this._handleEndTimeChange} />
               </label>
             </div>
+
+            <label className="event-form-input">
+              <h3>Address</h3>
+              <input
+                type="text"
+                className="event-form-input"
+                value={this.state.address}
+                onChange={this._handleChange("address")}
+              />
+            </label>
+
+            <label className="event-form-input">
+              <h3>City</h3>
+              <input
+                type="text"
+                className="event-form-input city-input"
+                value={this.state.city}
+                onChange={this._handleChange("city")}
+              />
+            </label>
+
+            <label className="event-form-input">
+              <h3>State</h3>
+              <input
+                type="text"
+                maxLength={2}
+                className="event-form-input state-input"
+                value={this.state.state}
+                onChange={this._handleChange("state")}
+              />
+            </label>
 
             <h2>Tickets</h2>
             <label className="event-form-input">

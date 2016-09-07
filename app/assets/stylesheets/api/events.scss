@@ -115,10 +115,13 @@
 .event-index-price {
   width: 201px;
   cursor: pointer;
+  justify-content: center;
+  letter-spacing: 1px;
 }
 
 .event-index-category {
   flex-grow: 1;
+  text-transform: capitalize;
 }
 
 .event-index-bookmark {

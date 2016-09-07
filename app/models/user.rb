@@ -33,10 +33,10 @@ class User < ActiveRecord::Base
     foreign_key: :organizer_id,
     class_name: :Event
 
-  has_many :bookmarks
+  has_many :bookmarks, -> { includes :event }
 
   has_many :bookmarked_events,
-    through: :bookmarks, 
+    through: :bookmarks,
     source: :event
 
   def self.find_by_credentials(username, password)

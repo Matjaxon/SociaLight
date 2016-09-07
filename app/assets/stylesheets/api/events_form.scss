@@ -24,7 +24,7 @@
 
 .event-form-container h2 {
   display: block;
-  padding: 10px 0 40px 0;
+  padding: 25px 0 10px 0;
   border-bottom: 1px solid $form-border-color;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -170,4 +170,21 @@ span.rdr-Day {
 
 .draft-event {
   color: #eb0000;
+}
+
+.event-form-input select {
+  text-transform: capitalize;
+  font-size: $form-font-size
+}
+
+.event-form-input input[type=text] {
+  padding: 7px 4px;
+}
+
+.state-input {
+  max-width: 50px;
+}
+
+.city-input {
+  max-width: 300px;
 }

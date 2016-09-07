@@ -1,10 +1,6 @@
 wanted_event_fields = event.attributes.keys.map(&:to_sym) - [:created_at, :updated_at]
 
-# json.category_name event.category.name
-
-if user
-  is_bookmarked = event.user_bookmark(user) ? true : false
-end
+json.category_name event.category.name
 
 if event.venue_id
   venue = event.venue
@@ -15,4 +11,3 @@ if event.venue_id
 end
 
 json.extract! event, *wanted_event_fields
-json.is_bookmarked is_bookmarked

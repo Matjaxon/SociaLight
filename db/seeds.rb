@@ -6,6 +6,11 @@ unless User.find_by_username('matt')
     phone_number: 6618888888, seed_user: false)
 end
 
+unless User.find_by_username("dom_cobb")
+  User.create!(username: "dom_cobb", password: "password", email: "don_cobb@example.com",
+    phone_number: 7777777777, seed_user: false)
+end
+
 #  ============= FAKER USERNAME GENERATION ================
 
 50.times do
@@ -40,7 +45,6 @@ end
 # =============== CATEGORY SEEDING ======================
 
 # NOT A COMPLETE LIST
-
 EVENTBRITE_CATEGORY_MAPPING = {
   103 => "music",
   101 => "business",
@@ -180,14 +184,13 @@ end
 create_seed_events(paid_seed_events, false)
 create_seed_events(free_seed_events, true)
 
-
 # ================ TICKET GENERATION ===============
 
 live_events = Event.where(live: true)
 seed_users = User.where(seed_user: true)
-seed_users.push(User.find_by_username('matt'))
+seed_users.push(User.find_by_username('matt')).push(User.find_by_username('don_cobb'))
 
-2000.times do |purchase|
+500.times do |purchase|
   event = live_events.sample
   user = seed_users.sample
   until user != event.organizer

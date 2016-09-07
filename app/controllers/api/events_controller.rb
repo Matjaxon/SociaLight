@@ -4,10 +4,10 @@ class Api::EventsController < ApplicationController
   def index
     if current_user
       @events = Event.where("live = true OR organizer_id = ?", current_user.id)
-      .order(:start_time).includes(:venue)
+      .order(:start_time).includes(:venue).includes(:category).includes(:organizer)
       @events = Event.filter_events(@events, params[:filters])
     else
-      @events = Event.all.where(live: true).order(:start_time).includes(:venue)
+      @events = Event.all.where(live: true).order(:start_time).includes(:venue).includes(:organizer)
       @events = Event.filter_events(@events, params[:filters])
     end
     @user = current_user
@@ -62,7 +62,7 @@ class Api::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :description, :category_id,
       :num_tickets, :ticket_price, :start_time, :end_time,
-      :live)
+      :live, :address, :city, :state)
   end
 
   def verify_owner

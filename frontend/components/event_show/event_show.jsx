@@ -77,6 +77,9 @@ class EventShow extends React.Component {
         bookmarkFlag = <i className="fa fa-bookmark-o" aria-hidden="true"></i>;
       }
 
+      let descriptionText = (showEvent.description_html) ?
+        showEvent.description_html : showEvent.description;
+
       return (
         <section className="event-show-container">
           <section className="show-header" style={headerStyle}>
@@ -114,7 +117,7 @@ class EventShow extends React.Component {
               <h3>What</h3>
               <div className="event-details-description">
                 <div dangerouslySetInnerHTML=
-                  {{__html: showEvent.description_html}} />
+                  {{__html: descriptionText}} />
               </div>
 
               <h3>Where</h3>

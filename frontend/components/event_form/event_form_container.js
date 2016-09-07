@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import EventForm from './event_form';
 import * as EventActions from '../../actions/event_actions';
+import * as SearchActions from '../../actions/search_actions';
 
 const mapStateToProps = (state, ownProps) => {
   let activeEventId = parseInt(ownProps.params.eventId);
@@ -11,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
     currentUser: state.session.currentUser,
     formType,
     preloadedEvent,
-    activeEventId
+    activeEventId,
+    categories: state.search.categories
   };
 };
 
@@ -20,7 +22,8 @@ const mapDispatchToProps = dispatch => ({
   updateEvent: (eventId, eventData) =>
     dispatch(EventActions.updateEvent(eventId, eventData)),
   requestEvent: (eventId) => dispatch(EventActions.requestEvent(eventId)),
-  deleteEvent: (eventData) => dispatch(EventActions.deleteEvent(eventData))
+  deleteEvent: (eventData) => dispatch(EventActions.deleteEvent(eventData)),
+  fetchCategories: () => dispatch(SearchActions.fetchCategories())
 });
 
 export default connect(

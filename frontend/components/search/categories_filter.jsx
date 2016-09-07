@@ -12,7 +12,7 @@ const CategoriesFilter = ({ categories, filteredCategories,
 
   return (
     <div className="category-filter-container">
-      <h4>Categories</h4>
+      <h4>Filter By Categories <i className="fa fa-filter" aria-hidden="true"></i></h4>
       <ul>
         { categoryFilterItems }
       </ul>

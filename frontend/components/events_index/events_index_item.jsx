@@ -9,7 +9,7 @@ class EventIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isBookmarked: this.props.eventItem.is_bookmarked
+      isBookmarked: this.props.isBookmarked
     };
     this._toggleBookmark = this._toggleBookmark.bind(this);
   }
@@ -40,13 +40,22 @@ class EventIndexItem extends React.Component {
             {liveStatus}
           </div>
         </div>;
-    } else if (eventItem.current_user_tickets > 0) {
+    } else if (this.props.userTickets > 0) {
       eventStatusSection = <div className="event-index-status has-tickets">
-        <div className="tickets-number">{eventItem.current_user_tickets}</div>
-        <div className="tickets-label"> tickets</div>
+        <div className="tickets-number">{this.props.userTickets}</div>
+        <div className="tickets-label">
+          {`ticket` + ((this.props.userTickets > 1) ? "s" : "")}
+        </div>
       </div>;
     } else {
       eventStatusSection = <div></div>;
+    }
+
+    let location;
+    if (eventItem.venue) {
+      location = eventItem.venue.name;
+    } else {
+      location = (eventItem.address) ? eventItem.address: "";
     }
 
     let bookmarkFlag;
@@ -81,7 +90,7 @@ class EventIndexItem extends React.Component {
                 `${startDateTime.toLocaleTimeString(navigator.language,
                 {hour: '2-digit', minute: '2-digit'})}`}</h5>
             </li>
-            <li className='event-index-location'>LOCATION</li>
+            <li className='event-index-location'>{location}</li>
           </ul>
 
           {eventStatusSection}
@@ -90,9 +99,9 @@ class EventIndexItem extends React.Component {
         <ul className="event-index-footer">
           <li className='event-index-price'
             onClick={_handleClick(router, `/event/${eventItem.id}`)}>
-            {eventItem.ticket_price}
+            ${eventItem.ticket_price}
           </li>
-          <li className='event-index-category'>Category</li>
+          <li className='event-index-category'>{eventItem.category_name}</li>
           <li className="event-index-bookmark"
             onClick={ () => this._toggleBookmark(eventItem.id)}>
             {bookmarkFlag}
