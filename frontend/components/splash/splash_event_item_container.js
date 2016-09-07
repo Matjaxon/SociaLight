@@ -1,7 +1,6 @@
-import { connect } from "react-redux";
-import EventIndexItem from './events_index_item';
-import * as EventActions from '../../actions/event_actions';
-import { requestUser } from '../../actions/session_actions';
+import { connect } from 'react-redux';
+import SplashEventItem from './splash_event_item';
+import { toggleBookmark } from '../../actions/event_actions';
 
 const mapStateToProps = (state) => {
   if (state.session.currentUser) {
@@ -14,14 +13,13 @@ const mapStateToProps = (state) => {
     return ({
     });
   }
-
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId)),
+  toggleBookmark: (eventId) => dispatch(toggleBookmark(eventId)),
 });
 
-export default connect(
+export default connect (
   mapStateToProps,
   mapDispatchToProps
-)(EventIndexItem);
+)(SplashEventItem);

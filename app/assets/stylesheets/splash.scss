@@ -64,11 +64,13 @@
   display: flex;
   margin: 20px auto;
   border: 1px solid $border-color;
+  background-color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
 }
 
 .featured-cities-container li {
   padding: 10px 5px;
-  border-right: 1px solid $border-color;
   text-align: center;
   width: 25%;
   box-sizing: border-box;
@@ -79,8 +81,74 @@
 }
 
 .splash-events-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   width: 90%;
-  border: 1px solid red;
   margin: 20px auto;
-  padding: 20px;
+}
+
+.splash-item-container {
+  width: 30%;
+  margin-bottom: 20px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.splash-item-image {
+  position: relative;
+  width: 100%;
+  height: 17vh;
+  max-height: 225px;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid $border-color;
+}
+
+.splash-item-price {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  min-width: 45px;
+  padding: 3px 5px;
+  text-align: center;
+  background-color: rgba(248, 248, 255,0.90);
+  letter-spacing: 1px;
+}
+
+.splash-item-details {
+  border-right: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+}
+
+.splash-item-category {
+  display: flex;
+  padding-left: 5px !important;
+  font-size: 0.75em;
+  padding-top: 10px !important;
+}
+
+.splash-item-footer {
+  display: flex;
+  flex-direction: row;
+  border-right: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+}
+
+.splash-item-title {
+  font-weight: bold;
+  height: 40px;
+  padding: 5px;
+  padding-top: 8px;
+  overflow: hidden;
+}
+
+.splash-item-time {
+  font-size: 0.8em;
+  padding: 2px 5px;
+}
+
+.splash-item-location {
+  font-size: 0.75em;
+  padding: 2px 5px;
 }

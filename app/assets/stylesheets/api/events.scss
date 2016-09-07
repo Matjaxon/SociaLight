@@ -25,7 +25,7 @@
   background-color: white;
 }
 
-.event-index-item:hover {
+.event-index-item:hover, .splash-item-container:hover {
   -webkit-box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
   -moz-box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
   box-shadow: 0px 0px 20px 5px rgba(128, 128, 128, 0.37);
@@ -104,7 +104,8 @@
 }
 
 .event-index-footer li {
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-left: 1px solid $border-color;
 }
 
@@ -123,6 +124,7 @@
 .event-index-category {
   flex-grow: 1;
   text-transform: capitalize;
+  padding-left: 15px;
 }
 
 .event-index-bookmark {

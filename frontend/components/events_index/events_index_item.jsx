@@ -1,10 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-const _handleClick = (router, url) => (
-  () => router.push(url)
-);
-
 class EventIndexItem extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +9,7 @@ class EventIndexItem extends React.Component {
     };
     this._toggleBookmark = this._toggleBookmark.bind(this);
     this._checkIsBookmarked = this._checkIsBookmarked.bind(this);
+    this._handleClick = this._handleClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,6 +29,10 @@ class EventIndexItem extends React.Component {
       this.props.toggleBookmark(this.props.eventItem.id);
       this.setState({isBookmarked: !this.state.isBookmarked});
     }
+  }
+
+  _handleClick (router, url) {
+    return () => router.push(url);
   }
 
   render() {
@@ -65,6 +66,10 @@ class EventIndexItem extends React.Component {
     } else {
       eventStatusSection = <div></div>;
     }
+
+    let eventTime = <h5>{`${startDateTime.toDateString()}` + `  ` +
+      `${startDateTime.toLocaleTimeString(navigator.language,
+      {hour: '2-digit', minute: '2-digit'})}`}</h5>;
 
     let location;
     if (eventItem.venue) {
@@ -100,7 +105,7 @@ class EventIndexItem extends React.Component {
     return (
       <ul className="event-index-item">
         <li className='event-index-header'
-          onClick={_handleClick(router, `/event/${eventItem.id}`)}>
+          onClick={this._handleClick(router, `/event/${eventItem.id}`)}>
           <div className="events-index-image"
             style={indexItemStyle} >
           </div>
@@ -108,9 +113,7 @@ class EventIndexItem extends React.Component {
           <ul className="event-main-details">
             <li className='event-index-title'><h4>{eventItem.title}</h4></li>
             <li className="event-index-time">
-              <h5>{`${startDateTime.toDateString()}` + `  ` +
-                `${startDateTime.toLocaleTimeString(navigator.language,
-                {hour: '2-digit', minute: '2-digit'})}`}</h5>
+              {eventTime}
             </li>
             <li className='event-index-location'>{location}</li>
           </ul>
@@ -120,10 +123,10 @@ class EventIndexItem extends React.Component {
 
         <ul className="event-index-footer">
           <li className='event-index-price'
-            onClick={_handleClick(router, `/event/${eventItem.id}`)}>
+            onClick={this._handleClick(router, `/event/${eventItem.id}`)}>
             {ticketPrice}
           </li>
-          <li className='event-index-category'>{eventItem.category_name}</li>
+          <li className="event-index-category">{eventItem.category_name}</li>
           <li className="event-index-bookmark"
             onClick={ () => this._toggleBookmark(eventItem.id)}>
             {bookmarkFlag}

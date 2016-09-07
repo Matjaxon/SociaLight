@@ -4,6 +4,12 @@ import SplashEventsIndex from './splash_events_index';
 
 class Splash extends React.Component {
 
+  componentWillMount() {
+    if (this.props.currentUser) {
+      this.props.requestUser(this.props.currentUser.id);
+    }
+  }
+
   render() {
     return (
       <section>
