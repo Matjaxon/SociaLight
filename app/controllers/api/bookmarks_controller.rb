@@ -6,16 +6,12 @@ class Api::BookmarksController < ApplicationController
 
     if @user_bookmark
       @user_bookmark.destroy
-      puts "DESTROY SUCCESSFUL"
-      puts @event
       render json: @event, status: 200
     else
       @bookmark = Bookmark.new(bookmark_params)
       @bookmark.user_id = current_user.id
       if @bookmark.save
-        puts "BOOKMARK SUCCESSULLY SAVED"
         @event = @bookmark.event
-        puts @event
         render json: @event, status: 200
       else
         @errors = @bookmark.errors.full_messages

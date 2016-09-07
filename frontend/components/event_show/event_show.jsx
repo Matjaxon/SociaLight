@@ -18,8 +18,10 @@ class EventShow extends React.Component {
   }
 
   _toggleBookmark() {
-    this.props.toggleBookmark(this.props.eventDetail.id);
-    this.setState({isBookmarked: !this.state.isBookmarked});
+    if (this.props.currentUser) {
+      this.props.toggleBookmark(this.props.eventDetail.id);
+      this.setState({isBookmarked: !this.state.isBookmarked});
+    }
   }
 
   _toggleForm() {

@@ -11,8 +11,8 @@
   padding-bottom: 20px;
   position: fixed;
   display: flex;
-  width: 340px;
-  right: -280px;
+  width: 350px;
+  right: -290px;
   top: 195px;
   transition: all 0.8s ease;
   z-index: 2;
@@ -24,7 +24,7 @@
 }
 
 .ticket-nav {
-  width: 40px;
+  width: 45px;
   border: 1px solid $border-color;
   background-color: $live-green;
   box-sizing:border-box;
@@ -38,15 +38,16 @@
 .ticket-nav-box {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
-  height: 40px;
+  height: 45px;
   display: flex;
   align-items: center;
-  justify-content: center;
   color: white;
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .ticket-nav-text {
@@ -56,7 +57,7 @@
   text-align: center;
   position: absolute;
   bottom: 50%;
-  left: 13%;
+  left: 12%;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: bolder;
@@ -66,7 +67,7 @@
 .main-ticket-form {
   flex-grow: 1;
   padding: 10px;
-  padding-left: 20px;
+  padding-left: 30px;
   border: 1px solid $form-border-color;
   background: $form-background-color;
   text-align: right;
@@ -125,4 +126,26 @@
   padding: 5px;
   border: 1px solid $form-border-color;
   border-radius: 5px;
+}
+
+.form-issue {
+  color: red;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+i.fa.fa-play {
+    flex-grow: 1;
+    display: inline-block;
+    padding: 10px;
+}
+
+.form-success {
+  color: $live-green;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-weight: bold;
+  text-align: center;
 }

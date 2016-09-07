@@ -26,7 +26,7 @@ const SessionReducer = (state = defaultState, action) => {
       let bookmarkedEventIds = newState.currentUser.bookmarked_event_ids;
       let eventId = action.eventData.id.toString();
       if (bookmarkedEventIds[eventId]) {
-        delete bookmarkedEventIds.eventId;
+        delete bookmarkedEventIds[eventId];
         let savedEvents = newState.currentUser.saved_events;
         let index = savedEvents.map( savedEvent => savedEvent.id.toString())
           .indexOf(eventId);
@@ -34,7 +34,7 @@ const SessionReducer = (state = defaultState, action) => {
           .concat(savedEvents.slice(index + 1));
         newState.currentUser.saved_events = newSavedEvents;
       } else {
-        newState.currentUser.bookmarked_event_ids[parseInt(eventId)] = eventId;
+        newState.currentUser.bookmarked_event_ids[parseInt(eventId)] = Number(eventId);
         newState.currentUser.saved_events.push(action.eventData);
       }
       return newState;

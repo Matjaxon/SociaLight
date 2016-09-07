@@ -7,11 +7,14 @@ class TicketForm extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._orderNow = this._orderNow.bind(this);
     this._openForm = this._openForm.bind(this);
+    this._checkLoggedIn = this._checkLoggedIn.bind(this);
     // this._showGroupOrder = this._showGroupOrder.bind(this);
     // this._hideGroupOrder = this._hideGroupOrder.bind(this);
     this.state = {
       numTickets: 1,
-      formOpen: this.props.formOpen
+      formOpen: this.props.formOpen,
+      formIssue: "",
+      formSuccess: ""
     };
   }
 
@@ -20,7 +23,21 @@ class TicketForm extends React.Component {
   // }
 
   _handleChange(key) {
-    return (event) => this.setState({[key]: event.target.value});
+    return (event) => this.setState({[key]: event.target.value, formSuccess: ""});
+  }
+
+  componentDidMount() {
+    this._checkLoggedIn(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._checkLoggedIn(nextProps);
+  }
+
+  _checkLoggedIn(props) {
+    if(!props.currentUser) {
+      this.setState({formIssue: "You must be logged in to complete order"});
+    }
   }
 
   // _resetForms() {
@@ -38,6 +55,7 @@ class TicketForm extends React.Component {
   _orderNow(event) {
     event.preventDefault();
     this.props.createTicket(this.props.eventId, this.state.numTickets);
+    this.setState({formSuccess: "Ticket order placed"});
   }
 
   // _showGroupOrder(event) {
@@ -68,6 +86,9 @@ class TicketForm extends React.Component {
         </div>
         <form className="main-ticket-form" onSubmit={this._orderNow}>
           <h2>Get Your Tickets</h2>
+          <div className="form-issue">
+            {this.state.formIssue}
+          </div>
           <label>
             <h4>Ticket Quantity</h4>
             <input className="event-form-input tickets-input"
@@ -88,6 +109,9 @@ class TicketForm extends React.Component {
           <div className="button-container">
             <input className="form-button order-now"
               type="submit" value="Order Now" />
+          </div>
+          <div className="form-success">
+            {this.state.formSuccess}
           </div>
         </form>
       </section>

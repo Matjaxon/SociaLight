@@ -2,6 +2,12 @@ import React from 'react';
 import EventIndexItemContainer from './events_index_item_container';
 
 class EventsIndex extends React.Component {
+  componentWillMount() {
+    if (this.props.currentUser) {
+      this.props.requestUser(this.props.currentUser.id);
+    }
+  }
+
   render() {
     let eventListItems = this.props.eventsList.map( singleEvent => {
       let currentUser = this.props.currentUser;

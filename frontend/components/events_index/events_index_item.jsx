@@ -15,8 +15,8 @@ class EventIndexItem extends React.Component {
     this._checkIsBookmarked = this._checkIsBookmarked.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setState({isBookmarked: this._checkIsBookmarked(this.props)});
+  componentWillReceiveProps(nextProps) {
+    this.setState({isBookmarked: this._checkIsBookmarked(nextProps)});
   }
 
   _checkIsBookmarked(props) {
@@ -28,8 +28,10 @@ class EventIndexItem extends React.Component {
   }
 
   _toggleBookmark() {
-    this.props.toggleBookmark(this.props.eventItem.id);
-    this.setState({isBookmarked: !this.state.isBookmarked});
+    if (this.props.currentUser) {
+      this.props.toggleBookmark(this.props.eventItem.id);
+      this.setState({isBookmarked: !this.state.isBookmarked});
+    }
   }
 
   render() {
@@ -80,6 +82,13 @@ class EventIndexItem extends React.Component {
       bookmarkFlag = <i className="fa fa-bookmark-o" aria-hidden="true"></i>;
     }
 
+    let ticketPrice;
+    if (eventItem.ticket_price > 0) {
+      ticketPrice = `$${eventItem.ticket_price}`;
+    } else {
+      ticketPrice = "FREE";
+    }
+
     const defaultItemImage = 'http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg';
     let itemBackgroundImage = (eventItem.main_event_image_url) ?
       eventItem.main_event_image_url : defaultItemImage;
@@ -112,7 +121,7 @@ class EventIndexItem extends React.Component {
         <ul className="event-index-footer">
           <li className='event-index-price'
             onClick={_handleClick(router, `/event/${eventItem.id}`)}>
-            ${eventItem.ticket_price}
+            {ticketPrice}
           </li>
           <li className='event-index-category'>{eventItem.category_name}</li>
           <li className="event-index-bookmark"
