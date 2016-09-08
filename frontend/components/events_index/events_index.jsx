@@ -20,6 +20,7 @@ class EventsIndex extends React.Component {
             eventItem={singleEvent}
             isBookmarked={isBookmarked}
             userTickets={userTickets}
+            displayType={"browse"}
            />
         );
     });

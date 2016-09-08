@@ -3,7 +3,7 @@ import EventIndexItem from './events_index_item';
 import * as EventActions from '../../actions/event_actions';
 import { requestUser } from '../../actions/session_actions';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   if (state.session.currentUser) {
     return({
       currentUser: state.session.currentUser,
@@ -14,12 +14,13 @@ const mapStateToProps = (state) => {
     return ({
     });
   }
-
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId)),
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return ({
+    toggleBookmark: (eventId) => dispatch(EventActions.toggleBookmark(eventId)),
+  });
+};
 
 export default connect(
   mapStateToProps,

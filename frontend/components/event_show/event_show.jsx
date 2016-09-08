@@ -15,6 +15,9 @@ class EventShow extends React.Component {
 
   componentWillMount() {
     this.props.requestEvent(this.props.eventId);
+    if (this.props.ticketFormOpen) {
+      this.props.toggleForm();
+    }
   }
 
   _toggleBookmark() {

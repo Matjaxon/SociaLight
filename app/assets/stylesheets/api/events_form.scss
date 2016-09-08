@@ -87,11 +87,14 @@
   text-align: center;
   font-style: bolder;
   padding: 20px;
-  letter-spacing: 0.5px;
-  color: rgb(231, 76, 60);
   border: 1px solid $form-border-color;
   margin: 10px 0 20px 0;
   background: white;
+}
+
+.event-time-display span {
+  color: rgb(231, 76, 60);
+  letter-spacing: 0.5px;
 }
 
 .calendar-container {

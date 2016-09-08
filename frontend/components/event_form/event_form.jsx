@@ -69,6 +69,7 @@ class EventForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    debugger;
     let that = this;
     if (that.props.formType === "new-event") {
       that.setState(newEventState);
@@ -221,6 +222,16 @@ class EventForm extends React.Component {
       this._createCategoryOptions(this.props.categories);
     }
 
+    let displayStartTime = `${this.state.start_time.toDateString()}
+        ${this.state.start_time.toLocaleTimeString(navigator.language,
+        {hour: '2-digit', minute: '2-digit'})}`;
+
+    let displayEndTime = `${this.state.end_time.toDateString()}
+        ${this.state.end_time.toLocaleTimeString(navigator.language,
+        {hour: '2-digit', minute: '2-digit'})}`;
+
+    let displayTime = <span>{`${displayStartTime} - ${displayEndTime}`}</span>;
+
     return(
       <section className="event-form-container">
         <h1 className="event-form-title">{formTitle}</h1>
@@ -263,8 +274,7 @@ class EventForm extends React.Component {
               <label className="event-form-input"></label>
               <h3>Event Time</h3>
                 <div className="event-time-display">
-                  {this.state.start_time.toString()} -
-                  {this.state.end_time.toString()}
+                  {displayTime}
                 </div>
                 <div>
                   <DateRange

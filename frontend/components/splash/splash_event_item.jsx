@@ -12,12 +12,15 @@ class SplashEventItem extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({isBookmarked: this._checkIsBookmarked(nextProps)});
+    this.setState({
+      isBookmarked: this._checkIsBookmarked(nextProps),
+      currentUser: nextProps.currentUser
+    });
   }
 
   _checkIsBookmarked(props) {
-    if (this.props.currentUser) {
-      return (props.bookmarkedEventIds[this.props.eventItem.id]) ? true : false;
+    if (props.currentUser) {
+      return (props.bookmarkedEventIds[props.eventItem.id]) ? true : false;
     } else {
       return false;
     }

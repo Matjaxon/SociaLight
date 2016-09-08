@@ -46,18 +46,16 @@
 .splash-create-event {
   display: flex;
   background: #0077ea;
-  height: 40px;
+  height: 48px;
   width: 210px;
-  border-radius: 4px;
   margin: 10px auto;
   justify-content: center;
   flex-direction: column;
   text-decoration: none;
-
   text-transform: uppercase;
   font-size: 24px;
   color: white;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
 }
 
 .featured-cities-container {
@@ -120,6 +118,7 @@
 .splash-item-details {
   border-right: 1px solid $border-color;
   border-left: 1px solid $border-color;
+  height: 70px;
 }
 
 .splash-item-category {

@@ -162,28 +162,29 @@ body {
 }
 
 .nav-logo {
-  border-right: 1px solid $border-color;
   justify-content: center;
   letter-spacing: 1px;
+  width: 215px !important;
   box-sizing: border-box;
-  background-size: cover;
-  background-position: center;
-  background-image: url('SociaLights.png');
 }
 
 .nav-logo a {
   display: flex;
-  font-variant: small-caps;
   height: $nav-logo-height;
+  background-image: url("http://res.cloudinary.com/dbwkodu79/image/upload/v1473357986/site_assets/SociaLights3-transaprent.png");
+  padding-left: 30px;
+  height: 78px;
   border-top: 0px solid transparent;
   text-decoration: none;
   justify-content: center;
   align-content: center;
-  padding: 10px 10px;
-  width: 20%;
   min-width: 200px;
   transition: all 0.2s, ease;
   box-sizing: border-box;
+  background-size: contain;
+  background-repeat: space;
+  background-position: 9px;
+  background-size: 90%;
 }
 
 .nav-logo a:hover {
@@ -195,6 +196,7 @@ body {
   text-align: center;
   letter-spacing: 1px;
   justify-content: center;
+  border-left: 1px solid $border-color;
 }
 
 .nav-browse a, {

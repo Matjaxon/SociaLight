@@ -7,8 +7,7 @@ const mapStateToProps = state => {
   let loggedIn = state.session.currentUser !== null;
   return {
     loggedIn: loggedIn,
-    errors: state.session.errors,
-    formType: "login"
+    errors: state.session.errors
   };
 };
 

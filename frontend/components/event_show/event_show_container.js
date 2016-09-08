@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     eventId,
     currentUser: state.session.currentUser,
     isBookmarked,
+    ticketFormOpen: state.tickets.ticketFormOpen
   };
 };
 

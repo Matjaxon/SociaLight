@@ -30,7 +30,12 @@ class Splash extends React.Component {
           <li>Chicago</li>
         </ul>
 
-        <SplashEventsIndex eventsList={this.props.eventsList}/>
+        <SplashEventsIndex
+          eventsList={this.props.eventsList}
+          currenetUser={this.props.currentUser}
+          savedEvents={this.props.savedEvents}
+          toggleBookmark={this.props.toggleBookmark}
+        />
       </section>
     );
   }
