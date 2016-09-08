@@ -41,7 +41,7 @@ class TicketForm extends React.Component {
 
   _orderNow(event) {
     event.preventDefault();
-    if (this.props.currentUser) {
+    if (this.props.currentUser && this.props.eventDetail.live) {
       this.props.createTicket(this.props.eventId, this.state.numTickets);
       this.setState({formSuccess: "Ticket order placed"});
     }

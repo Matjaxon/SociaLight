@@ -21,8 +21,8 @@ class EventIndexItem extends React.Component {
   }
 
   _checkIsBookmarked(props) {
-    if (this.props.currentUser) {
-      return (props.bookmarkedEventIds[this.props.eventItem.id]) ? true : false;
+    if (props.currentUser) {
+      return (props.bookmarkedEventIds[props.eventItem.id]) ? true : false;
     } else {
       return false;
     }

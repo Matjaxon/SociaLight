@@ -29,7 +29,10 @@ const SearchReducer = (state = defaultState, action) => {
       return newState;
 
     case SearchActions.SearchConstants.CLEAR_FILTERS:
-      return defaultState;
+      newState = merge({}, state);
+      newState.filteredCategories = defaultState.filteredCategories;
+      newState.allFilters = defaultState.allFilters;
+      return newState;
 
     default:
       return state;

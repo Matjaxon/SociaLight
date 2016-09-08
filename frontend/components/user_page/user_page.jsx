@@ -38,7 +38,7 @@ class UserPage extends React.Component {
             <button
               className={"profile-button" +
                 ((active === "events") ? " selected-button" : "")}
-              onClick={() => this._changeActive("events")}>Events</button>
+              onClick={() => this._changeActive("events")}>Purchased Events</button>
             <button
               className={"profile-button" +
                 ((active === "hosted") ? " selected-button" : "")}
@@ -63,7 +63,8 @@ class UserPage extends React.Component {
 
           <div className="index-overflow-container">
             <section className={((active === "hosted") ? "open " : "closed")}>
-              <HostedEventsIndex hostedEvents={this.props.hostedEvents}
+              <HostedEventsIndex
+                hostedEvents={this.props.hostedEvents}
                 currentUser={this.props.currentUser}
                 toggleBookmark={this.props.toggleBookmark}/>
               <Link className="form-button profile-index-button"

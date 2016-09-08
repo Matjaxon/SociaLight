@@ -15,6 +15,12 @@
   background-color: white;
 }
 
+.session-form-container h2 {
+  color: $font-accent;
+  font-variant: small-caps;
+  padding: 10px 0px;
+}
+
 .session-form-fields label {
   display: block;
   padding: 5px 0;

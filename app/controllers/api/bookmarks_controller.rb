@@ -1,4 +1,5 @@
 class Api::BookmarksController < ApplicationController
+  before_action :enforce_login
 
   def create
     @event = Event.find(params[:event_id])

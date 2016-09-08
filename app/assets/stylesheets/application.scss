@@ -255,3 +255,12 @@ body {
   min-height: 8vh;
   background-color: $footer-background-color;
 }
+
+.label-note {
+  font-style: italic;
+  font-size: 0.7em;
+}
+
+input:not([type=button]):not([type=reset]):not([type=submit]):focus, textarea:focus {
+  border-color: $font-accent;
+}

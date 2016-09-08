@@ -24,7 +24,8 @@ class Search extends React.Component {
             <div className="map-search-container">MAP SEARCH AREA</div>
             <CategoriesFilter categories={this.props.categories}
               filteredCategories={this.props.filteredCategories}
-              toggleCategoryFilter={this.props.toggleCategoryFilter}/>
+              toggleCategoryFilter={this.props.toggleCategoryFilter}
+              clearFilters={this.props.clearFilters}/>
           </section>
           <section className="search-events-container">
             <EventsIndexContainer />

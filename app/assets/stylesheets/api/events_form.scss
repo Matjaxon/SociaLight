@@ -17,7 +17,7 @@
 .event-form-title {
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   padding-bottom: 5px;
 }
 
@@ -123,25 +123,28 @@ span.rdr-Day {
 }
 
 .launch-button {
-  font-size: 1.1em;
+  font-size: 1.5em;
   padding: 15px;
   width: 45%;
-  min-width: 350px;
   background-color: $green-button;
   color: white;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 3px;
   border: 1px solid;
+  height: 100px;
 }
 
 .hide-event {
   background-color: #ff4d4d;
+  padding:5px !important;
+  height: 75px;
 }
 
 .button-container {
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .button-container:not(:last-child) {

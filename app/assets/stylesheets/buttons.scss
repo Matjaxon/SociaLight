@@ -25,13 +25,16 @@
 
 .save-button  {
   text-align: center;
-  padding: 30px 15px;
+  padding: 30px 15px !important;
+  order: -1;
+  width: 20%;
 }
 
 .delete-button {
   text-align: center;
   color: white;
   background: red;
+  order: 2;
 }
 
 .delete-button:hover {

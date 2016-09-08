@@ -59,3 +59,10 @@
   color: $font-color;
   font-weight: bold;
 }
+
+.search-reset {
+  color: $font-accent;
+  font-style: italic;
+  cursor: pointer;
+  font-variant: small-caps;
+}

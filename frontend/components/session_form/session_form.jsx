@@ -39,9 +39,6 @@ class SessionForm extends React.Component {
     if (this.props.loggedIn) this.props.router.replace("/");
   }
 
-  // CONST GUESS_INFO = {username: ['d','o','m','_','c','o','b','b'],
-  //   password: ['p','a','s','s','w','o','r','d']}
-
   guestLogin() {
     if (this.props.formType !== "login") {
       this.props.router.push('/login');
@@ -51,9 +48,9 @@ class SessionForm extends React.Component {
   }
 
   render () {
-
+    let isLogin = this.props.formType === "login";
     let emailAndPhone;
-    if (this.props.formType === "login") {
+    if (isLogin) {
       emailAndPhone = "";
     } else {
       emailAndPhone = (
@@ -80,7 +77,7 @@ class SessionForm extends React.Component {
     }
 
     let buttonName, altAction;
-    if (this.props.formType === "login") {
+    if (isLogin) {
       buttonName = "Login";
       altAction = <Link to='/signup'>or Sign Up</Link>;
     } else {
@@ -94,7 +91,7 @@ class SessionForm extends React.Component {
         <form className="session-form" onSubmit={this.handleSubmit}>
           <div className="session-form-fields">
             <label>
-              Username:
+              Username
               <input
                 className="session-form-input"
                 type="text"
@@ -103,7 +100,7 @@ class SessionForm extends React.Component {
             </label>
 
             <label>
-              Password:
+              Password {(isLogin) ? "" : <span className="label-note"> - min 8 characters</span>}
               <input
                 className="session-form-input"
                 type="password"

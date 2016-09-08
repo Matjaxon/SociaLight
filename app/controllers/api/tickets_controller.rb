@@ -1,4 +1,5 @@
 class Api::TicketsController < ApplicationController
+  before_action :enforce_login
 
   def create
     tickets_to_order = params[:num_tickets].to_i
@@ -20,12 +21,12 @@ class Api::TicketsController < ApplicationController
       end
 
       if @errors
-        render json: {error: @errors}, status: :unprocessible_entity
+        render json: {error: @errors}, status: :unprocessable_entity
       else
         render json: tickets_array.last
       end
     else
-      render json: {error: "Tickets unavailable"}, status: :unprocessible_entity
+      render json: {error: "Tickets unavailable"}, status: :unprocessable_entity
     end
   end
 

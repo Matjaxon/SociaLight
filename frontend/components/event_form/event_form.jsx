@@ -10,14 +10,21 @@ const newEventState = {
   category_id: "",
   num_tickets: 100,
   ticket_price: 0,
-  start_time: new Date(),
-  end_time: new Date(),
+  start_time: setupDate(),
+  end_time: setupDate(),
   live: false,
   address: "",
   city: "",
   state: "",
   main_event_image_url: null
 };
+
+function setupDate() {
+  let date = new Date();
+  date.setHours(12);
+  date.setMinutes(0);
+  return date;
+}
 
 class EventForm extends React.Component {
   constructor(props) {
@@ -36,10 +43,11 @@ class EventForm extends React.Component {
     this._postImage = this._postImage.bind(this);
   }
 
+
   componentWillMount() {
     if (this.props.formType !== 'new-event' &&
       this.props.preloadedEvent === null) {
-        return this.props.requestEvent(this.props.activeEventId);
+      this.props.requestEvent(this.props.activeEventId);
     }
     this.props.fetchCategories();
   }
@@ -66,7 +74,7 @@ class EventForm extends React.Component {
       that.setState(newEventState);
     } else {
       if (that.props.preloadedEvent === null) {
-        return that.setState(newEventState);
+        that.setState(newEventState);
       } else {
         let tempState = {};
         let stateKeys = Object.keys(newEventState);
@@ -76,7 +84,7 @@ class EventForm extends React.Component {
         });
         tempState.start_time = new Date(tempState.start_time);
         tempState.end_time = new Date(tempState.end_time);
-        return that.setState(tempState);
+        that.setState(tempState);
       }
     }
     this.categoryOptions = this._createCategoryOptions(nextProps.categories);
@@ -209,6 +217,10 @@ class EventForm extends React.Component {
       );
     }
 
+    if (this.props.categories) {
+      this._createCategoryOptions(this.props.categories);
+    }
+
     return(
       <section className="event-form-container">
         <h1 className="event-form-title">{formTitle}</h1>
@@ -286,7 +298,7 @@ class EventForm extends React.Component {
             </div>
 
             <label className="event-form-input">
-              <h3>Address</h3>
+              <h3>Address <span className="label-note"> - optional</span></h3>
               <input
                 type="text"
                 className="event-form-input"
@@ -296,7 +308,7 @@ class EventForm extends React.Component {
             </label>
 
             <label className="event-form-input">
-              <h3>City</h3>
+              <h3>City <span className="label-note"> - optional</span></h3>
               <input
                 type="text"
                 className="event-form-input city-input"
@@ -306,7 +318,7 @@ class EventForm extends React.Component {
             </label>
 
             <label className="event-form-input">
-              <h3>State</h3>
+              <h3>State <span className="label-note"> - optional</span></h3>
               <input
                 type="text"
                 maxLength={2}
@@ -317,7 +329,7 @@ class EventForm extends React.Component {
             </label>
 
             <label className="event-form-input">
-              <h3>Banner Image</h3>
+              <h3>Banner Image <span className="label-note"> - optional</span></h3>
               <div className="image-upload-container">
                 {imageBox}
               </div>
@@ -329,6 +341,8 @@ class EventForm extends React.Component {
               <input
                 className="event-form-input tickets-input"
                 type="number"
+                min={1}
+                step={1}
                 value={this.state.num_tickets}
                 onChange={this._handleChange("num_tickets")} />
             </label>
@@ -338,6 +352,8 @@ class EventForm extends React.Component {
               <input
                 className="event-form-input tickets-input"
                 type="number"
+                min={0}
+                step={1}
                 value={this.state.ticket_price}
                 onChange={this._handleChange("ticket_price")} />
             </label>
@@ -352,13 +368,13 @@ class EventForm extends React.Component {
 
           <div className="button-container">
 
-            {launchButton}
-
             <input type="submit" className="save-button form-button"
               value={`Save Changes`} />
 
-            <button className="form-button delete-button"
-              onClick={this._deleteEvent}>{deleteButtonText} Event</button>
+            {launchButton}
+
+            <div className="save-button form-button delete-button"
+              onClick={this._deleteEvent}>{deleteButtonText} Event</div>
 
           </div>
 
