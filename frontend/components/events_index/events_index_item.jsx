@@ -5,7 +5,8 @@ class EventIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isBookmarked: this._checkIsBookmarked(props)
+      isBookmarked: this._checkIsBookmarked(props),
+      currentUser: this.props.currentUser
     };
     this._toggleBookmark = this._toggleBookmark.bind(this);
     this._checkIsBookmarked = this._checkIsBookmarked.bind(this);
@@ -13,7 +14,10 @@ class EventIndexItem extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({isBookmarked: this._checkIsBookmarked(nextProps)});
+    this.setState({
+      isBookmarked: this._checkIsBookmarked(nextProps),
+      currentUser: nextProps.currentUser
+    });
   }
 
   _checkIsBookmarked(props) {

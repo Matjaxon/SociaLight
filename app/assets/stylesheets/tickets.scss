@@ -109,10 +109,11 @@
 }
 
 .order-now {
+  display: block;
   background-color: $live-green;
   color: white;
   font-weight: bold;
-  width: 100%;
+  width: 100% !important;
   padding: 20px 0;
   transform: all 0.2s ease;
 }
@@ -137,9 +138,9 @@
 }
 
 i.fa.fa-play {
-    flex-grow: 1;
-    display: inline-block;
-    padding: 10px;
+  flex-grow: 1;
+  display: inline-block;
+  padding: 10px;
 }
 
 .form-success {

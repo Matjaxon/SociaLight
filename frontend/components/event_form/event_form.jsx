@@ -2,6 +2,7 @@ import React from 'react';
 import { DateRange } from 'react-date-range';
 import { withRouter } from 'react-router';
 import merge from 'lodash/merge';
+import UploadButton from './upload_button';
 
 const newEventState = {
   title: "",
@@ -14,7 +15,8 @@ const newEventState = {
   live: false,
   address: "",
   city: "",
-  state: ""
+  state: "",
+  main_event_image_url: null
 };
 
 class EventForm extends React.Component {
@@ -31,6 +33,7 @@ class EventForm extends React.Component {
     this._checkOwner = this._checkOwner.bind(this);
     this._deleteEvent = this._deleteEvent.bind(this);
     this._createCategoryOptions = this._createCategoryOptions.bind(this);
+    this._postImage = this._postImage.bind(this);
   }
 
   componentWillMount() {
@@ -163,6 +166,10 @@ class EventForm extends React.Component {
     }
   }
 
+  _postImage(image) {
+    this.setState({main_event_image_url: image.url});
+  }
+
   render() {
     let formTitle = (this.props.formType === 'new-event') ?
     "Create a New Event" : "Edit Your Event";
@@ -177,8 +184,30 @@ class EventForm extends React.Component {
         onClick={this._toggleLive}>Launch Event</button>;
     }
 
-    let deleteButtonText = (this.props.formType === "new-event") ?
+    const deleteButtonText = (this.props.formType === "new-event") ?
       "Discard" : "Delete";
+
+    let imageBox;
+    if (this.state.main_event_image_url) {
+      let eventImageStyle = {
+        backgroundImage: `url(${this.state.main_event_image_url})`
+      };
+      imageBox = (
+        <div>
+          <div style={eventImageStyle} className='event-image-box-active'></div>
+          <UploadButton status="image-uploaded" postImage={this._postImage} />
+        </div>
+      );
+    } else {
+      imageBox = (
+        <div className="event-image-box-default">
+          <div className="event-image-default-inner"
+            id="inner-image-box">
+            <UploadButton status="no-image" postImage={this._postImage} />
+          </div>
+        </div>
+      );
+    }
 
     return(
       <section className="event-form-container">
@@ -285,6 +314,13 @@ class EventForm extends React.Component {
                 value={this.state.state}
                 onChange={this._handleChange("state")}
               />
+            </label>
+
+            <label className="event-form-input">
+              <h3>Banner Image</h3>
+              <div className="image-upload-container">
+                {imageBox}
+              </div>
             </label>
 
             <h2>Tickets</h2>

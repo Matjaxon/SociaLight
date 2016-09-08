@@ -115,3 +115,18 @@
   border: 1px solid red;
   height: 400px;
 }
+
+.draft-watermark {
+  color: $draft-red;
+  position: absolute;
+  bottom: -20%;
+  right: 10%;
+  font-size: 15em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  -webkit-transform: rotate(35deg);
+  -moz-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  -o-transform: rotate(35deg);
+  pointer-events: none;
+}

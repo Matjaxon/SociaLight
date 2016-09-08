@@ -35,12 +35,19 @@ class EventShow extends React.Component {
       let startDateTime = new Date(showEvent.start_time);
       let endDateTime = new Date(showEvent.end_time);
       let editButton;
+      let draftWatermark;
       if (this.props.currentUser &&
         this.props.currentUser.id === showEvent.organizer_id) {
         editButton = <Link to={`/edit-event/${showEvent.id}`}
           className="form-button show-edit-button">Edit Event</Link>;
+        if (showEvent.live) {
+          draftWatermark =  "";
+        } else {
+          draftWatermark = <div className="draft-watermark">draft</div>;
+        }
       } else {
         editButton = "";
+        draftWatermark = "";
       }
 
       let headerLocation;
@@ -109,6 +116,7 @@ class EventShow extends React.Component {
             </div>
 
             {editButton}
+            {draftWatermark}
           </section>
 
           <TicketFormContainer />

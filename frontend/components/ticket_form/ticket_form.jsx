@@ -8,8 +8,6 @@ class TicketForm extends React.Component {
     this._orderNow = this._orderNow.bind(this);
     this._openForm = this._openForm.bind(this);
     this._checkLoggedIn = this._checkLoggedIn.bind(this);
-    // this._showGroupOrder = this._showGroupOrder.bind(this);
-    // this._hideGroupOrder = this._hideGroupOrder.bind(this);
     this.state = {
       numTickets: 1,
       formOpen: this.props.formOpen,
@@ -17,10 +15,6 @@ class TicketForm extends React.Component {
       formSuccess: ""
     };
   }
-
-  // componentDidMount() {
-  //   this._resetForms();
-  // }
 
   _handleChange(key) {
     return (event) => this.setState({[key]: event.target.value, formSuccess: ""});
@@ -40,13 +34,6 @@ class TicketForm extends React.Component {
     }
   }
 
-  // _resetForms() {
-  //   const groupOrderDiv = document.getElementById("group-order");
-  //   if (!Array.from(groupOrderDiv.classList).includes("hidden-form")) {
-  //     groupOrderDiv.classList.add("hidden-form");
-  //   }
-  // }
-
   _openForm(event) {
     if (event) event.preventDefault();
     this.props.toggleForm();
@@ -54,24 +41,17 @@ class TicketForm extends React.Component {
 
   _orderNow(event) {
     event.preventDefault();
-    this.props.createTicket(this.props.eventId, this.state.numTickets);
-    this.setState({formSuccess: "Ticket order placed"});
+    if (this.props.currentUser) {
+      this.props.createTicket(this.props.eventId, this.state.numTickets);
+      this.setState({formSuccess: "Ticket order placed"});
+    }
   }
-
-  // _showGroupOrder(event) {
-  //   event.preventDefault();
-  //   const groupOrderDiv = document.getElementById("group-order");
-  //   groupOrderDiv.classList.remove("hidden-form");
-  // }
-
-  // _hideGroupOrder(event) {
-  //   event.preventDefault();
-  //   const groupOrderDiv = document.getElementById("group-order");
-  //   groupOrderDiv.classList.add("hidden-form");
-  // }
 
   render() {
     let formOpen = this.props.ticketFormOpen;
+    let buttonStatus = (this.props.currentUser &&
+      this.props.eventDetail.live) ? "" : " submit-disabled";
+
     return(
       <section className={"ticket-form-container"
         + ((formOpen) ? " ticket-active" : "")}>
@@ -107,7 +87,7 @@ class TicketForm extends React.Component {
             <h3>${this.props.ticketPrice * this.state.numTickets}</h3>
           </div>
           <div className="button-container">
-            <input className="form-button order-now"
+            <input className={"form-button order-now" + buttonStatus}
               type="submit" value="Order Now" />
           </div>
           <div className="form-success">

@@ -4,6 +4,11 @@
 
 .search-page {
   margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4vw;
+
 }
 
 .search-main-container {

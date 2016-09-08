@@ -23,6 +23,7 @@
   margin: 20px auto;
   align-self: center;
   background-color: white;
+  width: 60vw;
 }
 
 .event-index-item:hover, .splash-item-container:hover {
@@ -34,6 +35,7 @@
 .event-index-header {
   border: 1px solid $border-color;
   cursor: pointer;
+  flex-grow: 1;
 }
 
 .events-index-image {
