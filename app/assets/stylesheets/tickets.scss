@@ -33,6 +33,11 @@
   border-bottom: 1px solid black;
   box-sizing: border-box;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ticket-nav:hover {
+  background-color: $green-hover;
 }
 
 .ticket-nav-box {

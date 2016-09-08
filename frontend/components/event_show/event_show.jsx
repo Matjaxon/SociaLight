@@ -107,7 +107,7 @@ class EventShow extends React.Component {
                 {(showEvent.ticket_price === 0) ? "FREE" : `Price: $` +
                   showEvent.ticket_price}
               </div>
-              <div className="show-header-button"
+              <div className="show-header-button buy-button"
                 onClick={() => this._toggleForm()}>Buy Tickets</div>
               <div className="event-index-bookmark show-header-button"
                 onClick={ () => this._toggleBookmark(showEvent.id)}>
