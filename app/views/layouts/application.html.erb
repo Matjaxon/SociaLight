@@ -4,17 +4,20 @@
   <title>SociaLight</title>
   <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Jaldi:400,700" rel="stylesheet">
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
   <script src="https://use.fontawesome.com/12ed17ed6b.js"></script>
-  <%= csrf_meta_tags %>
+
+  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GMAP_KEY']}"%>
   <script type="text/javascript" src="//widget.cloudinary.com/global/all.js"></script>
   <script type="text/javascript">
     window.cloudinary_options = {
       cloud_name: '<%= ENV["CLOUD_NAME"] %>',
       upload_preset: '<%= ENV["UPLOAD_PRESET"] %>'
     }
+    window._lookup_key = '<%= ENV["GEO_KEY"] %>'
   </script>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
 </head>
 <body>
 

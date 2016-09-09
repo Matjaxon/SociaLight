@@ -136,6 +136,7 @@
 .buy-button {
   background-color: $live-green;
   color: white;
+  max-width: 450px;
 }
 
 .buy-button:hover {
@@ -145,4 +146,13 @@
   border-left: 1px solid white;
   border-bottom: 1px solid white;
   border-right: 1px solid $border-color !important;
+}
+
+.show-map-container {
+  height: 35vh;
+  width: 100%;
+}
+
+.show-map {
+  height: 35vh;
 }

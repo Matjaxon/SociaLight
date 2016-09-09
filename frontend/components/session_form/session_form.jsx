@@ -43,7 +43,7 @@ class SessionForm extends React.Component {
     if (this.props.formType !== "login") {
       this.props.router.push('/login');
     }
-    this.setState({username: 'dom_cobb', password: 'password'},
+    this.setState({username: 'dominic_cobb', password: 'password'},
       () => this.handleSubmit());
   }
 

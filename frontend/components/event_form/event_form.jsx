@@ -3,6 +3,8 @@ import { DateRange } from 'react-date-range';
 import { withRouter } from 'react-router';
 import merge from 'lodash/merge';
 import UploadButton from './upload_button';
+import LocationForm from './location_form';
+import EventFormMap from './event_form_map';
 
 const newEventState = {
   title: "",
@@ -16,7 +18,12 @@ const newEventState = {
   address: "",
   city: "",
   state: "",
-  main_event_image_url: null
+  main_event_image_url: null,
+  venue_id: null,
+  venue_name: "",
+  venue_displayLocation: "",
+  venue_latitude: "",
+  venue_longitude: ""
 };
 
 function setupDate() {
@@ -41,6 +48,7 @@ class EventForm extends React.Component {
     this._deleteEvent = this._deleteEvent.bind(this);
     this._createCategoryOptions = this._createCategoryOptions.bind(this);
     this._postImage = this._postImage.bind(this);
+    this._setLocation = this._setLocation.bind(this);
   }
 
 
@@ -69,17 +77,16 @@ class EventForm extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    debugger;
     let that = this;
-    if (that.props.formType === "new-event") {
+    if (nextProps.formType === "new-event") {
       that.setState(newEventState);
     } else {
-      if (that.props.preloadedEvent === null) {
+      if (!nextProps.preloadedEvent) {
         that.setState(newEventState);
       } else {
         let tempState = {};
         let stateKeys = Object.keys(newEventState);
-        let preloadedEvent = that.props.preloadedEvent;
+        let preloadedEvent = nextProps.preloadedEvent;
         stateKeys.forEach( key => {
           tempState[`${key}`] = preloadedEvent[`${key}`];
         });
@@ -100,10 +107,16 @@ class EventForm extends React.Component {
   }
 
   _handleChange(key) {
-      return (event) => this.setState({[key]: event.target.value});
-    }
+    return (event) => this.setState({[key]: event.target.value});
+  }
+
+  _setLocation(args) {
+    this.setState(args);
+  }
 
   _handleStartTimeChange(event) {
+    event.stopPropagation();
+    event.preventDefault();
     if (event.type !== "DOMContentLoaded" && event.type !=="hashchange") {
       let inputTime = (event.target.value) ? event.target.value : "12:00";
       let timeArray = inputTime.split(":");
@@ -115,6 +128,8 @@ class EventForm extends React.Component {
     }
   }
   _handleEndTimeChange(event) {
+    event.stopPropagation();
+    event.preventDefault();
     if (event.type !== "DOMContentLoaded" && event.type !=="hashchange") {
       let inputTime = (event.target.value) ? event.target.value : "12:00";
       let timeArray = inputTime.split(":");
@@ -127,6 +142,8 @@ class EventForm extends React.Component {
   }
 
   _handleSelect(range) {
+    event.stopPropagation();
+    event.preventDefault();
     let startDate = new Date(range.startDate._d.getTime());
     let endDate = new Date(range.endDate._d.getTime());
 
@@ -152,21 +169,59 @@ class EventForm extends React.Component {
   }
 
   _handleSubmit(event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    let stagedEvent = {'event': {
+      title: this.state.title,
+      description: this.state.description,
+      category_id: this.state.category_id,
+      num_tickets: this.state.num_tickets,
+      ticket_price: this.state.ticket_price,
+      start_time: this.state.start_time,
+      end_time: this.state.end_time,
+      live: this.state.live,
+      address: this.state.address,
+      city: this.state.city,
+      state: this.state.state,
+      main_event_image_url: this.state.main_event_image_url,
+      venue_id: this.state.venue_id
+    }};
+
+    let stagedVenue = {'venue': {
+      name: this.state.venue_name,
+      latitude: this.state.venue_latitude,
+      longitude: this.state.venue_longitude,
+      display_address: this.state.venue_displayLocation
+    }};
+
     if (this.props.formType === 'new-event') {
-      this.props.createEvent({'event': this.state});
+      if (!stagedEvent.venue_id) {
+        this.props.createVenueAndEvent(stagedVenue, stagedEvent);
+      } else {
+        this.props.createEvent(stagedEvent);
+      }
+
     } else {
       let eventId = parseInt(this.props.activeEventId);
-      this.props.updateEvent(eventId, {'event': this.state});
+      if (!stagedEvent.venue_id) {
+        this.props.createVenueAndUpdateEvent(stagedVenue, eventId, stagedEvent);
+      } else {
+        this.props.updateEvent(eventId, stagedEvent);
+      }
     }
   }
 
   _toggleLive(event) {
+    event.stopPropagation();
     event.preventDefault();
-    this.setState({live: !this.state.live}, this._handleSubmit);
+    this.setState({live: !this.state.live}, () => this._handleSubmit());
   }
 
   _deleteEvent(event) {
+    event.stopPropagation();
     event.preventDefault();
     if (this.props.formType === "new-event") {
       this.setState(newEventState);
@@ -240,7 +295,7 @@ class EventForm extends React.Component {
           <h2>Event Details</h2>
           <h4 className={"event-status " +
             ((isLive) ? "live-event" : "draft-event")}>
-              Status: {(isLive) ? 'live' : 'draft'}
+              Event Status: {(isLive) ? 'live' : 'draft'}
           </h4>
 
           <div className="event-form-fields">
@@ -263,7 +318,9 @@ class EventForm extends React.Component {
 
             <label className="event-form-input">
               <h3>Event Category</h3>
-              <select value={this.state.category_id}
+              <select
+                className="event-category-selector"
+                value={this.state.category_id}
                 onChange={this._handleChange("category_id")}>
                 <option value="" disabled>Select Category</option>
                 {this.categoryOptions}
@@ -307,36 +364,25 @@ class EventForm extends React.Component {
               </label>
             </div>
 
-            <label className="event-form-input">
-              <h3>Address <span className="label-note"> - optional</span></h3>
+            <label className="event-form-input middle-length">
+              <h3>Venue Name <span className="label-note"> -optional</span></h3>
               <input
                 type="text"
                 className="event-form-input"
-                value={this.state.address}
-                onChange={this._handleChange("address")}
+                value={this.state.name}
+                onChange={this._handleChange("venue_name")}
               />
             </label>
 
-            <label className="event-form-input">
-              <h3>City <span className="label-note"> - optional</span></h3>
-              <input
-                type="text"
-                className="event-form-input city-input"
-                value={this.state.city}
-                onChange={this._handleChange("city")}
+            <LocationForm
+                displayLocation={this.state.displayLocation}
+                setLocation={this._setLocation}
               />
-            </label>
 
-            <label className="event-form-input">
-              <h3>State <span className="label-note"> - optional</span></h3>
-              <input
-                type="text"
-                maxLength={2}
-                className="event-form-input state-input"
-                value={this.state.state}
-                onChange={this._handleChange("state")}
-              />
-            </label>
+            <EventFormMap
+              latitude={this.state.venue_latitude}
+              longitude={this.state.venue_longitude}
+            />
 
             <label className="event-form-input">
               <h3>Banner Image <span className="label-note"> - optional</span></h3>

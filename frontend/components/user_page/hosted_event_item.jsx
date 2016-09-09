@@ -12,10 +12,11 @@ const HostedEventItem = ({ eventItem, currentUser, toggleBookmark,
         currentUser={currentUser}
         toggleBookmark={toggleBookmark}
         userTickets={userTickets} />
-    </div>
-    <div className="event-host-details-container">
-      Tickets Sold: {eventItem.ticket_details.sold}
-      Last Sale: {eventItem.ticket_details.last_sale_at}
+      <div className="event-host-details-container">
+        <div>Tickets Sold: {eventItem.ticket_details.sold}</div>
+        <div>Last Sale: {(eventItem.ticket_details.last_sale_at) ?
+            new Date(eventItem.ticket_details.last_sale_at).toLocaleString() : "N/A"}</div>
+      </div>
     </div>
   </div>
 );

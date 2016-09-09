@@ -1,13 +1,16 @@
 seed_users = User.where(seed_user: true)
 seed_users.destroy_all
+Ticket.destroy_all
+Bookmark.destroy_all
+Event.destroy_all
 
 unless User.find_by_username('matt')
   User.create!(username: 'matt', password: 'password', email: 'matt@example.com',
     phone_number: 6618888888, seed_user: false)
 end
 
-unless User.find_by_username("dom_cobb")
-  User.create!(username: "dom_cobb", password: "password", email: "don_cobb@example.com",
+unless User.find_by_username("dominic_cobb")
+  User.create!(username: "dominic_cobb", password: "password", email: "dominic_cobb@example.com",
     phone_number: 7777777777, seed_user: false)
 end
 
@@ -21,6 +24,8 @@ end
   User.create!(username: username, password: password, email: email,
     phone_number: phone_number, seed_user: true)
 end
+
+puts "#{User.all.count} users in database"
 
 #  ============= FAKER EVENT GENERATION ================
 
@@ -111,84 +116,93 @@ EVENTBRITE_VENUE_MAPPING = {
 
 SEED_USERS = User.where(seed_user: true)
 
-paid_events = Eventbrite::Event.search({'location.latitude': 37.7749,
-  'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
-  'location.within': '10mi', price: 'paid'})
-free_events = Eventbrite::Event.search({'location.latitude': 37.7749,
-  'location.longitude': -122.4194, categories: '103,101,110,104,108,102,109',
-  'location.within': '10mi', price: 'free'})
+SEED_CATEGORIES = ['103', '101', '110', '104', '108', '102', '109']
 
-paid_seed_events = paid_events.events
-free_seed_events = free_events.events
+SEED_CATEGORIES.each do |seed_category|
+  seed_status = "Seeding category #{EVENTBRITE_CATEGORY_MAPPING[seed_category.to_i]}"
+  puts ""
+  print seed_status
 
+  paid_events = Eventbrite::Event.search({'location.latitude': 37.7749,
+    'location.longitude': -122.4194, categories: seed_category,
+    'location.within': '10mi', price: 'paid'})
+  free_events = Eventbrite::Event.search({'location.latitude': 37.7749,
+    'location.longitude': -122.4194, categories: seed_category,
+    'location.within': '10mi', price: 'free'})
 
-def create_seed_events(seed_events, is_free)
-  seed_events.each do |event|
-    eb_venue_id = event['venue_id']
-    venue = Venue.find_by_seed_id(eb_venue_id)
+  paid_seed_events = paid_events.events.first(20)
+  free_seed_events = free_events.events.first(20)
 
-    unless venue
-      new_venue = Venue.new
+  def create_seed_events(seed_events, is_free)
+    seed_events.each do |event|
+      eb_venue_id = event['venue_id']
+      venue = Venue.find_by_seed_id(eb_venue_id)
 
-      request_url = "https://www.eventbriteapi.com/v3/venues/#{eb_venue_id}"
-      response = RestClient.get request_url,
-        {params: {token: 'H5YYFUXDC3LC5PFS4N3B'}}
-      parsed_response = JSON.parse(response)
+      unless venue
+        new_venue = Venue.new
 
-      EVENTBRITE_VENUE_MAPPING.each do |key, val|
-        if val.length == 1 && parsed_response[val.first]
-          new_venue[key] = parsed_response[val.first]
-        elsif parsed_response[val.first] && parsed_response[val.first][val[1]]
-          new_venue[key] = parsed_response[val.first][val[1]]
+        request_url = "https://www.eventbriteapi.com/v3/venues/#{eb_venue_id}"
+        response = RestClient.get request_url,
+          {params: {token: 'H5YYFUXDC3LC5PFS4N3B'}}
+        parsed_response = JSON.parse(response)
+
+        EVENTBRITE_VENUE_MAPPING.each do |key, val|
+          if val.length == 1 && parsed_response[val.first]
+            new_venue[key] = parsed_response[val.first]
+          elsif parsed_response[val.first] && parsed_response[val.first][val[1]]
+            new_venue[key] = parsed_response[val.first][val[1]]
+          end
         end
+
+        new_venue.save!
+        venue = new_venue
       end
 
-      new_venue.save!
-      venue = new_venue
-    end
+      venue_id = venue.id
 
-    venue_id = venue.id
+      unless Event.find_by_seed_id(event.id)
+        new_event = Event.new
 
-    unless Event.find_by_seed_id(event.id)
-      new_event = Event.new
-
-      EVENTBRITE_EVENT_MAPPING.each do |key, val|
-        if key == :category_id
-          new_event.category =
-            Category.find(SOCIALITE_CATEGORY_BRIDGE[event[val.first].to_i])
-        elsif val.length == 1 && event[val.first]
-          new_event[key] = event[val.first]
-        elsif event[val.first] && event[val.first][val[1]]
-          new_event[key] = event[val.first][val[1]]
+        EVENTBRITE_EVENT_MAPPING.each do |key, val|
+          if key == :category_id
+            new_event.category =
+              Category.find(SOCIALITE_CATEGORY_BRIDGE[event[val.first].to_i])
+          elsif val.length == 1 && event[val.first]
+            new_event[key] = event[val.first]
+          elsif event[val.first] && event[val.first][val[1]]
+            new_event[key] = event[val.first][val[1]]
+          end
         end
+
+        new_event.num_tickets = (rand(30) + 1) * 10
+
+        if is_free
+          new_event.ticket_price = 0
+        else
+          new_event.ticket_price = (rand(25) + 1) * 5
+        end
+
+        new_event.live = true
+        new_event.organizer = SEED_USERS.sample
+
+        new_event.venue_id = venue_id
+
+        new_event.save
+        puts new_event.errors.full_messages if new_event.errors
+        print "."
       end
-
-      new_event.num_tickets = (rand(30) + 1) * 10
-
-      if is_free
-        new_event.ticket_price = 0
-      else
-        new_event.ticket_price = (rand(25) + 1) * 5
-      end
-
-      new_event.live = true
-      new_event.organizer = SEED_USERS.sample
-
-      new_event.venue_id = venue_id
-
-      new_event.save!
     end
   end
-end
 
-create_seed_events(paid_seed_events, false)
-create_seed_events(free_seed_events, true)
+  create_seed_events(paid_seed_events, false)
+  create_seed_events(free_seed_events, true)
+end
 
 # ================ TICKET GENERATION ===============
 
 live_events = Event.where(live: true)
 seed_users = User.where(seed_user: true)
-seed_users.push(User.find_by_username('matt')).push(User.find_by_username('don_cobb'))
+seed_users.push(User.find_by_username('matt')).push(User.find_by_username('dominic_cobb'))
 
 500.times do |purchase|
   event = live_events.sample

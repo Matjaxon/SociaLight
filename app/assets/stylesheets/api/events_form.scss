@@ -56,6 +56,16 @@
   padding: 5px;
 }
 
+.event-category-selector {
+  text-transform: capitalize;
+  font-size: 100%;
+  padding: 40px;
+  margin: 7px 0;
+  height: 50px;
+  background: white;
+  border-radius: 0px !important;
+}
+
 .times-container {
   display: flex;
   flex-direction: row;
@@ -184,6 +194,10 @@ span.rdr-Day {
   padding: 7px 4px;
 }
 
+.middle-length {
+  max-width : 500px;
+}
+
 .state-input {
   max-width: 50px;
 }
@@ -247,4 +261,15 @@ span.rdr-Day {
   text-align: center;
   cursor: pointer;
   margin-top: 20px;
+}
+
+.form-map-container {
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.location-results {
+  padding: 10px 0 5px 0;
+  color: $font-accent;
+
 }

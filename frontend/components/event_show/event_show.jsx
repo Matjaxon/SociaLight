@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import TicketFormContainer from '../ticket_form/ticket_form_container';
+import EventShowMap from './event_show_map';
 
 class EventShow extends React.Component {
   constructor(props) {
@@ -133,19 +134,21 @@ class EventShow extends React.Component {
                   {{__html: descriptionText}} />
               </div>
 
-              <h3>Where</h3>
-              <div>{detailLocation}</div>
 
               <h3>When</h3>
               <h4>Starts</h4>
               <p>{startDateTime.toDateString()}  -
                 {startDateTime.toLocaleTimeString(navigator.language,
                 {hour: '2-digit', minute: '2-digit'})}</p>
-
               <h4>Ends</h4>
               <p>{endDateTime.toDateString()} -
                 {endDateTime.toLocaleTimeString(navigator.language,
                   {hour: '2-digit', minute: '2-digit'})}</p>
+
+              <h3>Where</h3>
+              <div>{detailLocation}</div>
+              <EventShowMap venue={showEvent.venue} />
+
             </section>
           </section>
         </section>

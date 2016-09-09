@@ -86,3 +86,17 @@
   letter-spacing: 1.5px;
   margin: 20px auto;
 }
+
+.event-host-details-container {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-right: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
+.event-host-details-container div {
+  width: 40%;
+}

@@ -59,7 +59,6 @@ class Api::EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    puts @event
     if @event.destroy
       render json: @event
     else
@@ -73,7 +72,7 @@ class Api::EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:title, :description, :category_id,
       :num_tickets, :ticket_price, :start_time, :end_time,
-      :live, :address, :city, :state, :main_event_image_url)
+      :live, :address, :city, :state, :main_event_image_url, :venue_id)
   end
 
   def verify_owner

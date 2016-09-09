@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resource :bookmark, only: [:create]
     end
     resources :categories, only: [:index, :create]
+    resources :venues, only: [:create]
   end
 
   root to: 'static_pages#root'

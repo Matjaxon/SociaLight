@@ -31,7 +31,6 @@
 }
 
 .map-search-container {
-  height: 200px;
   border: 1px solid $border-color;
   margin-top: 20px;
 }
@@ -66,3 +65,18 @@
   cursor: pointer;
   font-variant: small-caps;
 }
+
+.map {
+  height: 30vh;
+}
+
+
+.map img {
+  max-width: none;
+}
+
+#map img {
+  max-width:none
+}
+
+.gmnoprint img { max-width: none !important; }

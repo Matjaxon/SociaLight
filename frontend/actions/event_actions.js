@@ -7,8 +7,15 @@ export const EventConstants = {
   UPDATE_EVENT: "UPDATE_EVENT",
   DELETE_EVENT: "DELETE_EVENT",
   TOGGLE_BOOKMARK: "TOGGLE_BOOKMARK",
-  RECEIVE_BOOKMARK_EVENT: "RECEIVE_BOOKMARK_EVENT"
+  RECEIVE_BOOKMARK_EVENT: "RECEIVE_BOOKMARK_EVENT",
+  CREATE_VENUE_AND_EVENT: "CREATE_VENUE_AND_EVENT",
+  CREATE_VENUE_AND_UPDATE_EVENT: "CREATE_VENUE_AND_UPDATE_EVENT",
+  RESET_EVENT_FORM: "RESET_EVENT_FORM"
 };
+
+export const resetEventForm = () => ({
+  type: EventConstants.RESET_EVENT_FORM
+});
 
 export const createEvent = (eventData) => ({
   type: EventConstants.CREATE_EVENT,
@@ -52,5 +59,18 @@ export const toggleBookmark = (eventId) => ({
 
 export const receiveBookmarkEvent = (eventData) => ({
   type: EventConstants.RECEIVE_BOOKMARK_EVENT,
+  eventData
+});
+
+export const createVenueAndEvent = (venueData, eventData) => ({
+  type: EventConstants.CREATE_VENUE_AND_EVENT,
+  venueData,
+  eventData
+});
+
+export const createVenueAndUpdateEvent = (venueData, eventId, eventData) => ({
+  type: EventConstants.CREATE_VENUE_AND_UPDATE_EVENT,
+  venueData,
+  eventId,
   eventData
 });

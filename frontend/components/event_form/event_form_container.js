@@ -23,7 +23,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(EventActions.updateEvent(eventId, eventData)),
   requestEvent: (eventId) => dispatch(EventActions.requestEvent(eventId)),
   deleteEvent: (eventData) => dispatch(EventActions.deleteEvent(eventData)),
-  fetchCategories: () => dispatch(SearchActions.fetchCategories())
+  fetchCategories: () => dispatch(SearchActions.fetchCategories()),
+  createVenueAndEvent: (venueData, eventData) =>
+    dispatch(EventActions.createVenueAndEvent(venueData, eventData)),
+  createVenueAndUpdateEvent: (venueData, eventId, eventData) =>
+    dispatch(EventActions.createVenueAndUpdateEvent(venueData, eventId, eventData))
 });
 
 export default connect(

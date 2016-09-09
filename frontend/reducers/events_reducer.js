@@ -18,6 +18,11 @@ const EventsReducer = (state = defaultState, action) => {
       const newEvent = action.singleEvent;
       return merge({}, state, {eventDetail: newEvent});
 
+    case EventActions.EventConstants.RESET_EVENT_FORM:
+      let newState1 = merge({}, state);
+      newState1.eventDetail = null;
+      return newState1;
+
     case EventActions.EventConstants.DELETE_EVENT:
       let deletedEventIndex = -1;
       for (let i = 0; i < state.eventsList.length; i++) {

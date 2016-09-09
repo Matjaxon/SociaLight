@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-import { requestEvent, requestEvents } from '../actions/event_actions';
+import { requestEvent, requestEvents, resetEventForm } from '../actions/event_actions';
 import { requestUser } from '../actions/session_actions';
 
 import App from './app';
@@ -23,6 +23,7 @@ class AppRouter extends React.Component {
     this._requestEvents = this._requestEvents.bind(this);
     this._requestEvent = this._requestEvent.bind(this);
     this._requestProfile = this._requestProfile.bind(this);
+    this._loadNewForm = this._loadNewForm.bind(this);
 
     this.routes = (
       <Route path='/' component={ App } >
@@ -36,7 +37,7 @@ class AppRouter extends React.Component {
           onEnter={this._requestEvents} />
         <Route path="new-event"
           component={ EventFormContainer }
-          onEnter={this._enforceLogin}/>
+          onEnter={this._loadNewForm}/>
         <Route path="event/:eventId" component={ EventShowContainer }>
           <Route path="order" component={ TicketForm } />
         </Route>
@@ -74,6 +75,11 @@ class AppRouter extends React.Component {
     if (this.props.currentUser) {
       replace('/');
     }
+  }
+
+  _loadNewForm(nextState, replace) {
+    this._enforceLogin(nextState, replace);
+    this.props.dispatch(resetEventForm());
   }
 
   render() {
