@@ -1,5 +1,7 @@
 # SociaLight
 
+![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473357986/site_assets/SociaLights3-transaprent.png)
+
 Live Site:  http://www.SociaLight.events
 
 SocialLight is a full-stack web application easy planning and launching
