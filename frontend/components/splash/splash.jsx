@@ -23,19 +23,16 @@ class Splash extends React.Component {
           </div>
         </section>
 
-        <ul className="featured-cities-container">
-          <li>San Francisco</li>
-          <li>Los Angeles</li>
-          <li>New York</li>
-          <li>Chicago</li>
-        </ul>
-
         <SplashEventsIndex
           eventsList={this.props.eventsList}
           currenetUser={this.props.currentUser}
           savedEvents={this.props.savedEvents}
           toggleBookmark={this.props.toggleBookmark}
         />
+
+      <Link className="form-button profile-index-button"
+        to="browse">Browse Events</Link>
+
       </section>
     );
   }

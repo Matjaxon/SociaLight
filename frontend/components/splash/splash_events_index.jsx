@@ -9,8 +9,11 @@ const SplashEventsIndex = ({ eventsList }) => {
       displayType={"splash"} />
   ));
   return (
-    <section className="splash-events-container">
-      {splashEvents}
+    <section>
+      <h2 className="happening-soon">Events Happening Soon</h2>
+      <div className="splash-events-container">
+        {splashEvents}
+      </div>
     </section>
   );
 };
