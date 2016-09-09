@@ -1,28 +1,56 @@
-== README
+# SociaLight
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Live Site:  http://www.SociaLight.events
 
-Things you may want to cover:
+SocialLight is a full-stack web application easy planning and launching
+events for organizers and easy browsing and purchasing for guests.
+The backend utilizes Ruby on Rails with PostgreSQL as a database.
+The frontend uses React.js for views and the Redux architecture to hold data.
 
-* Ruby version
+## Features & Implementation
 
-* System dependencies
+Plan Events<br />
+Browse Events<br />
+Bookmark Events For Later<br />
+Purchase Tickets<br />
 
-* Configuration
+## Single-Page Application
 
-* Database creation
+All content is delivered on one static page.  AJAX requests are made to the
+backend as needed and content is re-rendered once received.
 
-* Database initialization
+## Plan Events
 
-* How to run the test suite
+Quick organizer an event with a streamlined form, including
+easily populating your events location with the using the Google Maps
+Geocoding API.
 
-* Services (job queues, cache servers, search engines, etc.)
+![form-geo](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453398/site_assets/form_geocoding_screen_shot.png)
 
-* Deployment instructions
+Start planning out details and save your event to finish later or launch it right away.
 
-* ...
+![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453846/site_assets/Screen_Shot_2016-09-09_at_1.43.00_PM.png)
+
+Preview your event before taking launching it.
+
+![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453841/site_assets/Screen_Shot_2016-09-09_at_1.43.13_PM.png)
+
+## Browse Events
+
+Filter events by multiple categories to tailor results to your interests.
+
+![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473454110/site_assets/Screen_Shot_2016-09-09_at_1.47.40_PM.png)
+
+## Bookmark Events For Later
+
+Save events that you're interested in and review them on the user profile page
+
+![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473454400/site_assets/Screen_Shot_2016-09-09_at_1.52.05_PM.png)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Future Implementations
+
++ Browsing by featured cities
++ Limit search area with Google Maps
++ Group planning for guests
++ Ticket sharing via SMS
