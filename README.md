@@ -35,7 +35,7 @@ Start planning out details and save your event to finish later or launch it righ
 
 Preview your event before taking launching it.
 
-![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453841/site_assets/Screen_Shot_2016-09-09_at_1.43.13_PM.png)
+![event-preview](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453841/site_assets/Screen_Shot_2016-09-09_at_1.43.13_PM.png)
 
 ## Browse Events
 
