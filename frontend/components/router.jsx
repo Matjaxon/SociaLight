@@ -32,12 +32,11 @@ class AppRouter extends React.Component {
         <Route path="signup" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn} />
         <Route path="login" component={ SessionFormContainer }
-          onEnter={this._redirectIfLoggedIn}/>
+          onEnter={this._redirectIfLoggedIn} />
         <Route path="browse" component={ SearchContainer }
           onEnter={this._requestEvents} />
-        <Route path="new-event"
-          component={ EventFormContainer }
-          onEnter={this._loadNewForm}/>
+        <Route path="new-event" component={ EventFormContainer }
+          onEnter={this._loadNewForm} />
         <Route path="event/:eventId" component={ EventShowContainer }>
           <Route path="order" component={ TicketForm } />
         </Route>
@@ -84,7 +83,7 @@ class AppRouter extends React.Component {
 
   render() {
     return (
-      <Router history={ hashHistory } routes={this.routes} >
+      <Router history={ hashHistory } routes={ this.routes }>
       </Router>
     );
   }
