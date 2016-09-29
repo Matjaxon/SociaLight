@@ -337,6 +337,7 @@ class EventForm extends React.Component {
                   <DateRange
                     onInit={this._handleSelect}
                     onChange={this._handleSelect}
+                    calendars={1}
                   />
                 </div>
             </div>
@@ -365,7 +366,7 @@ class EventForm extends React.Component {
             </div>
 
             <label className="event-form-input middle-length">
-              <h3>Venue Name <span className="label-note"> -optional</span></h3>
+              <h3>Venue Name <span className="label-note"> - optional</span></h3>
               <input
                 type="text"
                 className="event-form-input"
@@ -419,7 +420,7 @@ class EventForm extends React.Component {
 
           <h4 className={"event-status " +
             ((isLive) ? "live-event" : "draft-event")}>
-              Status: {(isLive) ? 'live' : 'draft'}
+              Event Status: {(isLive) ? 'live' : 'draft'}
           </h4>
 
           <div className="button-container">

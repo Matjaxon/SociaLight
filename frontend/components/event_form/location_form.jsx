@@ -23,22 +23,27 @@ class LocationForm extends React.Component {
   _requestLocation(event) {
     event.stopPropagation();
     event.preventDefault();
-    let successCallback = (data) => {
-      if (data.status === "ZERO_RESULTS") {
-        this.setState({formattedAddress: "LOCATION NOT FOUND"});
-      } else {
-        this.setState({
-          formattedAddress: data.results[0].formatted_address,
-          lat: data.results[0].geometry.location.lat,
-          lng: data.results[0].geometry.location.lng
-        }, () => this.props.setLocation({
-          venue_displayLocation: this.state.formattedAddress,
-          venue_latitude: this.state.lat,
-          venue_longitude: this.state.lng}));
-        }
+    if (this.state.searchString.length > 0) {
+      let successCallback = (data) => {
+        if (data.status === "ZERO_RESULTS") {
+          this.setState({formattedAddress: "LOCATION NOT FOUND"});
+        } else {
+          this.setState({
+            formattedAddress: data.results[0].formatted_address,
+            lat: data.results[0].geometry.location.lat,
+            lng: data.results[0].geometry.location.lng
+          }, () => this.props.setLocation({
+            venue_displayLocation: this.state.formattedAddress,
+            venue_latitude: this.state.lat,
+            venue_longitude: this.state.lng}));
+          }
+        };
+      let errorCallback = (error) => {
+        console.log(error);
+        this.setState({formattedAddress: "Something went wrong. Try again"});
       };
-    let errorCallback = () => this.setState({formattedAddress: "Something went wrong. Try again"});
-    searchLocation(this.state.searchString, successCallback, errorCallback);
+      searchLocation(this.state.searchString, successCallback, errorCallback);
+    }
   }
 
   render() {
@@ -48,7 +53,7 @@ class LocationForm extends React.Component {
           {this.props.displayLocation}
         </div>
         <label className="event-form-input">
-          <h3>Location Search <span className="label-note"> -enter address</span></h3>
+          <h3>Location Search <span className="label-note"> - enter address and exit box to search</span></h3>
           <input
             type="text"
             className="event-form-input middle-length"
