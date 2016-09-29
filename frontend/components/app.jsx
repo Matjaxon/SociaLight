@@ -15,7 +15,16 @@ const App = ({ children }) => (
     </ul>
     { children }
 
-    <section className="app-footer"></section>
+    <section className="app-footer">
+      <div className="app-footer-links">
+        <a href="https://github.com/Matjaxon/SociaLight">
+          <i className="fa fa-github fa-4x" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mattrjackson1">
+          <i className="fa fa-linkedin-square fa-4x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
 
   </div>
 );
