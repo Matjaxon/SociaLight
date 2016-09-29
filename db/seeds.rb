@@ -18,6 +18,7 @@ end
 
 50.times do
   username = Faker::Internet.user_name
+  p username
   password = Faker::Internet.password(8)
   email = Faker::Internet.safe_email
   phone_number = Faker::PhoneNumber.phone_number
@@ -116,7 +117,8 @@ EVENTBRITE_VENUE_MAPPING = {
 
 SEED_USERS = User.where(seed_user: true)
 
-SEED_CATEGORIES = ['103', '101', '110', '104', '108', '102', '109']
+SEED_CATEGORIES = ['103', '101', '110', '113', '105', '104', '108', '107',
+  '102', '109', '106', '119']
 
 SEED_CATEGORIES.each do |seed_category|
   seed_status = "Seeding category #{EVENTBRITE_CATEGORY_MAPPING[seed_category.to_i]}"
