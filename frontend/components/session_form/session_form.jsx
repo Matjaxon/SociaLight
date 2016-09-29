@@ -79,10 +79,10 @@ class SessionForm extends React.Component {
     let buttonName, altAction;
     if (isLogin) {
       buttonName = "Login";
-      altAction = <Link to='/signup'>or Sign Up</Link>;
+      altAction = <Link to='/signup' className='alt-action-link'>or Sign Up</Link>;
     } else {
       buttonName = "Sign Up";
-      altAction = <Link to='/login'>or Login</Link>;
+      altAction = <Link to='/login' className='alt-action-link'>or Login</Link>;
     }
 
     return(
@@ -111,9 +111,9 @@ class SessionForm extends React.Component {
 
           {emailAndPhone}
 
-          <div>
+          <div className="session-button-container">
             <input type="submit" className="submit-button" value={buttonName} />
-            <span className="alt-session-action">{altAction}</span>
+            <div className="alt-session-action">{altAction}</div>
           </div>
         </form>
 

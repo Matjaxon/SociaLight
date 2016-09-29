@@ -28,10 +28,12 @@ class EventIndexItem extends React.Component {
     }
   }
 
-  _toggleBookmark() {
+  _toggleBookmark(router) {
     if (this.props.currentUser) {
       this.props.toggleBookmark(this.props.eventItem.id);
       this.setState({isBookmarked: !this.state.isBookmarked});
+    } else {
+      router.push("login");
     }
   }
 
@@ -132,7 +134,7 @@ class EventIndexItem extends React.Component {
           </li>
           <li className="event-index-category">{eventItem.category_name}</li>
           <li className="event-index-bookmark"
-            onClick={ () => this._toggleBookmark(eventItem.id)}>
+            onClick={ () => this._toggleBookmark(router)}>
             {bookmarkFlag}
           </li>
         </ul>

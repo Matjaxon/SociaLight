@@ -38,6 +38,13 @@
   border: 1px solid gray;
 }
 
+.session-button-container {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 30px 0px;
+}
+
 .alt-session-action {
   display: inline-block;
   padding: 10px;
@@ -49,16 +56,15 @@
 
 .submit-button {
   cursor: pointer;
-  border: 1px solid;
-  padding: 10px 20px;
-  border-radius: 2px;
+  border: 0px solid transparent;
   background-color: #0077ea;
+  padding: 10px 20px;
   color: white;
   margin: 10px 0 10px 0;
   width: 60%;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .submit-button:hover {
@@ -69,7 +75,7 @@
 
 .guest-login {
   background-color: $live-green;
-  padding: 10px 20px;
+  padding: 15px 20px;
   margin: 10px 0 10px 0;
   width: 100%;
   cursor: pointer;
@@ -77,11 +83,10 @@
   text-align: center;
   text-transform: uppercase;;
   letter-spacing: 1px;
-  font-size: 0.9em;
-  transition: all 0.2s ease;
+  transition: all 0.1s ease;
 }
 
 .guest-login:hover {
-  padding: 12px 20px;
+  padding: 17px 20px;
   margin: 8px 0;
 }

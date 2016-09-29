@@ -26,14 +26,16 @@ class SplashEventItem extends React.Component {
     }
   }
 
-  _toggleBookmark() {
+  _toggleBookmark(router) {
     if (this.props.currentUser) {
       this.props.toggleBookmark(this.props.eventItem.id);
       this.setState({isBookmarked: !this.state.isBookmarked});
+    } else {
+      router.push("login");
     }
   }
 
-  _handleClick (router, url) {
+  _handleClick(router, url) {
     return () => router.push(url);
   }
 
@@ -132,7 +134,7 @@ class SplashEventItem extends React.Component {
               {eventItem.category_name}
           </li>
           <li className="event-index-bookmark"
-            onClick={ () => this._toggleBookmark(eventItem.id)}>
+            onClick={ () => this._toggleBookmark(router)}>
             {bookmarkFlag}
           </li>
         </ul>

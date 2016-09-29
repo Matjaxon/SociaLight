@@ -21,10 +21,12 @@ class EventShow extends React.Component {
     }
   }
 
-  _toggleBookmark() {
+  _toggleBookmark(router) {
     if (this.props.currentUser) {
       this.props.toggleBookmark(this.props.eventDetail.id);
       this.setState({isBookmarked: !this.state.isBookmarked});
+    } else {
+      router.push('login');
     }
   }
 
@@ -33,6 +35,7 @@ class EventShow extends React.Component {
   }
 
   render() {
+    let router = this.props.router;
     const showEvent = (this.props.eventDetail);
     const defaultHeaderImage = 'http://res.cloudinary.com/dbwkodu79/image/upload/c_scale,g_center,h_500,y_0/v1472759821/sparklers_vdmfph.jpg';
     if (showEvent) {
@@ -114,7 +117,7 @@ class EventShow extends React.Component {
               <div className="show-header-button buy-button"
                 onClick={() => this._toggleForm()}>Buy Tickets</div>
               <div className="event-index-bookmark show-header-button"
-                onClick={ () => this._toggleBookmark(showEvent.id)}>
+                onClick={ () => this._toggleBookmark(router)}>
                 {bookmarkFlag}
               </div>
             </div>
