@@ -4,7 +4,7 @@
   "description": "== README",
   "main": "webpack.config.js",
   "scripts": {
-    "postinstall": "./node_modules/.bin/webpack"
+    "heroku-postbuild": "webpack --config webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Matjaxon/SociaLight/issues"
   },
-  "homepage": "https://github.com/Matjaxon/SociaLight#readme",
+  "homepage": "http://socialight.events",
   "dependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
