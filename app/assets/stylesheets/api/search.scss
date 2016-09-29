@@ -36,7 +36,9 @@
 }
 
 .category-filter-container {
-  padding: 20px 0;
+  margin: 20px 0;
+  padding: 0 10px 20px 10px;
+  background-color: $form-background-color;
 }
 
 .category-filter-container h4 {
