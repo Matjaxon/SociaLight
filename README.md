@@ -120,19 +120,71 @@ render() {
 }
 ```
 
-Start planning out details and save your event to finish later or launch it right away.
+Events do not need to be made and launched at once.  Changes can be saved and the event will be considered in "draft" mode until launched.
 
 ![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453846/site_assets/Screen_Shot_2016-09-09_at_1.43.00_PM.png)
 
-Preview your event before taking launching it.
-
 ![event-preview](http://res.cloudinary.com/dbwkodu79/image/upload/v1473453841/site_assets/Screen_Shot_2016-09-09_at_1.43.13_PM.png)
+
+Event results for other users will only show events that are "live".  As a logged in user, all live events and all events created by the user will be shown.  
+
+The code below shows how the results for the index views are determined.  By chaining Active Record methods and using includes to join tables before the query is executed I have avoided the N+1 query problem.
+
+```
+# Events Controller
+def index
+  if current_user
+    @events = Event.where("live = true OR organizer_id = ?", current_user.id)
+      .order(:start_time)
+      .where("start_time >= ?", Time.now)
+      .includes(:venue)
+      .includes(:category)
+      .includes(:organizer)
+    @events = Event.filter_events(@events, params[:filters])
+  else
+    @events = Event.all
+      .where(live: true)
+      .where("start_time >= ?", Time.now)
+      .order(:start_time)
+      .includes(:venue)
+      .includes(:category)
+      .includes(:organizer)
+    @events = Event.filter_events(@events, params[:filters])
+  end
+  @user = current_user
+  render 'api/events/index'
+end
+```
 
 ## Browse Events
 
-Filter events by multiple categories to tailor results to your interests.
-
 ![](http://res.cloudinary.com/dbwkodu79/image/upload/v1473454110/site_assets/Screen_Shot_2016-09-09_at_1.47.40_PM.png)
+
+Events can be filtered by multiple categories.  When no category is selected, all are shown.  Users may then select 1 or as many categories as they like. Each category name
+is a React component.  When clicked, an action is dispatched to add that category name to the search parameters.
+
+```
+class CategoryFilterItem extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.props.fetchFilteredEvents(nextProps.allFilters);
+  }
+
+  render() {
+    const category = this.props.category;
+    return(
+      <div className={`category-filter-item` +
+          ((this.props.isFiltered) ? " active-filter" : "")}
+          onClick={() => this.props.toggleCategoryFilter(category.name)} >
+          {category.name}
+      </div>
+    );
+  }
+}
+```
 
 ## Bookmark Events For Later
 

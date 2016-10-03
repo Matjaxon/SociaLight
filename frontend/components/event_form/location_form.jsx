@@ -39,7 +39,6 @@ class LocationForm extends React.Component {
           }
         };
       let errorCallback = (error) => {
-        console.log(error);
         this.setState({formattedAddress: "Something went wrong. Try again"});
       };
       searchLocation(this.state.searchString, successCallback, errorCallback);
