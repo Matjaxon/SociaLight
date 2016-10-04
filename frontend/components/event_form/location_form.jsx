@@ -1,15 +1,17 @@
 import React from 'react';
 import { searchLocation } from '../../util/form_api_util';
 
+const newEventState = {
+  searchString: "",
+  formattedAddress: "",
+  lat: "",
+  lng: ""
+};
+
 class LocationForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchString: "",
-      formattedAddress: "",
-      lat: "",
-      lng: ""
-    };
+    this.state = newEventState;
     this._requestLocation = this._requestLocation.bind(this);
     this._handleLocationChange = this._handleLocationChange.bind(this);
   }
@@ -48,11 +50,12 @@ class LocationForm extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          {this.props.displayLocation}
-        </div>
         <label className="event-form-input">
-          <h3>Location Search <span className="label-note"> - enter address and exit box to search</span></h3>
+          <h3>Event Location</h3>
+          <div className="event-form-display-location">
+            <h4>{this.props.displayLocation}</h4>
+          </div>
+          <h5>Location Search <span className="label-note"> - enter address and exit box to search</span></h5>
           <input
             type="text"
             className="event-form-input middle-length"

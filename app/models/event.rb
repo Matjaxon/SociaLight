@@ -55,12 +55,15 @@ class Event < ActiveRecord::Base
 
   def self.filter_events(events, filters)
     return events if filters == nil
-    unless filters["categories"].empty?
+    if filters["categories"]
       category_ids = filters["categories"].map do |category|
         found_category = Category.find_by_name(category)
         found_category.id
       end
       events = events.where(category_id: category_ids)
+    end
+    if filters["limit"]
+      events = events.limit(filters["limit"])
     end
     events
   end

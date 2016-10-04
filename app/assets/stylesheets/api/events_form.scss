@@ -52,7 +52,8 @@
   padding: 7px 3px;
 }
 
-.event-form-container h3 {
+.event-form-container h3,
+.event-form-container h5 {
   padding: 5px;
 }
 
@@ -271,5 +272,8 @@ span.rdr-Day {
 .location-results {
   padding: 10px 0 5px 0;
   color: $font-accent;
+}
 
+.event-form-display-location {
+  padding: 5px;
 }

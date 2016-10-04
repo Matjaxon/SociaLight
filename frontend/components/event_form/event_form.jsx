@@ -19,6 +19,7 @@ const newEventState = {
   city: "",
   state: "",
   main_event_image_url: null,
+  venue: null,
   venue_id: null,
   venue_name: "",
   venue_displayLocation: "",
@@ -50,7 +51,6 @@ class EventForm extends React.Component {
     this._postImage = this._postImage.bind(this);
     this._setLocation = this._setLocation.bind(this);
   }
-
 
   componentWillMount() {
     if (this.props.formType !== 'new-event' &&
@@ -90,6 +90,14 @@ class EventForm extends React.Component {
         stateKeys.forEach( key => {
           tempState[`${key}`] = preloadedEvent[`${key}`];
         });
+        if (preloadedEvent.venue) {
+          let venue = preloadedEvent.venue;
+          tempState.venue_id = venue.id;
+          tempState.venue_name = venue.name;
+          tempState.venue_displayLocation = venue.display_address;
+          tempState.venue_latitude = venue.latitude;
+          tempState.venue_longitude = venue.longitude;
+        }
         tempState.start_time = new Date(tempState.start_time);
         tempState.end_time = new Date(tempState.end_time);
         that.setState(tempState);
@@ -376,7 +384,7 @@ class EventForm extends React.Component {
             </label>
 
             <LocationForm
-                displayLocation={this.state.displayLocation}
+                displayLocation={this.state.venue_displayLocation}
                 setLocation={this._setLocation}
               />
 

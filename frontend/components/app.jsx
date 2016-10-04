@@ -11,7 +11,9 @@ const App = ({ children }) => (
       <li className="nav-group nav-browse">
         <Link to="/browse">Browse Events</Link>
       </li>
-      <li className="nav-group"><UserNavContainer /></li>
+      <li className="nav-group">
+        <UserNavContainer />
+      </li>
     </ul>
     { children }
 

@@ -3,6 +3,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import { requestEvent, requestEvents, resetEventForm } from '../actions/event_actions';
 import { requestUser } from '../actions/session_actions';
+import { fetchFilteredEvents } from '../actions/search_actions';
 
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
@@ -24,11 +25,12 @@ class AppRouter extends React.Component {
     this._requestEvent = this._requestEvent.bind(this);
     this._requestProfile = this._requestProfile.bind(this);
     this._loadNewForm = this._loadNewForm.bind(this);
+    this._fetchFilteredEvents = this._fetchFilteredEvents.bind(this);
 
     this.routes = (
       <Route path='/' component={ App } >
         <IndexRoute component={ SplashContainer }
-          onEnter={this._requestEvents} />
+          onEnter={this._fetchFilteredEvents({limit: 6})} />
         <Route path="signup" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn} />
         <Route path="login" component={ SessionFormContainer }
@@ -79,6 +81,10 @@ class AppRouter extends React.Component {
   _loadNewForm(nextState, replace) {
     this._enforceLogin(nextState, replace);
     this.props.dispatch(resetEventForm());
+  }
+
+  _fetchFilteredEvents(filter) {
+    this.props.dispatch(fetchFilteredEvents(filter));
   }
 
   render() {
