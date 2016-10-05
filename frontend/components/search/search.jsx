@@ -8,10 +8,6 @@ class Search extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.fetchCategories();
-  }
-
   componentWillUnmount() {
     this.props.clearFilters();
   }

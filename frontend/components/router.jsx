@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import { requestEvent, requestEvents, resetEventForm } from '../actions/event_actions';
 import { requestUser } from '../actions/session_actions';
-import { fetchFilteredEvents } from '../actions/search_actions';
+import { fetchFilteredEvents, fetchCategories } from '../actions/search_actions';
 
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
@@ -26,6 +26,7 @@ class AppRouter extends React.Component {
     this._requestProfile = this._requestProfile.bind(this);
     this._loadNewForm = this._loadNewForm.bind(this);
     this._fetchFilteredEvents = this._fetchFilteredEvents.bind(this);
+    this._prepSearch = this._prepSearch.bind(this);
 
     this.routes = (
       <Route path='/' component={ App } >
@@ -36,7 +37,7 @@ class AppRouter extends React.Component {
         <Route path="login" component={ SessionFormContainer }
           onEnter={this._redirectIfLoggedIn} />
         <Route path="browse" component={ SearchContainer }
-          onEnter={this._requestEvents} />
+          onEnter={this._prepSearch} />
         <Route path="new-event" component={ EventFormContainer }
           onEnter={this._loadNewForm} />
         <Route path="event/:eventId" component={ EventShowContainer }>
@@ -56,6 +57,11 @@ class AppRouter extends React.Component {
     } else {
       this.props.dispatch(requestUser(this.props.currentUser.id));
     }
+  }
+
+  _prepSearch() {
+    this.props.dispatch(fetchCategories());
+    this._requestEvents();
   }
 
   _requestEvents() {

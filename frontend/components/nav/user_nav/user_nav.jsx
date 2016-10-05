@@ -12,8 +12,9 @@ const UserNav = ({ currentUser, logout }) => {
           <li>
             <Link to="/profile">{currentUser.username}</Link>
           </li>
-          <li><button onClick={logout}
-            className="logout-button">Logout</button></li>
+          <li>
+            <a onClick={logout}>Logout</a>
+          </li>
         </ul>
       </div>
     );

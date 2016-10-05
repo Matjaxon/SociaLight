@@ -62,7 +62,7 @@ class EventShow extends React.Component {
       if (showEvent.venue) {
         headerLocation = showEvent.venue.name;
         detailLocation = (
-          <div>
+          <div className="event-details-section">
             <p>{showEvent.venue.name}</p>
             <p>{showEvent.venue.display_address}</p>
           </div>
@@ -131,26 +131,27 @@ class EventShow extends React.Component {
           <section className="event-show-body">
             <section className="event-details-container">
 
-              <h3>What</h3>
-              <div className="event-details-description">
+              <div className="event-details-section">
+                <h4>What</h4>
                 <div dangerouslySetInnerHTML=
                   {{__html: descriptionText}} />
               </div>
 
-
-              <h3>When</h3>
-              <h4>Starts</h4>
-              <p>{startDateTime.toDateString()}  -
-                {startDateTime.toLocaleTimeString(navigator.language,
-                {hour: '2-digit', minute: '2-digit'})}</p>
-              <h4>Ends</h4>
-              <p>{endDateTime.toDateString()} -
-                {endDateTime.toLocaleTimeString(navigator.language,
+              <div className="event-details-section">
+                <h4>When</h4>
+                <p>Start: {startDateTime.toDateString() + "  -  " +
+                  startDateTime.toLocaleTimeString(navigator.language,
                   {hour: '2-digit', minute: '2-digit'})}</p>
+                <p>End: {endDateTime.toDateString() + " - " +
+                  endDateTime.toLocaleTimeString(navigator.language,
+                    {hour: '2-digit', minute: '2-digit'})}</p>
+              </div>
 
-              <h3>Where</h3>
-              <div>{detailLocation}</div>
-              <EventShowMap venue={showEvent.venue} />
+              <div className="event-details-section">
+                <h4>Where</h4>
+                <div>{detailLocation}</div>
+                <EventShowMap venue={showEvent.venue} />
+              </div>
 
             </section>
           </section>

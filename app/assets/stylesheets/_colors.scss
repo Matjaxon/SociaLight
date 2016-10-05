@@ -1,11 +1,11 @@
+$font-color: #5e6b78;
+$font-accent: #e60000;
+
 $form-background-color: #fafafa;
 $footer-background-color: #282c35;
 
 $border-color: #ededed;
-$form-border-color: black;
-
-$font-color: #5e6b78;
-$font-accent: #e60000;
+$form-border-color: $font-color;
 
 $green-button: #00a700;
 $blue-button: #0077ea;

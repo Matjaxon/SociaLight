@@ -37,7 +37,7 @@
  	font-weight: inherit;
  	font-style: inherit;
   color: #5e6b78;
- 	font-size: 100%;
+ 	font-size: 14px;
  	font-family: 'Jaldi', sans-serif;
  	vertical-align: baseline;
   text-decoration: none;
@@ -134,7 +134,8 @@ body {
   text-transform: uppercase;
 }
 
-.user-nav a, {
+.user-nav a,
+.nav-brose a {
   display: flex;
   align-items: center;
   float: right;
@@ -142,11 +143,14 @@ body {
   padding: 20px 20px;
   border-left: 1px solid $border-color;
   border-top: 0px solid transparent;
-  transition: all 0.2s, ease;
   text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s, ease;
 }
 
-.user-nav a:hover, .nav-browse a:hover {
+.user-nav a:hover,
+.nav-browse a:hover,
+.nav-logo a:hover {
   border-top: 5px solid $nav-hover;
   color: $nav-hover;
 }
@@ -173,7 +177,6 @@ body {
   height: $nav-logo-height;
   background-image: url("http://res.cloudinary.com/dbwkodu79/image/upload/v1473357986/site_assets/SociaLights3-transaprent.png");
   padding-left: 30px;
-  height: 78px;
   border-top: 0px solid transparent;
   text-decoration: none;
   justify-content: center;
@@ -187,10 +190,6 @@ body {
   background-size: 90%;
 }
 
-.nav-logo a:hover {
-  border-top: 5px solid $nav-hover;
-}
-
 .nav-browse {
   flex-grow: 1;
   text-align: center;
@@ -199,7 +198,7 @@ body {
   border-left: 1px solid $border-color;
 }
 
-.nav-browse a, {
+.nav-browse a {
   display: flex;
   height: $nav-height;
   margin: 0 auto;
@@ -212,30 +211,6 @@ body {
   width: 100%;
   justify-content: center;
   align-items: center;
-}
-
-.logout-button {
-  display: flex;
-  background: inherit;
-  text-transform: uppercase;
-  align-content: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  transition: all 0.2s ease;
-  display: flex;
-  float: right;
-  height: $nav-height;
-  line-height: 2;
-  padding: 20px 20px;
-  border-left: 1px solid $border-color;
-  border-top: 0px solid transparent;
-  transition: all 0.2s, ease;
-  text-decoration: none;
-}
-
-.logout-button:hover {
-  border-top: 5px solid $nav-hover;
-  color: $nav-hover;
 }
 
 .hidden-form {
