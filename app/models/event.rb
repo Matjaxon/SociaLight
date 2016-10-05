@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
   has_many :guests, -> {distinct},
     class_name: :User
 
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
 
   belongs_to :venue
 
