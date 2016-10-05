@@ -6,7 +6,8 @@ class CategoryFilterItem extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.props.fetchFilteredEvents(nextProps.allFilters);
+    let filters = nextProps.allFilters;
+    this.props.fetchFilteredEvents(filters);
   }
 
   render() {

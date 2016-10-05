@@ -55,3 +55,8 @@
   border: 1px solid $font-color !important;
   pointer-events: none;
 }
+
+.disabled-button {
+  opacity: 0.5;
+  pointer-events: none;
+}

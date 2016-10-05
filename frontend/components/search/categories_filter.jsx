@@ -3,6 +3,7 @@ import CategoryFilterItemContainer from './category_filter_item_container';
 
 const CategoriesFilter = ({ categories, filteredCategories,
   toggleCategoryFilter, clearFilters }) => {
+
   const categoryFilterItems = categories.map( category => {
     let isFiltered = filteredCategories.includes(category.name);
     return <CategoryFilterItemContainer key={category.name}

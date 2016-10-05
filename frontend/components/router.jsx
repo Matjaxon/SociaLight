@@ -61,7 +61,7 @@ class AppRouter extends React.Component {
 
   _prepSearch() {
     this.props.dispatch(fetchCategories());
-    this._requestEvents();
+    this._fetchFilteredEvents({limit: 50});
   }
 
   _requestEvents() {

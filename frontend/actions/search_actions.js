@@ -3,7 +3,8 @@ export const SearchConstants = {
   RECEIVE_CATEGORIES: "RECEIVE_CATEGORIES",
   TOGGLE_CATEGORY_FILTER: "TOGGLE_CATEGORY_FILTER",
   CLEAR_FILTERS: "CLEAR_FILTERS",
-  FETCH_FILTERED_EVENTS: "FETCH_FILTERED_EVENTS"
+  FETCH_FILTERED_EVENTS: "FETCH_FILTERED_EVENTS",
+  UPDATE_FILTERS: "UPDATE_FILTERS"
 };
 
 export const fetchCategories = () => ({
@@ -26,5 +27,10 @@ export const clearFilters = () => ({
 
 export const fetchFilteredEvents = (filters) => ({
   type: SearchConstants.FETCH_FILTERED_EVENTS,
+  filters
+});
+
+export const updateFilters = (filters) => ({
+  type: SearchConstants.UPDATE_FILTERS,
   filters
 });

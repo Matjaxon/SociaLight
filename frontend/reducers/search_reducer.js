@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 const defaultState = Object.freeze({
   categories: [],
   filteredCategories: [],
-  allFilters: {categories: []}
+  allFilters: {categories: [], limit: 50, offset: 0}
 });
 
 const SearchReducer = (state = defaultState, action) => {
@@ -25,13 +25,18 @@ const SearchReducer = (state = defaultState, action) => {
       }
       let newState = merge({}, state);
       newState.filteredCategories = newFilter;
-      newState.allFilters = {categories: newState.filteredCategories};
+      newState.allFilters.categories = newState.filteredCategories;
       return newState;
 
     case SearchActions.SearchConstants.CLEAR_FILTERS:
       newState = merge({}, state);
       newState.filteredCategories = defaultState.filteredCategories;
       newState.allFilters = defaultState.allFilters;
+      return newState;
+
+    case SearchActions.SearchConstants.UPDATE_FILTERS:
+      newState = merge({}, state);
+      newState.allFilters = action.filters;
       return newState;
 
     default:
