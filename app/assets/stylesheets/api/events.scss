@@ -11,16 +11,16 @@
 }
 
 .event-index {
-  padding: 0 20px;
+  padding: 10px 20px 20px 20px;
   margin: 20px;
   overflow-y: scroll;
-  max-height:73vh;
+  max-height:70vh;
   background-color: $form-background-color;
 }
 
 .event-index-item {
   flex-direction: column;
-  margin: 30px auto 0 auto;
+  margin: 10px auto;
   align-self: center;
   background-color: white;
   width: 60vw;
@@ -57,12 +57,12 @@
   flex-direction: column;
   flex-grow: 1;
   border-left: 1px solid $border-color;
-  min-height: 110px;
+  min-height: 85px;
 }
 
 .event-main-details li {
   flex-grow: 1;
-  padding: 10px;
+  padding: 5px;
 }
 
 .event-index-status {

@@ -81,3 +81,31 @@
 }
 
 .gmnoprint img { max-width: none !important; }
+
+.pagination-controls {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  border: 1px solid $border-color;
+}
+
+.pagination-button {
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  padding: 10px;
+  cursor: pointer;
+  border: 0px solid transparent;
+  transition: all 0.2s ease;
+  height: 35px;
+}
+
+.pagination-button:not(:last-of-type) {
+  border-right: 1px solid $border-color;
+}
+
+.pagination-button:hover {
+  color: $font-accent;
+  border-top: 5px solid $font-accent;
+}
